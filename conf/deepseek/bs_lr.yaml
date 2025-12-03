@@ -1,0 +1,4 @@
+
+training_h_sampler: ${..samplers.h_sampler_deepseek}
+neural_net: ${neural_net}
+

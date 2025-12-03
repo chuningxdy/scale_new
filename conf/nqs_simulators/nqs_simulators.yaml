@@ -1,0 +1,5 @@
+defaults:
+  - exact: exact
+  - gamma_function_approx: gamma_function_approx
+  - EM: EM
+  - EM_six: EM_six

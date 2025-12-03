@@ -1,0 +1,21 @@
+
+_target_: a_scale.scaling_models.zeroth_order_scaling_model
+_partial_: true
+
+
+
+h_sampler_training: ${samplers.h_sampler_fit_nqs}
+nqs_sampler_grid_search: ${samplers.nqs_sampler_grid_search}
+nqs_simulator: ${nqs_simulators.EM_six}
+
+neural_net: ${neural_net}
+
+eval_metric: 
+  _target_: a_scale.evaluation_metrics.log_ASE
+  _partial_: true
+
+scaling_model_dir: ${job_dir}1_fit_scaling_model/
+fitted_nqs_file: ${a_scaling_model.scaling_model_dir}/fitted_nqs.yaml
+
+nn_archive_file: ${nn_archive_file}
+nqs_archive_file: ${nqs_archive_file}

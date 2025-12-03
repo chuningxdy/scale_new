@@ -1,0 +1,13 @@
+defaults:
+  - _self_
+  - h_sampler_fit_chinchilla: h_sampler_from_csv #h_sampler_semigrid
+  - h_sampler_fit_nqs: h_sampler_from_csv #h_sampler_semigrid
+  - h_sampler_test_nqs: h_sampler_from_csv #h_sampler_single_point
+  - nqs_sampler_grid_search: nqs_sampler_grid
+  - h_sampler_resource_allocation_nqs: h_sampler_from_csv #h_sampler_grid_and_random_isoflop
+  - h_sampler_resource_allocation_nn: h_sampler_from_csv #h_sampler_grid_and_random_isoflop
+  - h_sampler_critical_batch_size: h_sampler_from_csv #h_sampler_grid_and_random_isoflop
+  - h_sampler_hyper_selection_NQS: h_sampler_grid_and_random_isoflop
+  - h_sampler_hyper_selection_deepseek: h_sampler_from_csv # h_sampler_grid_and_random_isoflop
+  - h_sampler_hyper_selection_test: h_sampler_single_point
+

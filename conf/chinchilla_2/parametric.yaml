@@ -1,0 +1,14 @@
+_target_: a_scale.baselines.baselines.chinchilla_parametric
+_partial_: true
+
+use_last_x_ckpt: 1
+
+h_sampler_training: ${samplers.h_sampler_fit_chinchilla} # use a set of training hyperparameter cfgs
+                                # NOT the same as the one used for the neural net
+neural_net: ${neural_net}
+chinchilla_dir: ${job_dir}/3_fit_chinchilla_v2/
+nn_archive_file: ${nn_archive_file}
+
+eval_metric: 
+  _target_: a_scale.evaluation_metrics.log_ASE
+  _partial_: true

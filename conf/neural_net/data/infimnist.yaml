@@ -1,0 +1,15 @@
+# Configuration for loading the Infinite MNIST dataset
+
+loader:
+  _target_: a_scale.nn.datasets.infimnist.InfiniteMnist
+  # Set batch size from the training configuration
+  batch_size: ${h.B}
+
+# Dataset-specific parameters
+# Dimensionality of each input sample (28x28 = 784)
+# Number of output classes (digits 0-9)
+input_channels: 1
+input_height: 28
+input_width: 28
+input_dim: 784
+output_dim: 10

@@ -1,0 +1,48 @@
+_target_: a_scale.sampling.h_sampler_from_csv
+_partial_: true
+
+file_path: ${fit_nqs_csv}
+#inputs/h_samples_fit_nqs_small_adamw_cosine.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw_isotoken_only.csv
+ #inputs/h_samples_fit_nqs_owt_small_sgd.csv
+ #inputs/h_samples_fit_nqs_owt_small_adamw.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw.csv
+#inputs/h_samples_fit_nqs_owt_small_momentum.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw_isoflop_only.csv
+#inputs/h_samples_fit_nqs_owt_small_adamw.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small_tuning.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small_tuning.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small_tuning.csv
+# inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small_tuning.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_owt_small.csv
+#inputs/h_samples_fit_nqs_critical_isoflop_3.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_critical_isoflop_3.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv
+#inputs/h_samples_fit_nqs_critical_isoflop_3.csv
+#inputs/h_samples_fit_nqs_iso_on_critical_adamw_small.csv #h_samples_fit_nqs_iso_on_critical_adamw_isoflop.csv
+#h_samples_fit_nqs_iso_on_critical_adamw_small.csv #_isoflop.csv #h_samples_fit_nqs_iso_on_critical_adamw.csv
+#h_samples_fit_nqs_critical_isoflop.csv
+#h_samples_fit_nqs_iso_schedule.csv
+#inputs/h_samples_fit_nqs_critical_isoflop.csv
+#h_samples_fit_nqs_iso_jun19.csv
+#large_mix_batch.csv
+seq_len: ${seq_len} # used to calculate total compute used by the samples

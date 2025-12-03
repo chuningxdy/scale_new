@@ -1,0 +1,20 @@
+_target_: a_scale.sampling.h_sampler_from_csv
+_partial_: true
+
+file_path: ${chin2_csv}
+#inputs/h_samples_resource_allocation_all_balanced_adamw_cosine.csv
+#inputs/h_samples_resource_allocation_all_balanced_adamw_cosine_small.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_sgd.csv
+#inputs/h_samples_resource_allocation_owt_train_only_sgd.csv
+#inputs/h_samples_resource_allocation_all_balanced_train_only.csv
+#h_samples_resource_allocation_all_balanced_valid.csv
+#inputs/h_samples_resource_allocation_owt_small_w_valid_and_test_adamw_on_critical_line.csv
+#inputs/h_samples_resource_allocation_owt_small_adamw_on_critical_line.csv
+#inputs/h_samples_resource_allocation_owt_small_on_critical_line.csv
+# inputs/h_samples_resource_allocation_owt_small_on_critical_line.csv
+#inputs/h_samples_resource_allocation_owt_small_adamw_on_critical_line.csv
+#inputs/h_samples_resource_allocation_owt_small_on_critical_line.csv
+#inputs/h_samples_resource_allocation_owt_small_adamw_on_critical_line.csv
+#inputs/h_samples_resource_allocation_owt_small_on_critical_line.csv
+#inputs/h_samples_fit_chin2.csv #_isoflop.csv
+seq_len: ${seq_len} # used to calculate total compute used by the samples

@@ -1,0 +1,31 @@
+_target_: a_scale.sampling.h_sampler_semigrid
+_partial_: true
+
+seq_len: 128 # used to calculate total compute used by the samples
+rand_key: 6
+
+min_N: ${samplers.h_sampler_fit_nqs.min_N}
+max_N: ${samplers.h_sampler_fit_nqs.max_N}
+lvls_N: ${samplers.h_sampler_fit_nqs.lvls_N}
+
+min_B: ${samplers.h_sampler_test_nqs.B}
+max_B: ${samplers.h_sampler_test_nqs.B}
+lvls_B: 1
+
+min_K: ${samplers.h_sampler_fit_nqs.min_K}
+max_K: ${samplers.h_sampler_fit_nqs.max_K}
+lvls_K: ${samplers.h_sampler_fit_nqs.lvls_K}
+
+min_lr: ${samplers.h_sampler_test_nqs.lr}
+max_lr: ${samplers.h_sampler_test_nqs.lr}
+lvls_lr: 1
+
+momentum: ${samplers.h_sampler_test_nqs.momentum}
+end_lr: ${samplers.h_sampler_test_nqs.end_lr}
+lr_schedule: ${samplers.h_sampler_test_nqs.lr_schedule}
+optimizer: ${samplers.h_sampler_test_nqs.optimizer}
+
+step_decay_schedule: 
+  decay_at: ${samplers.h_sampler_test_nqs.step_decay_schedule.decay_at}
+  decay_amt: ${samplers.h_sampler_test_nqs.step_decay_schedule.decay_amt}
+  

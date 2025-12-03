@@ -1,0 +1,33 @@
+_target_: a_scale.loss_estimation.loss_estimation
+_partial_: true
+
+
+h_sampler_train: ${a_scaling_model.h_sampler_training}
+h_sampler_train_chinchilla: ${samplers.h_sampler_fit_chinchilla}
+h_sampler_test: ${samplers.h_sampler_test_nqs}
+test_last_ckpt_only: false
+
+loss_threshold: ${a_scaling_model.loss_threshold}
+ignore_small_batches: ${a_scaling_model.ignore_small_batches}
+
+fitted_nqs: {} # to be passed to the loss estimation
+fitted_baselines: {} # to be passed to the loss estimation
+
+effective_model_size_factor: ${a_scaling_model.effective_model_size_factor}
+include_embedding_params: ${a_scaling_model.include_embedding_params}
+
+neural_net: ${neural_net}
+a_scaling_model: ${a_scaling_model}
+chinchilla_1: ${chinchilla_1}
+chinchilla_2: ${chinchilla_2}
+
+nqs_simulator: ${nqs_simulators.EM_six}
+
+eval_metric: 
+  _target_: a_scale.evaluation_metrics.log_ASE
+  _partial_: true
+
+loss_estimation_dir: ${job_dir}4_loss_estimation/
+
+nn_archive_file: ${nn_archive_file}
+nqs_archive_file: ${nqs_archive_file}

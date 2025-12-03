@@ -1,0 +1,55 @@
+
+
+
+_target_: a_scale.hyper_selection.hyper_selection
+_partial_: true
+
+seq_len: ${seq_len}
+vocab_size: ${vocab_size}
+
+fitted_nqs: {} # to be passed to the hyper selection function
+
+neural_net: ${neural_net}
+nqs_simulator: ${nqs_simulators.EM_six}
+
+hyper_selection_dir: ${job_dir}6_hyper_selection
+nn_archive_file: ${nn_archive_file}
+nqs_archive_file: ${nqs_archive_file}
+
+h_sampler_hyper_selection_deepseek: ${samplers.h_sampler_hyper_selection_deepseek}
+h_sampler_hyper_selection_NQS: ${samplers.h_sampler_hyper_selection_NQS}
+h_sampler_hyper_selection_test: ${samplers.h_sampler_hyper_selection_test}
+
+
+effective_model_size_factor: ${a_scaling_model.effective_model_size_factor} #1.0
+include_embedding_params: ${a_scaling_model.include_embedding_params} #false
+
+test:
+  C: 6144000 
+  N: 5000000
+
+deepseek:
+
+  max_N: 5000000 #3000000
+  min_N: 5000000 #1000000
+  max_K: 20000 #100000
+  min_K: 5000 #50000
+
+# ----- for DeepSeek and NQS
+min_B: 8 #16
+max_B: 32
+
+min_lr: 1.0
+max_lr: 2.5 #0.6
+
+momentum: ${test_momentum} #0.9
+end_lr: 0.1 # only for cosine schedule; not used for step schedule
+
+lr_schedule: ${test_lr_schedule}
+optimizer: sgd
+
+step_decay_schedule:
+  decay_at: ${test_step_decay_schedule.decay_at}
+  decay_amt: ${test_step_decay_schedule.decay_amt}
+
+

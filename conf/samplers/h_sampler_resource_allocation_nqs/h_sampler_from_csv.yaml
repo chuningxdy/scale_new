@@ -1,0 +1,9 @@
+_target_: a_scale.sampling.h_sampler_from_csv
+_partial_: true
+
+file_path: ${samplers.h_sampler_resource_allocation_nn.file_path}
+#inputs/h_samples_resource_allocation_adamw_small_on_critical_line.csv
+#inputs/h_samples_resource_allocation_tiny.csv
+#h_samples_resource_allocation_adamw_small_on_critical_line.csv
+#h_samples_resource_allocation_nn_on_critical_line.csv #_on_critical_line_schedule.csv #h_samples_resource_allocation_nn.csv
+seq_len: ${seq_len} # used to calculate total compute used by the samples

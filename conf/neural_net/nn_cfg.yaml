@@ -1,0 +1,6 @@
+defaults:
+  - data: cifar5m # placeholder - value doesnt matter; will be replaced by the value in master.yaml
+  - model: simplecnn # same as above
+  - loss: condcrossent # same as above
+
+h: {}

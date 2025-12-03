@@ -1,0 +1,12 @@
+_target_: optax.piecewise_constant_schedule
+init_value: ${h.lr}
+boundaries_and_scales: 
+      _target_: a_scale.nn.run_nn_utils.generate_step_decay_schedule
+      num_iterations: ${h.K}
+      decay_schedule: 
+            decay_at:
+                  - 0.5
+            decay_amt:
+                  - 1.0
+      init_lr: ${h.lr}
+      end_lr: ${h.end_lr} # not used for now

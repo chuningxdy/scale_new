@@ -1,0 +1,5 @@
+_target_: a_scale.sampling.h_sampler_from_csv
+_partial_: true
+
+file_path: inputs/h_samples_hyper_selection_deepseek.csv
+seq_len: ${seq_len} # used to calculate total compute used by the samples

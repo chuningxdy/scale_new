@@ -1,0 +1,11 @@
+defaults:
+  - _self_
+  - optimizer: sgd
+N: {}
+B: {}
+K: {}
+lr: {}
+# end_lr only for cosine decay
+end_lr: {}
+momentum: {}
+lr_schedule: {} # step, cosine, etc. 

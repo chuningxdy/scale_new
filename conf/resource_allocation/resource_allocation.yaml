@@ -1,0 +1,68 @@
+# fix momen, bs, lr_schedule
+# on a grid of N, K - compute the NQS risk (1)
+# select a few isoflops (2)
+# alone the isoflops, compute the NQS risk (1.5)
+# for each isoflop, find the optimal N,L allocation (chin1/2 using C in (2); and nqs using (1.5)) (3)
+# for the optimal N,L allocation, run the actual NN training to get NN test loss (4)
+
+# make the following figures
+# 1. x-axis K x seq len x batch size, y-axis N, contour plot of NQS risk (1), draw lines for each C in (2)
+#.    for each C, add stars for the optimal N,L allocation (3), and color the stars by the NN test loss (4)
+# 2. x-axis K x seq len x batch size, y-axis loss, for each C in (2), plot the NQS test loss (1.5) as a curve,
+#.    add stars for the optimal N,L allocation (3), and color the stars by the NN test loss (4)
+# 3. table: data, model, C in (2), optimal N, K allocations (3), and (4) NN test loss
+
+
+# compute NQS loss for all entries in the sample
+# get optimal N,L chin by formula
+# filter for isoflops, get optimal N,L nqs by the loss
+# filter for optimal N,L chin & nqs, run NN
+# make the figures
+
+
+
+_target_: a_scale.resource_allocation.resource_allocation
+_partial_: true
+
+
+max_iters_per_run: 10000000 # this is to prevent the NN from hanging
+                            # e.g. if chinchilla one asks for a huge K, skip that run
+
+seq_len: ${seq_len}
+
+h_sampler_nn: ${samplers.h_sampler_resource_allocation_nn} # isoflop
+h_sampler_nqs: ${samplers.h_sampler_resource_allocation_nqs} # grid & isoflop
+
+
+fitted_nqs: {} # to be passed to the loss estimation
+fitted_baselines: {} # to be passed to the loss estimation
+
+
+neural_net: ${neural_net}
+
+nqs_simulator: ${nqs_simulators.EM_six}
+
+resource_allocation_dir: ${job_dir}5_resource_allocation
+
+nn_archive_file: ${nn_archive_file}
+nqs_archive_file: ${nqs_archive_file}
+
+effective_model_size_factor: ${a_scaling_model.effective_model_size_factor}
+include_embedding_params: ${a_scaling_model.include_embedding_params}
+
+use_lr_adapt: ${use_lr_adapt}
+lr_adapt_tolerance: ${lr_adapt_tolerance}
+
+
+B: ${test_B} # batch size
+
+lr: ${test_lr} #0.5
+momentum: ${test_momentum} #0.9
+end_lr: 0.1 # only for cosine schedule; not used for step schedule
+
+lr_schedule: ${test_lr_schedule}
+optimizer: sgd
+
+step_decay_schedule:
+  decay_at: ${test_step_decay_schedule.decay_at}
+  decay_amt: ${test_step_decay_schedule.decay_amt}

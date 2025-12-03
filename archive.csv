@@ -1,0 +1,2 @@
+a,b,m_a,m_b,eps,sigma,run_id,N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule,path
+1.161803,0.891449,3.830275,0.610643,0.310771,2.88551,0,15848,384,5000,1.9990000000000003,0.1,0.0,optimized_old_nov,sgd,na,outputs/nqs_archive/runs/0/

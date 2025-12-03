@@ -1,0 +1,33 @@
+
+
+
+_target_: a_scale.critical_batch_size.critical_batch_size
+_partial_: true
+
+slope_at_critical_batch_size: 0.01
+seq_len: ${seq_len}
+vocab_size: ${vocab_size}
+
+fitted_nqs: {} # to be passed to the hyper selection function
+
+neural_net: ${neural_net}
+nqs_simulator: ${nqs_simulators.EM_six}
+
+critical_batch_size_dir: ${job_dir}6_critical_batch_size/
+nn_archive_file: ${nn_archive_file}
+nqs_archive_file: ${nqs_archive_file}
+
+#h_sampler_hyper_selection_deepseek: ${samplers.h_sampler_hyper_selection_deepseek}
+#h_sampler_hyper_selection_NQS: ${samplers.h_sampler_hyper_selection_NQS}
+h_sampler: ${samplers.h_sampler_critical_batch_size}
+
+effective_model_size_factor: ${a_scaling_model.effective_model_size_factor} #1.0
+include_embedding_params: ${a_scaling_model.include_embedding_params} #false
+
+
+use_lr_adapt: ${use_lr_adapt}
+lr_adapt_tolerance: ${lr_adapt_tolerance}
+
+
+
+

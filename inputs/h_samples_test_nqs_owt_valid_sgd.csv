@@ -1,0 +1,9 @@
+N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule,C
+2000000,324,107870,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+4000000,251,70024,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+8000000,204,48747,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+16000000,156,31007,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+32000000,124,20654,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+64000000,94,12808,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+128000000,74,8570,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000
+256000000,57,5330,1.999,0.1,0.0,constant,sgd,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",59000000

@@ -1,0 +1,7 @@
+# Configuration for a Two-Layer Multi-Layer Perceptron (MLP) model
+
+_partial_: true
+_target_: a_scale.nn.models.ffnns.TwoLayerMLP
+input_dim: ${data.input_dim}
+output_dim: ${data.output_dim}
+requested_num_parameters: ${h.N}

@@ -1,0 +1,6 @@
+defaults:
+  - _self_
+  - learning_rate: step
+
+_target_: optax.sgd
+momentum: ${h.momentum}

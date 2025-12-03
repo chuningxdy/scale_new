@@ -1,0 +1,14 @@
+_target_: a_scale.baselines.baselines.chinchilla_parametric
+_partial_: true
+
+use_last_x_ckpt: 1
+
+h_sampler_training: ${a_scaling_model.h_sampler_training} # use a set of training hyperparameter cfgs
+                                # same as that used for the NQS scaling model.
+neural_net: ${neural_net}
+chinchilla_dir: ${job_dir}/2_fit_chinchilla_v1/
+nn_archive_file: ${nn_archive_file}
+
+eval_metric: 
+  _target_: a_scale.evaluation_metrics.log_ASE
+  _partial_: true

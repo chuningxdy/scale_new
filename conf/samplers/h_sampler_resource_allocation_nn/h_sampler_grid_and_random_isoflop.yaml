@@ -1,0 +1,68 @@
+_target_: a_scale.sampling.samplers.h_sampler_grid_and_random_isoflop
+_partial_: true
+
+
+#max_iters_per_run: 1000000 # this is to prevent the NN from hanging
+
+neural_net: ${neural_net}
+# ------ LM parameters ----#
+
+seq_len: ${seq_len}
+vocab_size: ${vocab_size}
+
+# ------
+compute_budget: 6144000 #${select_hyper.compute_budget} # in 1000,000,000; the compute (6*NBK) of test run
+# specify the compute budget in multiples of 1000!
+
+time_budget: 500000 #200000
+
+use_grid: False #True
+use_random_isoflops: True
+
+## ------ For IsoFlops -------
+n_samples: 10 #100 #100 #100 # number of samples to draw from the isoflop region
+## seed for random number generator
+rand_key: 6 
+isoflop_fracs: 
+  - 1
+
+
+
+## ------ For Grid ------- 
+# spacing of the grid
+space_N: 1 #0.5 #1 # log base 2
+space_B: 1 #0.5 #1 # log base 2
+space_K: 1 #0.5 #1 # log base 2
+space_lr: 1 #0.5 # log base 10
+space_end_lr: 1 #0.5 # log base 10
+space_momentum: 1 #0.5 # log base 10 on  (1 - momentum )
+
+## -------- For Grid and IsoFlops -------
+max_N: 25000000
+min_N: 250000
+
+max_B: ${resource_allocation.B} 
+min_B: ${resource_allocation.B} 
+
+max_K: 500000 
+min_K: 10000
+
+min_lr: ${resource_allocation.lr} #0.001
+max_lr: ${resource_allocation.lr} # 0.3
+
+min_end_lr: ${resource_allocation.end_lr} # these are to be multiplied by the lr
+max_end_lr: ${resource_allocation.end_lr} # these are to be multiplied by the lr
+
+min_momentum: ${resource_allocation.momentum} 
+max_momentum: ${resource_allocation.momentum} 
+
+lr_schedule_options: 
+  - ${resource_allocation.lr_schedule}
+optimizer_options: 
+  - ${resource_allocation.optimizer}
+
+step_decay_schedule_options:
+  - ${resource_allocation.step_decay_schedule}
+
+
+

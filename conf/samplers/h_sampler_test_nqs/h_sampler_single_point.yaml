@@ -1,0 +1,22 @@
+_target_: a_scale.sampling.h_sampler_single_point
+_partial_: true
+
+seq_len: ${seq_len} # used to calculate total compute used by the samples
+
+
+N: ${test_N} # 5 Mil = 103Mil/ chin 20 ratio
+
+# BK = wiki text 103Mil/seq len = 128 => 800k
+B: ${test_B}
+K: ${test_K} # 800k
+
+lr: ${test_lr} #0.5
+momentum: ${test_momentum} #0.9
+end_lr: 0.1 # only for cosine schedule; not used for step schedule
+
+lr_schedule: ${test_lr_schedule}
+optimizer: sgd
+
+step_decay_schedule:
+  decay_at: ${test_step_decay_schedule.decay_at}
+  decay_amt: ${test_step_decay_schedule.decay_amt}

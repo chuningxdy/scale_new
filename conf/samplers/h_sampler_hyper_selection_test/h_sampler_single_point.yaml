@@ -1,0 +1,22 @@
+_target_: a_scale.sampling.h_sampler_single_point
+_partial_: true
+
+seq_len: ${seq_len} # used to calculate total compute used by the samples
+
+
+N: ${hyper_selection.test.N} # 5 Mil = 103Mil/ chin 20 ratio
+
+
+
+B: 1 #{} placeholder
+K: 1 #{} placeholder
+lr: 1 #{} placeholder
+
+
+momentum: ${hyper_selection.momentum}
+end_lr: ${hyper_selection.end_lr}
+
+lr_schedule: ${hyper_selection.lr_schedule}
+optimizer: ${hyper_selection.optimizer}
+
+step_decay_schedule: ${hyper_selection.step_decay_schedule}

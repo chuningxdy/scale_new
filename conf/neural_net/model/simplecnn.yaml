@@ -1,0 +1,9 @@
+# Configuration for a Two-Layer Multi-Layer Perceptron (MLP) model
+
+_partial_: true
+_target_: a_scale.nn.models.ffnns.SimpleCNN
+input_channels: ${data.input_channels}
+input_height: ${data.input_height}
+input_width: ${data.input_width}
+output_dim: ${data.output_dim}
+requested_num_parameters: ${h.N}

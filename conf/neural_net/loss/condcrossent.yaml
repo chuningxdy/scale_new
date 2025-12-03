@@ -1,0 +1,2 @@
+_target_: a_scale.nn.losses.condcrossent
+_partial_: true

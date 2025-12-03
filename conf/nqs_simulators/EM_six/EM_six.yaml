@@ -1,0 +1,4 @@
+_target_: a_scale.nqs.EM_nqs_from_cfg_six
+_partial_: true
+
+LRA_tol: ${lr_adapt_tolerance}
