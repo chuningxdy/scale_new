@@ -13,8 +13,6 @@ print("HF_DATASETS_CACHE:", os.environ["HF_DATASETS_CACHE"])
 import pandas as pd
 import json
 import sys
-import yaml
-from pathlib import Path
 
 Pythia_configs = pd.DataFrame({
     'model': ['pythia-70m', 'pythia-160m', 'pythia-410m', 'pythia-1b', 'pythia-1.4b', 'pythia-2.8b', 'pythia-6.9b', 'pythia-12b'],
@@ -319,7 +317,7 @@ import torch
 import os
 import random
 
-from transformers.optimization import get_constant_schedule, get_cosine_schedule_with_warmup
+from transformers.optimization import get_constant_schedule
 
 
 
@@ -471,8 +469,33 @@ def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1
                 print("Dataset features:", tokenized_dataset.features)
             
             print("Number of examples:", len(tokenized_dataset))
+            def display_example(example_idx):
+                example = tokenized_dataset[example_idx]
+                
+                input_ids = example['input_ids']
+                
+                decoded_text = tokenizer.decode(input_ids)
+                
+                print(f"Example {example_idx}:")
+                print(f"Length: {len(input_ids)} tokens")
+                print(f"Text: {decoded_text}")
+
             
         elif dataset_name in ["lm1b"]:
+        
+            def group_examples(examples, group_size=50, _cache_version=1):
+                """Group multiple examples into one larger example.
+                The _cache_version parameter helps invalidate cache when needed.
+                """
+                all_texts = examples["text"]
+                result_texts = []
+                
+                for i in range(0, len(all_texts), group_size):
+                    group = all_texts[i:i+group_size]
+                    grouped_text = "\n".join(group)
+                    result_texts.append(grouped_text)
+                    
+                return {"text": result_texts}
             
             def tokenize_with_stride(examples):
 
@@ -568,11 +591,6 @@ class CustomTrainer(Trainer):
                 
                 if self.lr_scheduler_type == "constant":
                     self.lr_scheduler = get_constant_schedule(self.optimizer)
-                elif self.lr_scheduler_type == "cosine":
-                    self.lr_scheduler = get_cosine_schedule_with_warmup(
-                        self.optimizer, 
-                        num_warmup_steps = int(num_training_steps * 0.01), 
-                        num_training_steps = num_training_steps)
                 elif self.lr_scheduler_type == "step":
                     if self.step_decay_schedule_dict is None:
                         raise ValueError("step_decay_schedule_dict must be provided for step decay schedule")
@@ -754,12 +772,9 @@ def main():
         print(f"  Per-device batch size: {BS}")
         print(f"  Num GPUs: {world_size}")
         print(f"  Effective global batch size: {effective_batch_size}")
-        
-        # CHANGE: Only rank 0 writes files
-        if local_rank in [-1, 0]:
-            with open(os.path.join(out_path, 'grad_accumulation_info.txt'), 'w') as f:
-                f.write(f"Using per-device batch size {BS} with gradient accumulation steps {grad_accumulation_steps} for global batch size {target_batch_size}\n")
-                f.write(f"Num GPUs: {world_size}, Effective batch size: {effective_batch_size}")
+        with open(os.path.join(out_path, 'grad_accumulation_info.txt'), 'w') as f:
+            f.write(f"Using per-device batch size {BS} with gradient accumulation steps {grad_accumulation_steps} for global batch size {target_batch_size}\n")
+            f.write(f"Num GPUs: {world_size}, Effective batch size: {effective_batch_size}")
     else:
         BS = int(target_batch_size / world_size)
         grad_accumulation_steps = 1
@@ -767,12 +782,9 @@ def main():
         print(f"Using per-device batch size {BS} with no gradient accumulation")
         print(f"  Num GPUs: {world_size}")
         print(f"  Effective global batch size: {effective_batch_size}")
-        
-        # CHANGE: Only rank 0 writes files
-        if local_rank in [-1, 0]:
-            with open(os.path.join(out_path, 'grad_accumulation_info.txt'), 'w') as f:
-                f.write(f"Using per-device batch size {BS} with no gradient accumulation for global batch size {target_batch_size}\n")
-                f.write(f"Num GPUs: {world_size}, Effective batch size: {effective_batch_size}")
+        with open(os.path.join(out_path, 'grad_accumulation_info.txt'), 'w') as f:
+            f.write(f"Using per-device batch size {BS} with no gradient accumulation for global batch size {target_batch_size}\n")
+            f.write(f"Num GPUs: {world_size}, Effective batch size: {effective_batch_size}")
 
     # CHANGE: Modified TrainingArguments - only set ddp params if actually in multi-GPU mode
     training_args_dict = {
@@ -821,8 +833,10 @@ def main():
         data_collator=data_collator,
     )
 
-    # CHANGE: Checkpoint search with multi-GPU safety and error handling
-    search_ground = "/mfs1/u/chuning/scale/outputs/nn_archive/runs"
+    search_ground = "outputs/nn_archive/runs"
+
+    from pathlib import Path
+    import yaml
 
     def _is_subset(sub, sup):
         """Recursive dict subset check; lists/scalars must match exactly."""
@@ -833,132 +847,58 @@ def main():
         return True
 
     def find_matching_subdir(nn_dict, h_dict):
-        """Find directories matching both nn_dict and h_dict - with error handling"""
         candidates = []
         root = Path(search_ground)
-        
-        if not root.exists():
-            if local_rank in [-1, 0]:
-                print(f"Warning: Search ground {search_ground} does not exist")
-            return candidates
-        
         for subdir in (p for p in root.iterdir() if p.is_dir()):
-            try:
-                # Check if the directory name contains "2025_12_" or "2026_01_"
-                if "Run_2025_12_" not in subdir.name and "Run_2026_01_" not in subdir.name:
-                    continue
-                
-                h_yaml_path = subdir / "hdict.yaml"
-                m_yaml_path = subdir / "mdict.yaml"
-                
-                # Check if both YAML files exist
-                if not (h_yaml_path.exists() and m_yaml_path.exists()):
-                    continue
-                    
-                h_yaml = yaml.safe_load(h_yaml_path.read_text(encoding="utf-8")) or {}
-                m_yaml = yaml.safe_load(m_yaml_path.read_text(encoding="utf-8")) or {}
-                
-                if _is_subset(h_yaml, h_dict) and _is_subset(m_yaml, nn_dict):
-                    candidates.append(subdir)
-                    if local_rank in [-1, 0]:
-                        print(f"  Found matching checkpoint directory: {subdir.name}")
-            except Exception as e:
-                if local_rank in [-1, 0]:
-                    print(f"  Error processing {subdir.name}: {e}")
-                continue
-        
+            h_yaml = yaml.safe_load((subdir / "hdict.yaml").read_text(encoding="utf-8")) or {}
+            m_yaml = yaml.safe_load((subdir / "mdict.yaml").read_text(encoding="utf-8")) or {}
+            if _is_subset(h_yaml, h_dict) and _is_subset(m_yaml, nn_dict):
+                candidates.append(subdir)
         return candidates
 
     def find_latest_checkpoint(paths_to_checkpoints):
-        """Find most recent checkpoint by number"""
         checkpoint_candidates = []
         for path_to_checkpoints in paths_to_checkpoints:
-            try:
-                for subdir in (p for p in path_to_checkpoints.iterdir() if p.is_dir()):
-                    if subdir.is_dir() and subdir.name.startswith("checkpoint-"):
-                        checkpoint_candidates.append(subdir)
-            except Exception as e:
-                if local_rank in [-1, 0]:
-                    print(f"  Error scanning checkpoints in {path_to_checkpoints}: {e}")
-                continue
-        
-        if checkpoint_candidates:
-            checkpoint_candidates.sort(key=lambda p: int(p.name.split("-")[-1]))
-            return checkpoint_candidates[-1]
-        return None
+            for subdir in (p for p in path_to_checkpoints.iterdir() if p.is_dir()):
+                if subdir.is_dir() and subdir.name.startswith("checkpoint-"):
+                    checkpoint_candidates.append(subdir)
+        checkpoint_candidates.sort(key=lambda p: int(p.name.split("-")[-1]))
+        return checkpoint_candidates[-1] if checkpoint_candidates else None
+    
+    matching_subdir = find_matching_subdir(nn_dict, h_dict)
 
-    # CHANGE: Only rank 0 searches for checkpoints
-    latest_checkpoint_path = None
-    if local_rank in [-1, 0]:
-        print("\n" + "="*60)
-        print("Searching for matching checkpoints...")
-        print("="*60)
-        matching_subdir = find_matching_subdir(nn_dict, h_dict)
-        
-        if matching_subdir:
-            print(f"Found {len(matching_subdir)} matching directory(ies)")
-            latest_checkpoint_path = find_latest_checkpoint(matching_subdir)
-        else:
-            print("No matching checkpoint directories found")
-        
-        print(f"\nLatest checkpoint path: {latest_checkpoint_path}")
-        print("="*60 + "\n")
-        
-        # Only rank 0 writes checkpoint info
-        with open("/mfs1/u/chuning/scale_new/last_checkpoint_path.txt", "w") as f:
-            f.write(str(latest_checkpoint_path) if latest_checkpoint_path else "None")
-            f.write("\n")
-            f.write("Dec")
-        
-        with open(os.path.join(path, 'resume_from_checkpoint.txt'), 'w') as f:
-            f.write(str(latest_checkpoint_path) if latest_checkpoint_path else "None")
+    latest_checkpoint_path = find_latest_checkpoint(matching_subdir) if matching_subdir else None
 
-    # CHANGE: Broadcast checkpoint path to all GPUs
-    if world_size > 1:
-        # Convert to list for broadcasting
-        checkpoint_list = [str(latest_checkpoint_path) if latest_checkpoint_path else "None"]
-        
-        if dist.is_initialized():
-            if local_rank in [-1, 0]:
-                print(f"Rank {local_rank}: Broadcasting checkpoint path to all GPUs...")
-            
-            dist.broadcast_object_list(checkpoint_list, src=0)
-            latest_checkpoint_path = checkpoint_list[0] if checkpoint_list[0] != "None" else None
-            
-            if local_rank != 0:
-                print(f"Rank {local_rank}: Received checkpoint path: {latest_checkpoint_path}")
+    print(f"Found latest checkpoint path:{latest_checkpoint_path}")
 
-    # Convert to string or None for trainer
-    checkpoint_str = str(latest_checkpoint_path) if latest_checkpoint_path else None
+    with open("/mfs1/u/chuning/scale/last_checkpoint_path.txt", "w") as f:
+        f.write(str(latest_checkpoint_path))
+    f.close()
 
-    if local_rank in [-1, 0]:
-        print(f"\nAll ranks ready. Will resume from checkpoint: {checkpoint_str if checkpoint_str else 'None (training from scratch)'}\n")
-
-    # CHANGE: REMOVED the debugging raise statement
-    # raise ValueError("stop here, checkpoint is: ", latest_checkpoint_path)  # THIS LINE IS DELETED
+    with open(os.path.join(path, 'resume_from_checkpoint.txt'), 'w') as f:
+        f.write(str(latest_checkpoint_path))
+    f.close()
 
     # CHANGE: Wrap training in try-finally to ensure cleanup
     try:
         # Train the model
-        trainer.train(resume_from_checkpoint=checkpoint_str)
+        trainer.train(resume_from_checkpoint=str(latest_checkpoint_path) if latest_checkpoint_path else None)
 
         trainer.save_model()
 
         eval_results = trainer.evaluate()
         print(f"Evaluation results: {eval_results}")
 
-        # CHANGE: Only rank 0 copies files
-        if local_rank in [-1, 0]:
-            loss_curve_df = pd.read_csv(os.path.join(path, 'loss_curve_df.csv'))
-            loss_curve_df.to_csv(os.path.join(out_path, 'loss_curve_df.csv'), index=False)
+        loss_curve_df = pd.read_csv(os.path.join(path, 'loss_curve_df.csv'))
+        loss_curve_df.to_csv(os.path.join(out_path, 'loss_curve_df.csv'), index=False)
     
     finally:
         # CHANGE: Clean up distributed process group if it was initialized
         if world_size > 1 or local_rank != -1:
             if dist.is_initialized():
-                print(f"\nRank {local_rank}: Cleaning up distributed process group...")
+                print("\nCleaning up distributed process group...")
                 dist.destroy_process_group()
-                print(f"Rank {local_rank}: Distributed process group destroyed successfully.")
+                print("Distributed process group destroyed successfully.")
 
 
 
@@ -990,6 +930,4 @@ if __name__ == "__main__":
             dist.destroy_process_group()
         raise
  
- # command to run: 
- # Single GPU: python hf_utils_train_model.py
- # Multi-GPU:  torchrun --nproc_per_node=2 hf_utils_train_model.py
+ # command to run: torchrun --nproc_per_node=2 hf_utils_train_model.py

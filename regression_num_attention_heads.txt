@@ -1,0 +1,2 @@
+Log-log regression for num_attention_heads:
+Intercept: -2.1015, Coefficient: 0.2426, R²: 0.6905

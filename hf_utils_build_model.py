@@ -80,7 +80,11 @@ def func_config_from_params_count(df, plot_filename=None):
         
         print(f"Log-log regression for {col}:")
         print(f"Intercept: {intercept:.4f}, Coefficient: {slope:.4f}, R²: {r_value**2:.4f}")
-        
+        # save the above text to a file
+        with open(f'regression_{col}.txt', 'w') as f:
+            f.write(f"Log-log regression for {col}:\n")
+            f.write(f"Intercept: {intercept:.4f}, Coefficient: {slope:.4f}, R²: {r_value**2:.4f}\n")
+            #raise ValueError("Stop after saving regression results.")
         # Create visualization if requested
         if plot_filename:
             ax = plt.subplot(gs[i // 2, i % 2])

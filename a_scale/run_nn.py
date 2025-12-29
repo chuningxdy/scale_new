@@ -301,7 +301,9 @@ def train_hf_jax(nn_dict, h_dict, path):
     
 
     # Add it to the command
-    command = f"conda run --prefix {path_to_conda_env} python {path_to_script} {hf_temp_folder}"
+    #command = f"conda run --prefix {path_to_conda_env} python {path_to_script} {hf_temp_folder}"
+    command = f"conda run --prefix {path_to_conda_env} torchrun --nproc_per_node=4 {path_to_script} {hf_temp_folder}"
+    # torchrun --nproc_per_node=2 hf_utils_train_model.py
     print("run command: ", path_to_script)
     print(h_dict["step_decay_schedule"])
     result = subprocess.run(command, shell=True, capture_output=True, text=True)

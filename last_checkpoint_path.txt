@@ -1,0 +1,2 @@
+/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2025_12_27_02_20_03_900626/checkpoint-10000
+Dec

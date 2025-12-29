@@ -1,2 +1,2 @@
-a,b,m_a,m_b,eps,sigma,N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule
-1.096477,0.732638,2.535869,0.992296,0.0437,0.22395,16000000,34,2223,1.999,0.1,0.0,optimized,sgd,na
+data,model,loss,N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule
+openwebtext2,pythia,condcrossent,256000000,5014,62150,0.001,0.1,0.0,cosine,adamw,na

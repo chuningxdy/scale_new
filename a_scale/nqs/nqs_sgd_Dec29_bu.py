@@ -1399,7 +1399,7 @@ def test_e_bias_var_LRA():
     print(f"Test e_bias_var_fast_LRA: e_bv = {e_bv}")
 
 
-def _e_dim_bv_one_step(nqs, n, bv_factor, step, b_decay_factor = 1.0):
+def _e_dim_bv_one_step(nqs, n, bv_factor, step):
         '''
         Advance the b_factor and v_factor for both e_bias and e_var at dimension n, over one phase in a multi-step schedule
         '''
@@ -1419,12 +1419,12 @@ def _e_dim_bv_one_step(nqs, n, bv_factor, step, b_decay_factor = 1.0):
         sumprod_factor, prod_factor = _geom_sum(a**2, num_steps, output_prod = True)
         
         b_factor = b_factor * prod_factor
-        # use b_decay_factor to scale the noise at this step
-        # a b_decay_factor < 1.0 means reducing the noise (e.g. effect of regularization)
-        v_factor = v_factor * prod_factor + lr**2/B * sumprod_factor * b_decay_factor
+        v_factor = v_factor * prod_factor + lr**2/B * sumprod_factor
         bv_factor = jnp.array([b_factor, v_factor])
 
         return bv_factor
+
+
 
 def _get_em_quadrature_points(L, U):
     logL = jnp.log(L)
@@ -1496,31 +1496,8 @@ def _bv_from_bv_factor(nqs, n, bv_factor):
         e_var_n = 0.5 * lambda_n * (R / n**r) * v_factor
         return jnp.array([e_bias_n, e_var_n])
 
-# weight norm
-def _w2_from_bv_factor(nqs, n, bv_factor):
-        
-        p, q, P, Q, e_irr, R, r = nqs
-        b_factor, v_factor = bv_factor
-        
-
-        # in the n-th dimension, the expected weight norm squared is:
-        # E[||w_n||^2] = 2 / lambda_n * (E[Bias_n] + E[Var_n]) + (w^*)^2 + 2 * w^* \sqrt(b_factor) * (w_0 - w^*)
-        # assume w_0 = 0 for simplicity, this gives
-        # E[||w_n||^2] = 2 / lambda_n * (E[Bias_n] + E[Var_n]) + (w^*)^2 - 2 * w^* \sqrt(b_factor) * w^*
-        # = 2 / lambda_n * (E[Bias_n] + E[Var_n]) + (1 - 2 * \sqrt(b_factor)) * (w^*)^2
-        # and (w^*)^2 = init_R_n / lambda_n
-
-        init_R_n = 0.5 * P / n**p
-        lambda_n = Q / n**q
-        e_bias_n = init_R_n * b_factor
-        e_var_n = 0.5 * lambda_n * (R / n**r) * v_factor
-        w_star2_n = P / n**p / (lambda_n)
-        #e_w2_n = e_bias_n + e_var_n + (1 - 2 * b_factor) * w_star2_n
-        e_w2_n =  (1 - 2 * jnp.sqrt(b_factor))  * w_star2_n  + 2 / lambda_n * (e_bias_n + e_var_n)
-        return e_w2_n
-
 @jax.jit
-def _em_step(start_factors, nqs, step, verbose= False, b_decay_factor=1.0, return_w2=False):
+def _em_step(start_factors, nqs, step, verbose= False):
 
     # start_gns is the cache of 
     # the set of function values at the quadrature points & the first M points at  
@@ -1533,14 +1510,11 @@ def _em_step(start_factors, nqs, step, verbose= False, b_decay_factor=1.0, retur
     w = start_factors[:, 1]
     bv_factors_curr = start_factors[:, 2:4]
 
-    #b_decay_factor = 1.0 # no decay of noise for now
-    bv_factors_stepped = jax.vmap(lambda n, bv_factor: _e_dim_bv_one_step(nqs, n, bv_factor, step, b_decay_factor))(quadrature_points, bv_factors_curr)
+    bv_factors_stepped = jax.vmap(lambda n, bv_factor: _e_dim_bv_one_step(nqs, n, bv_factor, step))(quadrature_points, bv_factors_curr)
     bv_values = jax.vmap(lambda n, bv_factor: _bv_from_bv_factor(nqs, n, bv_factor))(quadrature_points, bv_factors_stepped)
-    w2_values = jax.vmap(lambda n, bv_factor: _w2_from_bv_factor(nqs, n, bv_factor))(quadrature_points, bv_factors_stepped)
-    
+
     # Evaluate function at quadrature points
     y_values  = bv_values * jnp.where(quadrature_points[:, None] > L, quadrature_points[:, None], 1.0)
-    w2_values  = w2_values * jnp.where(quadrature_points > L, quadrature_points, 1.0)
     # y_values * quadrature_points[:, None] # account for dn = n * dlogn
     # for the non -quadrature points (the integers from 1 to L-1), no need to multiply by n
     
@@ -1550,50 +1524,11 @@ def _em_step(start_factors, nqs, step, verbose= False, b_decay_factor=1.0, retur
     # the rest are to be summed directly, they get weight 1.0
     # (this is already accounted for in w)
     result = jnp.sum(w[:, jnp.newaxis] * y_values, axis=0)
-    result_w2 = jnp.sum(w * w2_values, axis=0)
 
     end_factors = jnp.concatenate([quadrature_points[:, None], w[:, None], bv_factors_stepped], axis=1)
 
-    return result, result_w2, end_factors
+    return result, end_factors
 
-
-
-@jax.jit
-def _em_at(start_factors, nqs, verbose= False, return_w2=False):
-
-    # start_gns is the cache of 
-    # the set of function values at the quadrature points & the first M points at  
-    # the end of the previous step
-
-    # start_gns is an array of shape (num_quad_points, 4)
-    # the 4 columns are: n, w, b_facor, v_factor
-
-    quadrature_points= start_factors[:, 0]
-    w = start_factors[:, 1]
-    bv_factors_curr = start_factors[:, 2:4]
-
-    bv_values = jax.vmap(lambda n, bv_factor: _bv_from_bv_factor(nqs, n, bv_factor))(quadrature_points, bv_factors_curr)
-    w2_values = jax.vmap(lambda n, bv_factor: _w2_from_bv_factor(nqs, n, bv_factor))(quadrature_points, bv_factors_curr)
-        
-
-    # Evaluate function at quadrature points
-    y_values  = bv_values * jnp.where(quadrature_points[:, None] > L, quadrature_points[:, None], 1.0)
-    # y_values * quadrature_points[:, None] # account for dn = n * dlogn
-    # for the non -quadrature points (the integers from 1 to L-1), no need to multiply by n
-
-    w2_values  = w2_values * jnp.where(quadrature_points > L, quadrature_points, 1.0)
-    
-    # Compute integral (vectorized over n)
-
-    # the first twenty points are quadrature points, they get radius and ydn_values weighting (both in w)
-    # the rest are to be summed directly, they get weight 1.0
-    # (this is already accounted for in w)
-    result = jnp.sum(w[:, jnp.newaxis] * y_values, axis=0)
-    result_w2 = jnp.sum(w * w2_values, axis=0)
-
-    #end_factors = jnp.concatenate([quadrature_points[:, None], w[:, None], bv_factors_curr], axis=1)
-
-    return result, result_w2 
 
 def _em_by_step(L, U, nqs, steps, include_1_to_L=True,
                 verbose=False):
@@ -1609,7 +1544,7 @@ def _em_by_step(L, U, nqs, steps, include_1_to_L=True,
     for step in steps:
         if verbose:
             print(f"EM step: lr={step[0]}, B={step[1]}, num_steps={step[2]}")
-        bias_var_step, w2_step, end_factors = _em_step(curr_factors, nqs, step, verbose= verbose)
+        bias_var_step, end_factors = _em_step(curr_factors, nqs, step, verbose= verbose)
         curr_factors = end_factors
     
     bias_var = bias_var_step
@@ -1699,7 +1634,7 @@ def _e_bias_var_LRA_fast(nqs, cfg, interval = 1000, LRA_tol = 0.05, verbose = Fa
         #e_bplusv_at_step = e_bv_at_step[0] + e_bv_at_step[1]
 
         # use the _em_step function to advance the quadrature points
-        bias_var_step, _, end_factors = _em_step(start_factors, nqs, step, verbose= verbose)
+        bias_var_step, end_factors = _em_step(start_factors, nqs, step, verbose= verbose)
         end_factors = end_factors
         e_bv_at_step = bias_var_step
         e_bplusv_at_step = e_bv_at_step[0] + e_bv_at_step[1]
@@ -1720,7 +1655,7 @@ def _e_bias_var_LRA_fast(nqs, cfg, interval = 1000, LRA_tol = 0.05, verbose = Fa
             #e_bv_at_step_proposed = _e_bv_step(steps_all[0:i+1, :])
             #e_bplusv_at_step_proposed = e_bv_at_step_proposed[0] + e_bv_at_step_proposed[1]
 
-            bias_var_step_proposed, _, end_factors_proposed = _em_step(start_factors, nqs, step, verbose= verbose)
+            bias_var_step_proposed, end_factors_proposed = _em_step(start_factors, nqs, step, verbose= verbose)
             e_bv_at_step_proposed = bias_var_step_proposed
             e_bplusv_at_step_proposed = e_bv_at_step_proposed[0] + e_bv_at_step_proposed[1]
             
@@ -1753,7 +1688,7 @@ def _e_bias_var_LRA_fast(nqs, cfg, interval = 1000, LRA_tol = 0.05, verbose = Fa
 
                 #e_bv_at_step_proposed = _e_bv_step(steps_all[0:i+1, :])
                 #e_bplusv_at_step_proposed = e_bv_at_step_proposed[0] + e_bv_at_step_proposed[1]
-                bias_var_step_proposed, _, end_factors_proposed = _em_step(start_factors, nqs, step, verbose= verbose)
+                bias_var_step_proposed, end_factors_proposed = _em_step(start_factors, nqs, step, verbose= verbose)
                 e_bv_at_step_proposed = bias_var_step_proposed
                 e_bplusv_at_step_proposed = e_bv_at_step_proposed[0] + e_bv_at_step_proposed[1]
                 loss_reduction = e_bplusv_at_step - e_bplusv_at_step_proposed
@@ -1771,7 +1706,7 @@ def _e_bias_var_LRA_fast(nqs, cfg, interval = 1000, LRA_tol = 0.05, verbose = Fa
 
             # for comparison, compute the loss without LRA
             step_no_LRA = steps_all_no_LRA[i, :]
-            e_bv_at_step_no_LRA, _, end_factors_no_LRA = _em_step(start_factors_no_LRA, nqs, step_no_LRA, verbose= verbose)
+            e_bv_at_step_no_LRA, end_factors_no_LRA = _em_step(start_factors_no_LRA, nqs, step_no_LRA, verbose= verbose)
             e_bplusv_at_step_no_LRA = e_bv_at_step_no_LRA[0] + e_bv_at_step_no_LRA[1]
             start_factors_no_LRA = end_factors_no_LRA
             loss_no_LRA = e_bplusv_at_step_no_LRA
@@ -1830,248 +1765,13 @@ def _e_bias_var_LRA_fast(nqs, cfg, interval = 1000, LRA_tol = 0.05, verbose = Fa
     return e_bv_at_step
 
 
-def _e_bias_var_SN_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = False):
-    '''
-    Fast computation of e_bias and e_var using EM approximation
-    (combining the computation of bias and var to save time)
-    '''
-    N = cfg.N
-    M = jnp.minimum(jnp.maximum(1, jnp.array((N * 0.05), int)), 100)
+# unit test for _e_bias_var_fast_LRA
+def test_e_bias_var_LRA_fast():
+    e_bv = _e_bias_var_LRA_fast(nqs, cfg, interval=LRA_interval, LRA_tol=LRA_tol, verbose=True)
+    print(f"Test e_bias_var_fast_LRA: e_bv = {e_bv}")
 
+#test_e_bias_var_LRA_fast()
 
-    K_all = cfg.K
-    B = cfg.B
-    lr = cfg.lr
-
-    sch = cfg.sch
-    steps_all = _process_schedule_steps_LRA(lr, B, K_all, sch, interval = interval)
-
-
-    K = 0
-    init_lr = cfg.lr
-    curr_lr = cfg.lr
-
-    steps_all_pre_LRA = steps_all
-
-    if verbose:
-        # make a plot of the learning rate schedule and the loss (e_bias + e_var) at each step
-        import matplotlib.pyplot as plt
-        lrs = steps_all[:, 0]
-        lrs_no_LRA = steps_all_pre_LRA[:, 0]
-
-        steps_all_no_LRA = _process_schedule_steps_LRA(cfg.lr, cfg.B, cfg.K, cfg.sch, interval = interval)
-
-        Ks = []
-        change_point_indices = jnp.where(steps_all[:, 3] == 1)[0]
-        losses = []
-        losses_no_LRA = []
-        w2s = []
-        w2s_no_LRA = []
-        lr_scales = []
-    
-    start_time = time.time()
-    # iterate through the rest of the steps
-    for i in range(0, steps_all.shape[0]):
-        if i == 0:
-            # initiate quadrature points for EM
-            start_factors = _init_all_points(M, N, include_1_to_L=True)
-            if verbose:
-                start_factors_no_LRA = _init_all_points(M, N, include_1_to_L=True)
-            # initiate the noise scale
-            # start with noise scale 1.0
-            # compute loss
-            bias_var_init, w2_init = _em_at(start_factors, nqs, verbose= verbose, return_w2=True)
-            loss_init = bias_var_init[0] + bias_var_init[1]
-            loss = loss_init
-            w2 = w2_init
-
-        
-        noise_scale = 1.0 #loss/loss_init
-        if w2 < 1:
-            lr_scale = 1.0
-        else:
-            hidden_width = jnp.exp(-0.0571 + 0.3687 * jnp.log(N)) 
-            #raise ValueError("hidden_width: ", hidden_width)
-            lr_scale = jnp.sqrt(30*hidden_width/w2)
-            #raise ValueError(30 * hidden_width)
-            #lr_scale = jnp.sqrt(1e4/w2)
-
-        
-
-        if verbose:
-                print(f"Step {i}, updated noise scale to {noise_scale} based on loss {loss} and initial loss {loss_init}")
-                print(f"Step {i}, updated lr scale to {lr_scale} based on w2 {w2} and target 1e4")
-                lr_scales.append(lr_scale)
-                print(f"Step {i}, lr scales: {lr_scales}")
-        step = steps_all[i, :]
-        step_cgpt_ind = step[3]
-        step_lr = step[0]
-        # update step learning rate with the minimum of current lr and step lr
-        step_lr = jnp.minimum(curr_lr, jnp.minimum(step_lr, init_lr * lr_scale))
-        curr_lr = step_lr
-        steps_all = steps_all.at[i, 0].set(step_lr)
-        step = steps_all[i, :]
-
-        #e_bv_at_step = _e_bv_step(steps_all[0:i+1, :])
-        #e_bplusv_at_step = e_bv_at_step[0] + e_bv_at_step[1]
-
-        # use the _em_step function to advance the quadrature points
-        bias_var_step, w2_step, end_factors = _em_step(start_factors, nqs, step, 
-                                              b_decay_factor= noise_scale, 
-                                              verbose= verbose, return_w2=True)
-        end_factors = end_factors
-        e_bv_at_step = bias_var_step
-        e_bplusv_at_step = e_bv_at_step[0] + e_bv_at_step[1]
-        
-
-        K = K + step[2]
-        start_factors = end_factors
-        loss = e_bplusv_at_step
-        w2 = w2_step
-
-        if verbose:
-            print (f"Step {i}, not a change point,  lr: {step_lr}, e_bv: {e_bv_at_step}, K: {K}")
-
-        if verbose:
-            Ks.append(K)
-            losses.append(loss)
-            w2s.append(w2)
-
-            # for comparison, compute the loss without LRA
-            step_no_LRA = steps_all_no_LRA[i, :]
-            e_bv_at_step_no_LRA, w2_no_LRA,end_factors_no_LRA = _em_step(start_factors_no_LRA, nqs, step_no_LRA, verbose= verbose)
-            e_bplusv_at_step_no_LRA = e_bv_at_step_no_LRA[0] + e_bv_at_step_no_LRA[1]
-            start_factors_no_LRA = end_factors_no_LRA
-            loss_no_LRA = e_bplusv_at_step_no_LRA
-
-            losses_no_LRA.append(loss_no_LRA)
-            w2s_no_LRA.append(w2_no_LRA)
-
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    if verbose:
-        # make a plot of the learning rate schedule and the loss (e_bias + e_var) at each step
-        import matplotlib.pyplot as plt
-        lrs = steps_all[:, 0]
-        lrs_no_LRA = steps_all_no_LRA[:, 0]
-
-            
-        losses = jnp.array(losses)
-        losses_no_LRA = jnp.array(losses_no_LRA)
-        Ks_shifted = [0] + Ks[:-1]
-
-        plt.figure(figsize=(12, 5))
-        plt.subplot(1, 3, 1)
-        plt.scatter(Ks, lrs, color='red', label='LRA', alpha=0.5, facecolors='none')
-        plt.scatter(Ks_shifted, lrs, color='red', alpha=0.5)
-        plt.scatter(Ks, lrs_no_LRA, color='green', label='No LRA', alpha=0.5, facecolors='none')
-        plt.scatter(Ks_shifted, lrs_no_LRA, color='green', alpha=0.5)
-        # add vertical lines at change points
-        for cp in change_point_indices:
-            plt.axvline(x=Ks_shifted[cp], color='gray', linestyle='--', alpha=0.5)
-        plt.title('Learning Rate Schedule')
-        plt.xlabel('Step Index')
-        plt.ylabel('Learning Rate')
-        plt.yscale('log')
-        plt.legend()
-        plt.subplot(1, 3, 2)
-        # use empty circles for Ks, and filled circles for Ks_shifted
-        plt.scatter(Ks, losses, color='red', label='LRA', alpha=0.5, facecolors='none')
-        plt.scatter(Ks_shifted, losses, color='red', alpha=0.5)
-        plt.scatter(Ks, losses_no_LRA, color='green', label='No LRA', alpha=0.5, facecolors='none')
-        plt.scatter(Ks_shifted, losses_no_LRA, color='green', alpha=0.5)
-        # add vertical lines at change points
-        for cp in change_point_indices:
-            plt.axvline(x=Ks_shifted[cp], color='gray', linestyle='--', alpha=0.5)
-
-        plt.title('Loss (e_bias + e_var) at Each Step; time: {:.2f} sec'.format(elapsed_time))
-        plt.xlabel('Step Index')
-        plt.ylabel('Loss')
-        # log scale for y axis
-        plt.yscale('log')
-        plt.legend()
-
-        plt.subplot(1, 3, 3)
-        # use empty circles for Ks, and filled circles for Ks_shifted
-        plt.scatter(Ks, w2s, color='red', label='LRA', alpha=0.5, facecolors='none')
-        plt.scatter(Ks_shifted, w2s, color='red', alpha=0.5)
-        plt.scatter(Ks, w2s_no_LRA, color='green', label='No LRA', alpha=0.5, facecolors='none')
-        plt.scatter(Ks_shifted, w2s_no_LRA, color='green', alpha=0.5)
-        # add vertical lines at change points
-        for cp in change_point_indices:
-            plt.axvline(x=Ks_shifted[cp], color='gray', linestyle='--', alpha=0.5)
-
-        plt.title('Weight Norm (w2) at Each Step; time: {:.2f} sec'.format(elapsed_time))
-        plt.xlabel('Step Index')
-        plt.ylabel('Weight Norm (w2)')
-        # log scale for y axis
-        plt.yscale('log')
-        plt.legend()
-
-        plt.tight_layout()
-        # save the plot
-        plt.savefig("LRA_schedule_and_loss_fast_SN.png")
-        if verbose:
-            print(f"LRA completed in {elapsed_time:.4f} seconds.")
-        
-    return e_bv_at_step, w2
-
-
-
-nqs = jnp.array([1.1652930752138773,
-              0.9293271292641424,
-              3.9277975287734592, 
-              0.4466304384813954, 
-              0.34046502245729804,
-              2.280919414389971**2,
-              0.9293271292641424])
-
-#p: 1.1097530321691766
-#q: 0.5933368010361162
-##P: 3.137653267064672
-#Q: 0.9591955803653882
-#e_irr: 0.3314231265816201
-#R: 2.874398089570365
-#r: 1.4903324960432542
-
-nqs = jnp.array([1.1097530321691766,
-              0.5933368010361162,
-              3.137653267064672, 
-              0.9591955803653882, 
-              0.3314231265816201,
-              2.874398089570365,
-              1.4903324960432542
-              ])
-cfg = Cfg(#N = 4000000, K=1171, B = 234, lr = 2.0,
-    N=10000000, K=20000, B=96, lr=2.0, 
-          #sch={"decay_at": [0.5, 0.8], "decay_amt": [0.5, 0.5], "B_decay_amt": [1.0, 2.0]}
-          sch = {"decay_at": [0.5], "decay_amt": [1.0], "B_decay_amt": [1.0]}
-          )
-LRA_interval = 2000
-
-# compute e_appx and e_irr for reference
-e_appx = _e_appx(nqs, cfg)
-e_irr = _e_irr(nqs, cfg)
-
-
-# unit test for _e_bias_var_rdnoise_fast
-
-def test_e_bias_var_SN_fast():
-    print("Testing _e_bias_var_rdnoise_fast...")
-    print("nqs:", nqs)
-    print("cfg:", cfg)
-    print("LRA_interval:", LRA_interval)
-    e_bv, w2 = _e_bias_var_SN_fast(nqs, cfg, interval=LRA_interval, verbose=True)
-    e_bv_LRA = _e_bias_var_LRA_fast(nqs, cfg, interval=LRA_interval, LRA_tol=0.05, verbose=True)
-    # compare with vanilla e_bias_var
-    e_bv_vanilla = _e_bias_var_fast(nqs, cfg)
-    print(f"Test e_bias_var_SN_fast vs LRA: e_bv = {e_bv}, e_bv_LRA = {e_bv_LRA}")
-    print(f"Total: LRA: = {e_bv_LRA[0] + e_bv_LRA[1] + e_appx + e_irr}")
-    print(f"Total: SN fast = {e_bv[0] + e_bv[1] + e_appx + e_irr}")
-    print(f"Total = {e_bv_vanilla[0] + e_bv_vanilla[1] + e_appx + e_irr}")
-    raise ValueError("Stop after test of _e_bias_var_SN_fast")
-
-#test_e_bias_var_SN_fast()
 
 def _risk_LRA(nqs, cfg, LRA_tol = 0.05):
     K_target = cfg.K
@@ -2081,8 +1781,7 @@ def _risk_LRA(nqs, cfg, LRA_tol = 0.05):
     else:
         stair_width = 1
 
-    #e_est_bv = _e_bias_var_LRA_fast(nqs, cfg, interval = stair_width, LRA_tol = LRA_tol, verbose = False)
-    e_est_bv,_ = _e_bias_var_SN_fast(nqs, cfg, interval = stair_width, LRA_tol = LRA_tol, verbose = False)
+    e_est_bv = _e_bias_var_LRA_fast(nqs, cfg, interval = stair_width, LRA_tol = LRA_tol, verbose = False)
     print(f"_risk_LRA: e_est_bv = {e_est_bv}")
     e_appx = _e_appx(nqs, cfg)
     print(f"_risk_LRA: e_appx = {e_appx}")

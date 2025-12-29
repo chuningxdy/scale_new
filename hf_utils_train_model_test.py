@@ -319,7 +319,7 @@ import torch
 import os
 import random
 
-from transformers.optimization import get_constant_schedule, get_cosine_schedule_with_warmup
+from transformers.optimization import get_constant_schedule
 
 
 
@@ -568,11 +568,6 @@ class CustomTrainer(Trainer):
                 
                 if self.lr_scheduler_type == "constant":
                     self.lr_scheduler = get_constant_schedule(self.optimizer)
-                elif self.lr_scheduler_type == "cosine":
-                    self.lr_scheduler = get_cosine_schedule_with_warmup(
-                        self.optimizer, 
-                        num_warmup_steps = int(num_training_steps * 0.01), 
-                        num_training_steps = num_training_steps)
                 elif self.lr_scheduler_type == "step":
                     if self.step_decay_schedule_dict is None:
                         raise ValueError("step_decay_schedule_dict must be provided for step decay schedule")
@@ -821,8 +816,8 @@ def main():
         data_collator=data_collator,
     )
 
-    # CHANGE: Checkpoint search with multi-GPU safety and error handling
-    search_ground = "/mfs1/u/chuning/scale/outputs/nn_archive/runs"
+    # CHANGE: Checkpoint search with multi-GPU safety
+    search_ground = "/mfs1/u/chuning/new_scale/outputs/nn_archive/runs"
 
     def _is_subset(sub, sup):
         """Recursive dict subset check; lists/scalars must match exactly."""
@@ -838,20 +833,14 @@ def main():
         root = Path(search_ground)
         
         if not root.exists():
-            if local_rank in [-1, 0]:
-                print(f"Warning: Search ground {search_ground} does not exist")
+            print(f"Warning: Search ground {search_ground} does not exist")
             return candidates
         
         for subdir in (p for p in root.iterdir() if p.is_dir()):
             try:
-                # Check if the directory name contains "2025_12_" or "2026_01_"
-                if "Run_2025_12_" not in subdir.name and "Run_2026_01_" not in subdir.name:
-                    continue
-                
                 h_yaml_path = subdir / "hdict.yaml"
                 m_yaml_path = subdir / "mdict.yaml"
                 
-                # Check if both YAML files exist
                 if not (h_yaml_path.exists() and m_yaml_path.exists()):
                     continue
                     
@@ -905,7 +894,7 @@ def main():
         print("="*60 + "\n")
         
         # Only rank 0 writes checkpoint info
-        with open("/mfs1/u/chuning/scale_new/last_checkpoint_path.txt", "w") as f:
+        with open("/mfs1/u/chuning/new_scale/last_checkpoint_path.txt", "w") as f:
             f.write(str(latest_checkpoint_path) if latest_checkpoint_path else "None")
             f.write("\n")
             f.write("Dec")
@@ -935,7 +924,7 @@ def main():
         print(f"\nAll ranks ready. Will resume from checkpoint: {checkpoint_str if checkpoint_str else 'None (training from scratch)'}\n")
 
     # CHANGE: REMOVED the debugging raise statement
-    # raise ValueError("stop here, checkpoint is: ", latest_checkpoint_path)  # THIS LINE IS DELETED
+    # raise ValueError("stop here, checkpoint is: ", latest_checkpoint_path)  # DELETED THIS LINE
 
     # CHANGE: Wrap training in try-finally to ensure cleanup
     try:

@@ -1,0 +1,2 @@
+Log-log regression for num_hidden_layers:
+Intercept: -2.3777, Coefficient: 0.2629, R²: 0.8673

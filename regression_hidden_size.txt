@@ -1,0 +1,2 @@
+Log-log regression for hidden_size:
+Intercept: -0.0571, Coefficient: 0.3687, R²: 0.9809

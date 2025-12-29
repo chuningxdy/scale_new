@@ -1,0 +1,2 @@
+N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule,C,actual_N,D
+512000000,3665,41399,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",60500000000,519186432,19421045880.027927

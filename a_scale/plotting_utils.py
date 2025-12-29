@@ -726,7 +726,7 @@ def isoflop_plot(isoflop_samples,
     ax.set_xscale('log')
     ax.set_yscale('log')
     # set y lim 2.0 to 8
-    ax.set_ylim([2.0, 8])
+    ax.set_ylim([1.6, 8])
     #ax.set_yscale('log')
     # save the figure
     plt.tight_layout(rect=[0, 0, 0.8, 1])

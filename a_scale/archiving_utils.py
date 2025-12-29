@@ -183,7 +183,7 @@ def mhdict_to_cfg(mdict, hdict):
     if "data" in mdict:
         m_cfg = nndict_to_nncfg(mdict)
         h_cfg = hdict_to_hcfg(hdict)
-    if "a" in mdict:
+    if "a" in mdict or "e_irr" in mdict: # nqs
         m_cfg = nqsdict_to_nqscfg(mdict)
         h_cfg = hdict_to_hcfg(hdict)
         #raise ValueError('h_cfg: ' + str(h_cfg))
@@ -362,7 +362,7 @@ def archive_wrapper(func, calc = True):
         #if "data" in mdict:
         #    hdict["lr_schedule"] = "constant"
 
-        if "a" in mdict: # nqs
+        if "a" in mdict or "e_irr" in mdict: # nqs
             if hdict["optimizer"] == "adamw":
                 hdict["lr"] = 1.999 * hdict["lr"]/0.001 #1.999
                 #1.999 #dict["lr"] * 10.0
@@ -372,36 +372,45 @@ def archive_wrapper(func, calc = True):
                 hdict["lr_schedule"] = "constant"
                 #raise ValueError("updated hdict to: ", hdict["lr_schedule"])
             
-            
-            
-        lookup_entry = create_lookup_entry_for_archive(mdict, hdict, archive_file)
-        #if hdict["B"] == 6 and hdict["K"] == 320000 and hdict["lr_schedule"] == "step":
-        #    raise ValueError("lookup_entry: " + str(lookup_entry))
-        #print("lookup_entry: " + str(lookup_entry))
-        #raise ValueError("lookup_entry: " + str(lookup_entry))
-        run_id, path = look_up_archive(lookup_entry, archive_file)
-        #raise ValueError(run_id, path)
+        if "a" in mdict or "e_irr" in mdict: # nqs
+            run_id = None
+            path = None
+        else:
+            lookup_entry = create_lookup_entry_for_archive(mdict, hdict, archive_file)
+            #if hdict["B"] == 6 and hdict["K"] == 320000 and hdict["lr_schedule"] == "step":
+            #    raise ValueError("lookup_entry: " + str(lookup_entry))
+            #print("lookup_entry: " + str(lookup_entry))
+            #raise ValueError("lookup_entry: " + str(lookup_entry))
+            run_id, path = look_up_archive(lookup_entry, archive_file)
+            #raise ValueError(run_id, path)
         
         if run_id is None:
             #raise ValueError(mdict, hdict)
             #if not "a" in mdict:
-            #    raise ValueError("Running new neural net: " + str(lookup_entry))
-            archive = pd.read_csv(archive_file)
-            #archive_172 = archive[archive["run_id"] == 172]
-            #raise ValueError("Archive file is empty. Run ID: " + str(run_id) + "\n" + str(archive_172) + "\n" + str(lookup_entry))
-            # get the run_id and path
-            archive_entry = get_run_id_and_path_archive(lookup_entry, archive_file)
             
-            # run the function with the path
-            path = archive_entry["path"].values[0]
+            if "a" in mdict or "e_irr" in mdict: # nqs
+                archive = None
+                archive_entry = None
+                path = "./outputs/temp/nqs/"
+
+            else:
+                #    raise ValueError("Running new neural net: " + str(lookup_entry))
+                archive = pd.read_csv(archive_file)
+                #archive_172 = archive[archive["run_id"] == 172]
+                #raise ValueError("Archive file is empty. Run ID: " + str(run_id) + "\n" + str(archive_172) + "\n" + str(lookup_entry))
+                # get the run_id and path
+                archive_entry = get_run_id_and_path_archive(lookup_entry, archive_file)
+                
+                # run the function with the path
+                path = archive_entry["path"].values[0]
             
             # if the path does not exist, create the directory
             if not os.path.exists(path):
                 os.makedirs(path)
-            
+                
 
-            # in error msg. print hdict and mdict
-            
+                # in error msg. print hdict and mdict
+                
             with open(path + "hdict.yaml", "w") as f:
                 yaml.dump(hdict, f)
             with open(path + "mdict.yaml", "w") as f:
@@ -415,7 +424,7 @@ def archive_wrapper(func, calc = True):
             # if model is in dict and model is in the llm models list, then run the function
             # on mdict and hdict
 
-            if "a" in mdict: #NQS
+            if "a" in mdict or "e_irr" in mdict: #NQS
                 #raise ValueError("NQS not supported yet")
                 #raise ValueError(hdict)
                 cfg = mhdict_to_cfg(mdict, hdict)
@@ -440,6 +449,8 @@ def archive_wrapper(func, calc = True):
 
             if calc:
                 if "a" in mdict:
+                    msg = "this is nqs, not saved"
+                if "e_irr" in mdict:
                     msg = "this is nqs, not saved"
                 else:
                     # save the entry to the archive

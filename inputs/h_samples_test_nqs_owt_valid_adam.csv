@@ -1,0 +1,7 @@
+N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule,C
+8000000,6079,6543,0.001,0.1,0.0,constant,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",236000000
+16000000,4104,4715,0.001,0.1,0.0,constant,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",236000000
+32000000,2902,3530,0.001,0.1,0.0,constant,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",236000000
+64000000,1923,2504,0.001,0.1,0.0,constant,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",236000000
+128000000,1356,1870,0.001,0.1,0.0,constant,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",236000000
+256000000,908,1338,0.001,0.1,0.0,constant,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0]}",236000000
