@@ -134,8 +134,7 @@ def _process_schedule_steps(lr, B, K, sch):
 
 def _e_irr(nqs, cfg):
     p, q, P, Q, e_irr, R, r = nqs
-    to_return = e_irr
-    return to_return
+    return e_irr
 
 def _e_irr_no_sch(nqs, cfg_array):
     p, q, P, Q, e_irr, R, r = nqs
@@ -144,9 +143,7 @@ def _e_irr_no_sch(nqs, cfg_array):
 def _e_appx(nqs, cfg):
     N = cfg.N
     p, q, P, Q, e_irr, R, r = nqs
-    to_return =  0.5 * P * jnp.squeeze(jax.scipy.special.zeta(p, N+1))
-    return to_return
-    
+    return 0.5 * P * jnp.squeeze(jax.scipy.special.zeta(p, N+1))
 
 def _e_appx_no_sch(nqs, cfg_array):
     N = cfg_array[0]
@@ -1241,21 +1238,6 @@ _jit_em_f_LRA = jax.jit(lambda L, U, nqs, steps: _em(lambda n: _f_LRA(nqs, n, st
 end_time = time.time()
 print(f"Time for JIT compiling EM f: {end_time - start_time} seconds")
 
-
-def _cosine_lr_with_warmup(k, num_training_steps, warmup_frac=0.01):
-    W = int(num_training_steps * warmup_frac)
-    T = num_training_steps
-
-    k = jnp.asarray(k)
-
-    warmup_factor = jnp.minimum(1.0, k / max(1, W))
-    progress = jnp.maximum(0.0, (k - W) / max(1, T - W))
-    cosine_factor = 0.5 * (1.0 + jnp.cos(jnp.pi * progress))
-    
-
-    return  warmup_factor * cosine_factor
-
-
 def _e_bias_var_LRA(nqs, cfg, interval = 1000, LRA_tol = 0.05, verbose = False):
     '''
     Fast computation of e_bias and e_var using EM approximation
@@ -1906,29 +1888,15 @@ def _e_bias_var_SN_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = Fal
         
         noise_scale = 1.0 #loss/loss_init
         if w2 < 1:
-            lr_scale = 1.0 # this is to avoid numerical issues when w2 is very small; no impact in theory
+            lr_scale = 1.0
         else:
             hidden_width = jnp.exp(-0.0571 + 0.3687 * jnp.log(N)) 
             #raise ValueError("hidden_width: ", hidden_width)
-            #lr_scale = jnp.sqrt(1e4/w2)
-            #jnp.sqrt(hidden_width) / jnp.sqrt(w2) * 6
-            #lr_scale = jnp.sqrt(30 * hidden_width / w2)
-            #raise ValueError("N: {}, lr_scale_0: {}, lr_scale_1: {}, w2: {}, hidden_width: {}".format(N, lr_scale_0, lr_scale_1, w2, hidden_width))
-            #jnp.sqrt(30*hidden_width/w2)
+            lr_scale = jnp.sqrt(30*hidden_width/w2)
             #raise ValueError(30 * hidden_width)
-            #lr_scale = jnp.sqrt(630*N**0.6/1e3/w2)
-            lr_scale = jnp.sqrt(N/1e4/w2)
+            #lr_scale = jnp.sqrt(1e4/w2)
 
-        # compute lr according to cosine schedule
-        # first compute which step we are in
-        iteration = jnp.sum(steps_all[0:i, 2]) + steps_all[i, 2]/2
-        total_iterations = cfg.K
-        # use the cosine_lr_with_warmup function to compute the lr scale
-        #cosine_lr_scale = _cosine_lr_with_warmup(k = iteration, 
-        #                                         num_training_steps= total_iterations)
         
-        cosine_lr_scale = 1.0
-        #raise ValueError("cosine_lr_scale: {}, lr_scale: {}, iteration: {}, total_iterations: {}".format(cosine_lr_scale, lr_scale, iteration, total_iterations))
 
         if verbose:
                 print(f"Step {i}, updated noise scale to {noise_scale} based on loss {loss} and initial loss {loss_init}")
@@ -1939,7 +1907,6 @@ def _e_bias_var_SN_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = Fal
         step_cgpt_ind = step[3]
         step_lr = step[0]
         # update step learning rate with the minimum of current lr and step lr
-        #step_lr = jnp.maximum(1e-8, jnp.minimum(step_lr * cosine_lr_scale, step_lr * lr_scale))
         step_lr = jnp.minimum(curr_lr, jnp.minimum(step_lr, init_lr * lr_scale))
         curr_lr = step_lr
         steps_all = steps_all.at[i, 0].set(step_lr)
@@ -2034,7 +2001,8 @@ def _e_bias_var_SN_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = Fal
         for cp in change_point_indices:
             plt.axvline(x=Ks_shifted[cp], color='gray', linestyle='--', alpha=0.5)
 
-        plt.title('Final w2 is {:.4f}'.format(w2))
+        plt.title('Weight Norm (w2) at Each Step; time: {:.2f} sec'.format(elapsed_time))
+        plt.xlabel('Step Index')
         plt.ylabel('Weight Norm (w2)')
         # log scale for y axis
         plt.yscale('log')
@@ -2075,11 +2043,11 @@ nqs = jnp.array([1.1097530321691766,
               1.4903324960432542
               ])
 cfg = Cfg(#N = 4000000, K=1171, B = 234, lr = 2.0,
-    N=128*1e6, K=40000, B=48, lr=2.0, 
+    N=10000000, K=20000, B=96, lr=2.0, 
           #sch={"decay_at": [0.5, 0.8], "decay_amt": [0.5, 0.5], "B_decay_amt": [1.0, 2.0]}
           sch = {"decay_at": [0.5], "decay_amt": [1.0], "B_decay_amt": [1.0]}
           )
-LRA_interval = 200
+LRA_interval = 2000
 
 # compute e_appx and e_irr for reference
 e_appx = _e_appx(nqs, cfg)
@@ -2094,13 +2062,13 @@ def test_e_bias_var_SN_fast():
     print("cfg:", cfg)
     print("LRA_interval:", LRA_interval)
     e_bv, w2 = _e_bias_var_SN_fast(nqs, cfg, interval=LRA_interval, verbose=True)
-    #e_bv_LRA = _e_bias_var_LRA_fast(nqs, cfg, interval=LRA_interval, LRA_tol=0.05, verbose=True)
+    e_bv_LRA = _e_bias_var_LRA_fast(nqs, cfg, interval=LRA_interval, LRA_tol=0.05, verbose=True)
     # compare with vanilla e_bias_var
     e_bv_vanilla = _e_bias_var_fast(nqs, cfg)
-   # print(f"Test e_bias_var_SN_fast vs LRA: e_bv = {e_bv}, e_bv_LRA = {e_bv_LRA}")
-   # print(f"Total: LRA: = {e_bv_LRA[0] + e_bv_LRA[1] + e_appx + e_irr}")
+    print(f"Test e_bias_var_SN_fast vs LRA: e_bv = {e_bv}, e_bv_LRA = {e_bv_LRA}")
+    print(f"Total: LRA: = {e_bv_LRA[0] + e_bv_LRA[1] + e_appx + e_irr}")
     print(f"Total: SN fast = {e_bv[0] + e_bv[1] + e_appx + e_irr}")
-    print(f"Total: Vanilla = {e_bv_vanilla[0] + e_bv_vanilla[1] + e_appx + e_irr}")
+    print(f"Total = {e_bv_vanilla[0] + e_bv_vanilla[1] + e_appx + e_irr}")
     raise ValueError("Stop after test of _e_bias_var_SN_fast")
 
 #test_e_bias_var_SN_fast()
