@@ -260,24 +260,24 @@ def train_hf_jax(nn_dict, h_dict, path):
 
     path_to_conda_env = "/mfs1/u/chuning/torch_hf"
 
-    RESUME_FROM_CHECKPOINT = False
+    #RESUME_FROM_CHECKPOINT = False
 
-    if nn_dict["model"] in ["pythia", "llama"]:
-        if nn_dict["data"] == "openwebtext2":
+    if nn_dict["model"] in ["pythia", "llama", "striped_hyena"]:
+        if nn_dict["data"] in ["openwebtext2", "opengenome2_local"]:
             if h_dict["lr_schedule"] == "step" and isinstance(h_dict["step_decay_schedule"], dict):
             # check if B_decay_amt in step_decay_schedule
                 if "B_decay_amt" in h_dict["step_decay_schedule"]:
                     path_to_script = "hf_utils_train_model_owt_BS_sch.py"
-                else:
-                    if RESUME_FROM_CHECKPOINT:
-                        path_to_script = "hf_utils_train_model_resume_from_checkpoint.py"
-                    else:
-                        path_to_script = "hf_utils_train_model.py"
-            else:
-                if RESUME_FROM_CHECKPOINT:
-                    path_to_script = "hf_utils_train_model_resume_from_checkpoint.py"
+                #else:
+                #    if RESUME_FROM_CHECKPOINT:
+                 #       path_to_script = "hf_utils_train_model_resume_from_checkpoint.py"
                 else:
                     path_to_script = "hf_utils_train_model.py"
+            else:
+                #if RESUME_FROM_CHECKPOINT:
+                #    path_to_script = "hf_utils_train_model_resume_from_checkpoint.py"
+                #else:
+                path_to_script = "hf_utils_train_model.py"
 
         elif nn_dict["data"] == "lm1b":
             path_to_script = "hf_utils_train_model_lm1b.py"
@@ -508,7 +508,7 @@ def train_hf_jax_old(nn_dict, h_dict, path):
 
 def train_nn(mdict, hdict, path):
 
-    if "model" in mdict and mdict["model"] in ["pythia", "llama"]:
+    if "model" in mdict and mdict["model"] in ["pythia", "llama", "striped_hyena"]:
         
         # call the function
         output_dict = train_hf_jax(nn_dict = mdict, h_dict = hdict, 

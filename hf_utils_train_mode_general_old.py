@@ -598,8 +598,8 @@ def build_model_with_predicted_config(
 
             simplified_non_embedding_params_cnt = total_layer_params + final_norm_params
 
-            # Embeddings (UNTIED due to bug in StripedHyena code - embed and unembed are separate)
-            embedding_params_cnt = vocab_size * d_model * 2  # embed + unembed
+            # Embeddings (tied, so count once)
+            embedding_params_cnt = vocab_size * d_model
             simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
 
         # SSM model (hybrid_ssm_model.py) with Mamba-style selective scan
@@ -827,8 +827,6 @@ def build_model_with_predicted_config(
             base_config.attn_layer_idxs = attn_layer_idxs
             base_config.hyena_layer_idxs = hyena_layer_idxs
             base_config.tie_word_embeddings = True
-            # Note: StripedHyena's tie_embeddings has a bug (references self.emb instead of self.embedding_layer)
-            # Keep it False to use separate unembed weights (default behavior)
             # Set dtypes - use float32 for Hyena blocks to avoid numerical instability
             # The Hyena filter uses complex exponentials that can overflow in bfloat16
             base_config.hyena_block_dtype = "float32"
@@ -920,10 +918,9 @@ def build_model_with_predicted_config(
         if model_family in ["ssm", "hyena"]:
             embedding_params = config.vocab_size * config.d_model  # Tied embeddings (count once)
         elif model_family == "striped_hyena":
-            # Untied embeddings due to bug in StripedHyena code (embed and unembed are separate)
-            embedding_params = config.vocab_size * config.hidden_size * 2
+            embedding_params = config.vocab_size * config.hidden_size  # Tied embeddings (count once)
         else:
-            embedding_params = config.vocab_size * config.hidden_size * 2  # Embedding + LM head
+            embedding_params = config.vocab_size * config.hidden_size * 2  # Embedding + LM head (tied)
 
         non_embedding_params_actual = param_count_actual - embedding_params
         accuracy = (param_count_actual / target_param_count) * 100
@@ -1132,21 +1129,14 @@ def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1
                     tokens = torch.tensor(self.data[start:end].astype(np.int64), dtype=torch.long)
                     return {"input_ids": tokens}
 
-            # Create dataset and split with random (but fixed) test set selection
+            # Create dataset and split
             full_dataset = BinaryGenomeDataset(data_label, seq_length=seq_length)
             total_size = len(full_dataset)
 
-            # Randomly select test indices (fixed seed for reproducibility)
-            rng = np.random.RandomState(seed=42)
-            all_indices = np.arange(total_size)
-            rng.shuffle(all_indices)
-            test_indices = all_indices[:test_size].tolist()
-            train_indices = all_indices[test_size:].tolist()
+            train_dataset = Subset(full_dataset, list(range(test_size, total_size)))
+            test_dataset = Subset(full_dataset, list(range(test_size)))
 
-            train_dataset = Subset(full_dataset, train_indices)
-            test_dataset = Subset(full_dataset, test_indices)
-
-            print(f"  Train: {len(train_dataset):,}, Test: {len(test_dataset):,} (randomly selected, seed=42)")
+            print(f"  Train: {len(train_dataset):,}, Test: {len(test_dataset):,}")
 
             # Return early - data is already tokenized
             return train_dataset, test_dataset
@@ -1578,24 +1568,17 @@ def main():
     print(f"  Local rank: {local_rank}")
     print(f"{'='*60}\n")
 
-    # CHANGE: Updated gradient accumulation logic accounting for multi-GPU and sequence length
-    # For genomics data (seq_length=2048), memory usage is ~16x higher than text (seq_length=128)
-    # Scale gradient accumulation accordingly to avoid OOM
+    # CHANGE: Updated gradient accumulation logic accounting for multi-GPU
     target_batch_size = h_dict["B"]
     print(f"Target global batch size: {target_batch_size}")
 
-    # Sequence length factor: longer sequences need more gradient accumulation
-    # Reference is seq_length=128 for text data
-    seq_length_factor = seq_length / 128.0
-    print(f"Sequence length factor for grad accumulation: {seq_length_factor:.1f}x (seq_length={seq_length})")
-
     if world_size == 1:
-        num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256)/4 * seq_length_factor
-        num_grad_accu2 = h_dict['B']/3072 * seq_length_factor
+        num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256)/4
+        num_grad_accu2 = h_dict['B']/3072
         num_grad_accu = max(num_grad_accu1, num_grad_accu2)
     else:
-        num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256 * world_size)/4 * seq_length_factor
-        num_grad_accu2 = h_dict['B']/(3072 * world_size) * seq_length_factor
+        num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256 * world_size)/4
+        num_grad_accu2 = h_dict['B']/(3072 * world_size)
         num_grad_accu = max(num_grad_accu1, num_grad_accu2)
 
     if num_grad_accu > 1.0:

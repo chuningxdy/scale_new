@@ -34,7 +34,7 @@ fitted_chin2: outputs/runs/saved_yamls/fitted_cp_${optimizer_name}.yaml
     #sgd: outputs/runs/2025-09-20-16-08_openwebtext2_pythia_dot1_dot7_sgd/3_fit_chinchilla_v2/fitted_cp.yaml
 
 run_loss_estimation: false
-run_resource_allocation: true
+run_resource_allocation: false 
 run_critical_batch_size: true
 run_variance_analysis: false
 
@@ -42,7 +42,9 @@ run_variance_analysis: false
 
 fit_nqs_csv: inputs/h_samples_fit_nqs_owt_small_adam_cosine_new.csv
 #inputs/h_samples_fit_nqs_owt_small_${optimizer_name}.csv
-test_nqs_csv: inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}_multiple_N_full.csv
+test_nqs_csv: inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_very_large_K_add.csv
+#h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense_3.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}_multiple_N_full.csv
 #inputs/h_samples_test_nqs_owt_adam_NBK_corrected.csv
 #inputs/h_samples_resource_allocation_owt_all_balanced_adam_cosine_4.csv
 #inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}_extended.csv
@@ -50,7 +52,16 @@ test_nqs_csv: inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_
 
 chin2_csv: inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}_train.csv # options: .csv, _train.csv, _train_valid.csv
 resource_allocation_csv: inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}.csv # options: .csv, _train.csv, _train_valid.csv
-critical_batch_size_csv: inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+critical_batch_size_csv: inputs/h_samples_critical_batch_size_genomes_all_balanced_${optimizer_name}_test.csv # options: .csv, _train.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_very_large_K.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense.csv 
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected.csv
+
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
 
 #inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected.csv
 
@@ -68,7 +79,7 @@ critical_batch_size_csv: inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
 # for sgd, this used to be 1.0 and 0.58; for adam, this used to be 0.1 and 0.7
 effective_model_size_factor_multiplier: 1.0 #0.1
 effective_model_size_factor_power: 1.0 #0.7
-use_lr_adapt: true
+use_lr_adapt: false
 lr_adapt_tolerance: 0.05 #0.1 #0.05, 0.001, 0.0001
 
 hydra:
@@ -79,9 +90,9 @@ hydra:
       lr_adapt_tolerance: 0.05
 
 neural_net: # this is just a dictionary!! not the config yaml neural_net
-    data: openwebtext2 #wikitext-103-v1 #infimnist #cifar5m
+    data: opengenome2_local #openwebtext2 #wikitext-103-v1 #infimnist #cifar5m
     loss: condcrossent
-    model: pythia #pythia #lama #simplecnn #twolayermlp
+    model: striped_hyena #pythia #pythia #lama #simplecnn #twolayermlp
 
 
 # ---------------------------------------- #

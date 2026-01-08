@@ -1917,8 +1917,9 @@ def _e_bias_var_SN_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = Fal
             #jnp.sqrt(30*hidden_width/w2)
             #raise ValueError(30 * hidden_width)
             #lr_scale = jnp.sqrt(630*N**0.6/1e3/w2)
-            lr_scale = jnp.sqrt(N/1e4/w2)
-
+            lr_scale = jnp.sqrt(N/5e3/w2) 
+            #lr_scale = jnp.sqrt(N)/w2 ## at end of training appx. 0.2 for N = 1e7 and w2 = 5e4
+            #lr_scale = jnp.sqrt(2e3/w2)
         # compute lr according to cosine schedule
         # first compute which step we are in
         iteration = jnp.sum(steps_all[0:i, 2]) + steps_all[i, 2]/2
