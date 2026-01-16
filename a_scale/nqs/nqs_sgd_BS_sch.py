@@ -688,6 +688,70 @@ def _risk_no_sch(nqs, cfg_array):
     risk = e_est_bv[0] + e_est_bv[1] + e_appx + e_irr
     return risk
 
+
+def _e_bias_var_fast_w_BS_sch(nqs, cfg_array, sch):
+    '''
+    Fast computation of e_bias and e_var using EM approximation
+    with batch size schedule support.
+
+    Args:
+        nqs: NQS parameters array [p, q, P, Q, e_irr, R, r]
+        cfg_array: Configuration array [N, K, B, lr]
+        sch: Schedule dictionary with keys 'decay_at', 'decay_amt', 'B_decay_amt'
+    '''
+    N = cfg_array[0]
+    K = cfg_array[1]
+    B = cfg_array[2]
+    lr = cfg_array[3]
+
+    # Process schedule steps with batch size schedule
+    steps = _process_schedule_steps(lr, B, K, sch)
+
+    # use exact summation for first M terms, and EM for the rest
+    M = jnp.minimum(jnp.maximum(1, jnp.array((N * 0.05), int)), 100)
+
+    start_time = time.time()
+    e_bv_1_to_M = _jit_reduce_f(nqs, M, steps)
+    end_time = time.time()
+    print(f"Time for computing e_bv_1_to_M: {end_time - start_time} seconds")
+
+    start_time = time.time()
+    e_bv_Mplus1_to_N = _jit_em_f(M, N, nqs, steps)
+    end_time = time.time()
+    print(f"Time for computing e_bv_Mplus1_to_N: {end_time - start_time} seconds")
+    e_bv = e_bv_1_to_M + e_bv_Mplus1_to_N
+
+    return e_bv
+
+
+def _risk_w_BS_sch(nqs, cfg_array, sch):
+    '''
+    Compute risk with batch size schedule support.
+
+    Args:
+        nqs: NQS parameters array [p, q, P, Q, e_irr, R, r]
+        cfg_array: Configuration array [N, K, B, lr]
+        sch: Schedule dictionary with keys:
+            - 'decay_at': list of fractions (0 to 1) indicating when to decay
+            - 'decay_amt': list of learning rate decay multipliers
+            - 'B_decay_amt': list of batch size decay multipliers
+
+    Returns:
+        risk: Total risk value (e_bias + e_var + e_appx + e_irr)
+
+    Example:
+        nqs = jnp.array([1.2, 0.9, 4.0, 0.5, 0.3, 5.0, 0.9])
+        cfg_array = jnp.array([10000, 50000, 32, 1.0])
+        sch = {"decay_at": [0.5, 0.8], "decay_amt": [0.5, 0.25], "B_decay_amt": [1.0, 2.0]}
+        risk = _risk_w_BS_sch(nqs, cfg_array, sch)
+    '''
+    e_est_bv = _e_bias_var_fast_w_BS_sch(nqs, cfg_array, sch)
+    e_appx = _e_appx_no_sch(nqs, cfg_array)
+    e_irr = _e_irr_no_sch(nqs, cfg_array)
+    risk = e_est_bv[0] + e_est_bv[1] + e_appx + e_irr
+    return risk
+
+
 # ---------------------------------------------------- #
 #        Fast Computation of Gradients                 #
 # ---------------------------------------------------- #

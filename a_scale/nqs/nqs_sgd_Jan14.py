@@ -2052,7 +2052,7 @@ def _e_bias_var_SN_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = Fal
     return e_bv_at_step, w2
 
 
-def _e_bias_var_SN_fast_no_sch(nqs, cfg, interval = 1000):
+def _e_bias_var_reg_fast(nqs, cfg, interval = 1000, LRA_tol = None, verbose = False):
     '''
     Fast computation of e_bias and e_var using EM approximation
     (combining the computation of bias and var to save time)
@@ -2068,6 +2068,7 @@ def _e_bias_var_SN_fast_no_sch(nqs, cfg, interval = 1000):
 
     K = 0
     init_lr = cfg.lr
+    curr_lr = cfg.lr
     steps_all_pre_LRA = steps_all
     
     start_time = time.time()
@@ -2076,23 +2077,35 @@ def _e_bias_var_SN_fast_no_sch(nqs, cfg, interval = 1000):
         if i == 0:
             # initiate quadrature points for EM
             start_factors = _init_all_points(M, N, include_1_to_L=True)
-            bias_var_init, w2_init = _em_at(start_factors, nqs, return_w2=True)
+            if verbose:
+                start_factors_no_LRA = _init_all_points(M, N, include_1_to_L=True)
+            # initiate the noise scale
+            # start with noise scale 1.0
+            # compute loss
+            bias_var_init, w2_init = _em_at(start_factors, nqs, verbose= verbose, return_w2=True)
             loss_init = bias_var_init[0] + bias_var_init[1]
             loss = loss_init
             w2 = w2_init
 
         noise_scale = 1.0 #loss/loss_init
-        lr_scale = N * 0.02**2 /(N * 0.02**2 + w2)
+        lr_scale = 1 - w2/(N * 0.02**2 + w2)
 
         step = steps_all[i, :]
-        
+        step_lr = step[0]
+        # update step learning rate with the minimum of current lr and step lr
+        #step_lr = jnp.maximum(1e-8, jnp.minimum(step_lr * cosine_lr_scale, step_lr * lr_scale))
         step_lr = init_lr * lr_scale
+        #jnp.minimum(curr_lr, jnp.minimum(step_lr, init_lr * lr_scale))
         steps_all = steps_all.at[i, 0].set(step_lr)
         step = steps_all[i, :]
 
+        #e_bv_at_step = _e_bv_step(steps_all[0:i+1, :])
+        #e_bplusv_at_step = e_bv_at_step[0] + e_bv_at_step[1]
+
         # use the _em_step function to advance the quadrature points
         bias_var_step, w2_step, end_factors = _em_step(start_factors, nqs, step, 
-                                              b_decay_factor= noise_scale, return_w2=True)
+                                              b_decay_factor= noise_scale, 
+                                              verbose= verbose, return_w2=True)
         end_factors = end_factors
         e_bv_at_step = bias_var_step
         e_bplusv_at_step = e_bv_at_step[0] + e_bv_at_step[1]
@@ -2105,54 +2118,6 @@ def _e_bias_var_SN_fast_no_sch(nqs, cfg, interval = 1000):
 
         
     return e_bv_at_step, w2
-
-# compute gradient of _e_bias_var_SN_fast wrt nqs
-_e_bias_var_SN_fast_grad = (jax.grad(lambda nqs, cfg, interval:
-                                           # _e_bias_var_SN_fast_no_sch(nqs, cfg, interval)[1],
-                                           _e_bias_var_SN_fast_no_sch(nqs, cfg, interval)[0][0] + 
-                                           _e_bias_var_SN_fast_no_sch(nqs, cfg, interval)[0][1],
-                                           argnums=0))
-
-
-nqs = jnp.array([1.1097530321691766,
-              0.5933368010361162,
-              3.137653267064672, 
-              0.9591955803653882, 
-              0.3314231265816201,
-              2.874398089570365,
-              1.4903324960432542
-              ])
-cfg = Cfg(#N = 4000000, K=1171, B = 234, lr = 2.0,
-    N=128*1e6, K=100, B=48, lr=2.0, 
-          #sch={"decay_at": [0.5, 0.8], "decay_amt": [0.5, 0.5], "B_decay_amt": [1.0, 2.0]}
-          sch = {"decay_at": [], "decay_amt": [], "B_decay_amt": []}
-          )
-LRA_interval = 50
-
-
-# test _e_bias_var_SN_fast_grad
-def test_e_bias_var_SN_fast_grad():
-    print("Testing _e_bias_var_SN_fast_no_sch...")
-    start_time = time.time()
-    print("nqs:", nqs)
-    print("cfg:", cfg)
-    print("LRA_interval:", LRA_interval)
-    e_bv, w2 = _e_bias_var_SN_fast_no_sch(nqs, cfg, interval=LRA_interval)
-    end_time = time.time()
-    print(f"Time for e_bias_var computation: {end_time - start_time} seconds")
-    print(f"e_bias + e_var: {e_bv[0] + e_bv[1]}")
-    print(f"w2: {w2}")
-    end_time = time.time()
-    print("Testing _e_bias_var_SN_fast_grad...")
-    start_time = time.time()
-    grad_nqs = _e_bias_var_SN_fast_grad(nqs, cfg, interval=LRA_interval)
-    end_time = time.time()
-    print(f"Time for gradient computation: {end_time - start_time} seconds")
-    print(f"Gradient of e_bias + e_var wrt nqs: {grad_nqs}")
-    
-    raise ValueError("Stop after test of _e_bias_var_SN_fast_grad")
-
-#test_e_bias_var_SN_fast_grad()
 
 
 nqs = jnp.array([1.1652930752138773,

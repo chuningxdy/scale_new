@@ -28,7 +28,7 @@ print(df_base[['N', 'B', 'K', 'R']].head(10))
 
 #raise ValueError("Stopping after R summary")
 # filter for rows where R > 10
-df_filtered = df_base [df_base['R'] > 2]
+df_filtered = df_base # [df_base['R'] > 0.5]
 print(f"Filtered base file to R > 2, new shape: {df_filtered.shape}")
 
 # decrease N by a factor of 2 and increase K by a factor of 2

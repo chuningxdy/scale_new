@@ -311,44 +311,43 @@ def func_ssm_config_from_params_count(df, plot_filename=None):
         if result['kv_size'] < 16:
             result['kv_size'] = 16
 
-        # Derive n_heads from d_model and kv_size (following SSM_configs pattern)
-        # Pattern: n_heads = d_model / kv_size
+        # Predict n_heads (number of attention heads)
+        intercept, slope = models['n_heads']
+        predicted_n_heads = np.exp(intercept + slope * log_params)
+        result['n_heads'] = int(round(predicted_n_heads))
+        if result['n_heads'] < 1:
+            result['n_heads'] = 1
+
+        # Ensure d_model is divisible by n_heads AND head_dim is flash-attention compatible
+        # Flash attention supports head_dim of 32, 64, 128, 256
         d_model = result['d_model']
-        kv_size = result['kv_size']
+        n_heads = result['n_heads']
+        flash_attn_head_dims = [32, 64, 128, 256]
 
-        # Calculate n_heads from the pattern
-        n_heads = d_model // kv_size
-        if n_heads < 1:
-            n_heads = 1
+        # Find n_heads that gives a flash-attention compatible head_dim
+        valid_n_heads_options = []
+        for head_dim in flash_attn_head_dims:
+            if d_model % head_dim == 0:
+                candidate_n_heads = d_model // head_dim
+                if candidate_n_heads >= 1:
+                    valid_n_heads_options.append((candidate_n_heads, head_dim))
 
-        # Ensure GQA compatibility: n_heads % (n_heads // proj_groups) == 0
-        # For proj_groups=4, valid n_heads are: 4, 5, 6, 7, 8, 10, 12, 15, 16, 20, 24, ...
-        # Simplest approach: round to nearest multiple of 4 (always valid for GQA)
-        proj_groups = 4
-
-        def is_gqa_compatible(n, proj_groups):
-            """Check if n_heads is compatible with GQA"""
-            if n < proj_groups:
-                return True  # When n < proj_groups, num_heads_kv = 0 which uses n directly
-            num_heads_kv = n // proj_groups
-            return num_heads_kv > 0 and n % num_heads_kv == 0
-
-        if not is_gqa_compatible(n_heads, proj_groups):
-            # Find nearest valid n_heads
-            # Search in both directions for a valid value
-            for delta in range(1, n_heads + 10):
-                if n_heads - delta >= 1 and is_gqa_compatible(n_heads - delta, proj_groups):
-                    n_heads = n_heads - delta
+        if valid_n_heads_options:
+            # Choose the n_heads closest to the predicted value
+            best_n_heads, best_head_dim = min(valid_n_heads_options, key=lambda x: abs(x[0] - n_heads))
+            result['n_heads'] = best_n_heads
+        else:
+            # Fallback: adjust d_model to be divisible by a valid head_dim
+            # Round d_model to nearest multiple of 64 (most common head_dim)
+            result['d_model'] = int(round(d_model / 64) * 64)
+            if result['d_model'] < 64:
+                result['d_model'] = 64
+            # Recalculate n_heads
+            d_model = result['d_model']
+            for head_dim in flash_attn_head_dims:
+                if d_model % head_dim == 0:
+                    result['n_heads'] = d_model // head_dim
                     break
-                if is_gqa_compatible(n_heads + delta, proj_groups):
-                    n_heads = n_heads + delta
-                    break
-
-        result['n_heads'] = n_heads
-
-        # Adjust d_model to match: d_model = n_heads * kv_size
-        # This ensures the pattern is maintained
-        result['d_model'] = n_heads * kv_size
 
         # Predict n_layer (number of layers)
         intercept, slope = models['n_layer']
@@ -394,6 +393,19 @@ def build_model_with_predicted_config(
         print(f"\nBuilding a Pythia model with target size: {target_param_count/1e9:.1f}B parameters")
         config_creation_function = GPTNeoXConfig
         model_creation_function = GPTNeoXForCausalLM
+    # Add support for SSM (Hybrid SSM/Attention) models - Mamba-style
+    elif model_family == "ssm":
+        print(f"\nBuilding a Hybrid SSM/Attention model with target size: {target_param_count/1e6:.1f}M parameters")
+        # Use our custom hybrid model implementation
+        from hybrid_ssm_model import HybridSSMModel, HybridSSMConfig
+        config_creation_function = HybridSSMConfig
+        model_creation_function = HybridSSMModel
+    # Add support for Hyena (StripedHyena-Lite) models - Conv-based mixing
+    elif model_family == "hyena":
+        print(f"\nBuilding a StripedHyena-Lite model with target size: {target_param_count/1e6:.1f}M parameters")
+        from striped_hyena import StripedHyenaLiteForCausalLM, StripedHyenaLiteConfig
+        config_creation_function = StripedHyenaLiteConfig
+        model_creation_function = StripedHyenaLiteForCausalLM
     # Add support for Together AI StripedHyena from HuggingFace
     elif model_family == "striped_hyena":
         print(f"\nBuilding a Together AI StripedHyena model with target size: {target_param_count/1e6:.1f}M parameters")
@@ -402,10 +414,10 @@ def build_model_with_predicted_config(
         config_creation_function = "striped_hyena_config"  # Special marker for custom handling
         model_creation_function = "striped_hyena_model"    # Special marker for custom handling
     else:
-        raise ValueError("Invalid model class. Choose 'llama', 'pythia', 'striped_hyena'.")
+        raise ValueError("Invalid model class. Choose 'llama', 'pythia', 'ssm', 'hyena', or 'striped_hyena'.")
 
     # Use SSM predictor for SSM/Hyena/StripedHyena models (same architecture config table)
-    if model_family in ["striped_hyena"]:
+    if model_family in ["ssm", "hyena", "striped_hyena"]:
         predictor = func_ssm_config_from_params_count(SSM_configs)
     else:
         predictor = func_config_from_params_count(reference_configs)
@@ -459,8 +471,70 @@ def build_model_with_predicted_config(
                 n_mix_layers = n_layer - n_attn_layers
             return n_mix_layers, n_attn_layers
 
+        # NEW: Support for Hyena model (striped_hyena.py)
+        if model_family == "hyena":
+            d_model = config_dict['d_model']
+            n_layer = config_dict['n_layer']
+            d_inner = config_dict['glu_size']  # d_inner in hyena = glu_size
+            head_dim = config_dict['kv_size']  # head_dim in hyena = kv_size
+            n_heads = config_dict['n_heads']
+            n_kv_heads = config_dict.get('n_kv_heads', n_heads)  # GQA support
+
+            n_hyena_layers, n_attn_layers = get_layer_counts(n_layer, hybrid_pattern)
+
+            # HyenaBlock parameters (HyenaLikeMix + MLP + 2 norms):
+            # - in_proj: d_model * 2 * d_inner
+            # - dwconv: d_inner * kernel_size + d_inner (depthwise weights + bias)
+            # - out_proj: d_inner * d_model
+            # - gate_proj: d_model * d_inner
+            # - up_proj: d_model * d_inner
+            # - down_proj: d_inner * d_model
+            # - 2x RMSNorm: 2 * d_model
+            hyena_layer_params = (
+                d_model * 2 * d_inner +             # in_proj
+                d_inner * hyena_kernel_size +       # dwconv weights
+                d_inner +                           # dwconv bias
+                d_inner * d_model +                 # out_proj
+                d_model * d_inner +                 # gate_proj (MLP)
+                d_model * d_inner +                 # up_proj (MLP)
+                d_inner * d_model +                 # down_proj (MLP)
+                2 * d_model                         # 2x RMSNorm
+            )
+
+            # AttentionBlock parameters (SDPA + MLP + 2 norms):
+            # - q_proj: d_model * n_heads * head_dim
+            # - k_proj: d_model * n_kv_heads * head_dim
+            # - v_proj: d_model * n_kv_heads * head_dim
+            # - o_proj: n_heads * head_dim * d_model
+            # - gate_proj: d_model * d_inner
+            # - up_proj: d_model * d_inner
+            # - down_proj: d_inner * d_model
+            # - 2x RMSNorm: 2 * d_model
+            attn_layer_params = (
+                d_model * n_heads * head_dim +      # q_proj
+                d_model * n_kv_heads * head_dim +   # k_proj
+                d_model * n_kv_heads * head_dim +   # v_proj
+                n_heads * head_dim * d_model +      # o_proj
+                d_model * d_inner +                 # gate_proj (MLP)
+                d_model * d_inner +                 # up_proj (MLP)
+                d_inner * d_model +                 # down_proj (MLP)
+                2 * d_model                         # 2x RMSNorm
+            )
+
+            # Total layer parameters
+            total_layer_params = n_hyena_layers * hyena_layer_params + n_attn_layers * attn_layer_params
+
+            # Final norm
+            final_norm_params = d_model
+
+            simplified_non_embedding_params_cnt = total_layer_params + final_norm_params
+
+            # Embeddings (tied, so count once)
+            embedding_params_cnt = vocab_size * d_model
+            simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
+
         # Together AI StripedHyena from HuggingFace
-        if model_family == "striped_hyena":
+        elif model_family == "striped_hyena":
             d_model = config_dict['d_model']
             n_layer = config_dict['n_layer']
             d_inner = config_dict['glu_size']  # Maps to inner_mlp_size
@@ -528,6 +602,70 @@ def build_model_with_predicted_config(
             embedding_params_cnt = vocab_size * d_model * 2  # embed + unembed
             simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
 
+        # SSM model (hybrid_ssm_model.py) with Mamba-style selective scan
+        elif model_family == "ssm":
+            d_model = config_dict['d_model']
+            n_layer = config_dict['n_layer']
+            glu_size = config_dict['glu_size']
+            kv_size = config_dict['kv_size']
+            n_heads = config_dict['n_heads']
+            d_state = 16  # Default SSM state dimension
+            d_conv = 4    # Default convolution kernel size
+
+            n_ssm_layers, n_attn_layers = get_layer_counts(n_layer, hybrid_pattern)
+
+            # SSM Layer parameters (SSMBlock + norm):
+            # - in_proj: d_model * 2 * glu_size
+            # - conv1d: glu_size * d_conv (grouped, so just d_conv per channel)
+            # - x_proj: glu_size * (dt_rank + 2*d_state), where dt_rank ≈ d_model/16
+            # - dt_proj: dt_rank * glu_size
+            # - A_log: glu_size * d_state
+            # - D: glu_size
+            # - out_proj: glu_size * d_model
+            # - RMSNorm: d_model
+            dt_rank = (d_model + 15) // 16
+            ssm_layer_params = (
+                d_model * 2 * glu_size +           # in_proj
+                glu_size * d_conv +                 # conv1d
+                glu_size * (dt_rank + 2*d_state) +  # x_proj
+                dt_rank * glu_size +                # dt_proj
+                glu_size * d_state +                # A_log
+                glu_size +                          # D
+                glu_size * d_model +                # out_proj
+                d_model                             # RMSNorm
+            )
+
+            # Attention Layer parameters (Attention + MLP + 2 norms):
+            # - q_proj: d_model * n_heads * kv_size
+            # - k_proj: d_model * n_kv_heads * kv_size (assuming n_kv_heads = n_heads for now)
+            # - v_proj: d_model * n_kv_heads * kv_size
+            # - o_proj: n_heads * kv_size * d_model
+            # - gate_proj: d_model * glu_size
+            # - up_proj: d_model * glu_size
+            # - down_proj: glu_size * d_model
+            # - 2x RMSNorm: 2 * d_model
+            attn_layer_params = (
+                d_model * n_heads * kv_size +       # q_proj
+                d_model * n_heads * kv_size +       # k_proj
+                d_model * n_heads * kv_size +       # v_proj
+                n_heads * kv_size * d_model +       # o_proj
+                d_model * glu_size +                # gate_proj
+                d_model * glu_size +                # up_proj
+                glu_size * d_model +                # down_proj
+                2 * d_model                         # 2x RMSNorm
+            )
+
+            # Total layer parameters
+            total_layer_params = n_ssm_layers * ssm_layer_params + n_attn_layers * attn_layer_params
+
+            # Final norm
+            final_norm_params = d_model
+
+            simplified_non_embedding_params_cnt = total_layer_params + final_norm_params
+
+            # Embeddings (tied, so count once)
+            embedding_params_cnt = vocab_size * d_model
+            simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
         else:
             hidden_size_config = config_dict['hidden_size']
             num_layers_config = config_dict['num_hidden_layers']
@@ -570,8 +708,73 @@ def build_model_with_predicted_config(
         for key, value in config_dict.items():
             print(f" - {key}: {value}")
 
+        # Create SSM config using our custom implementation (Mamba-style)
+        if model_family == "ssm":
+            print("\nCreating Hybrid SSM/Attention config...")
+
+            # Create config directly with our predicted values
+            config = config_creation_function(
+                vocab_size=vocab_size,
+                d_model=config_dict['d_model'],
+                n_layers=config_dict['n_layer'],
+                n_heads=config_dict['n_heads'],
+                glu_size=config_dict['glu_size'],
+                kv_size=config_dict['kv_size'],
+                d_state=16,  # SSM state dimension - typical value
+                d_conv=4,    # Convolution kernel size for SSM
+                dropout=0.0,
+                bias=False,
+                hybrid_pattern=hybrid_pattern  # Use the specified hybrid pattern
+            )
+
+            print(f"  Architecture Details:")
+            print(f"    - d_model (hidden_size): {config_dict['d_model']}")
+            print(f"    - glu_size (inner_mlp_size): {config_dict['glu_size']}")
+            print(f"    - n_heads: {config_dict['n_heads']}")
+            print(f"    - kv_size (per-head): {config_dict['kv_size']}")
+            print(f"    - n_layers: {config_dict['n_layer']}")
+            print(f"    - d_state (SSM): {config.d_state}")
+            print(f"    - hybrid_pattern: {hybrid_pattern}")
+            print(f"    - SSM layers: {len(config.ssm_layer_idxs)} at {config.ssm_layer_idxs}")
+            print(f"    - Attention layers: {len(config.attn_layer_idxs)} at {config.attn_layer_idxs}")
+            print(f"  Note: Using custom Hybrid SSM/Attention model (no flash_attn required)")
+
+        # Create Hyena config using StripedHyena-Lite (Conv-based mixing)
+        elif model_family == "hyena":
+            print("\nCreating StripedHyena-Lite config...")
+
+            # Get hyena-specific parameters from nn_dict or use defaults
+            hyena_kernel_size = 127  # Default kernel size for ~2k context
+
+            # Create config with predicted values
+            config = config_creation_function(
+                vocab_size=vocab_size,
+                d_model=config_dict['d_model'],
+                n_layers=config_dict['n_layer'],
+                n_heads=config_dict['n_heads'],
+                head_dim=config_dict['kv_size'],  # kv_size maps to head_dim
+                d_inner=config_dict['glu_size'],  # glu_size maps to d_inner
+                hyena_kernel_size=hyena_kernel_size,
+                hybrid_pattern=hybrid_pattern,
+                max_position_embeddings=2048,  # Default for genomics
+                dropout=0.0,
+                bias=False,
+            )
+
+            print(f"  Architecture Details:")
+            print(f"    - d_model (hidden_size): {config_dict['d_model']}")
+            print(f"    - d_inner (glu_size): {config_dict['glu_size']}")
+            print(f"    - n_heads: {config_dict['n_heads']}")
+            print(f"    - head_dim (kv_size): {config_dict['kv_size']}")
+            print(f"    - n_layers: {config_dict['n_layer']}")
+            print(f"    - hyena_kernel_size: {hyena_kernel_size}")
+            print(f"    - hybrid_pattern: {hybrid_pattern}")
+            print(f"    - Hyena layers: {len(config.ssm_layer_idxs)} at {config.ssm_layer_idxs}")
+            print(f"    - Attention layers: {len(config.attn_layer_idxs)} at {config.attn_layer_idxs}")
+            print(f"  Note: Using StripedHyena-Lite (Conv-based, no CUDA extensions required)")
+
         # Create Together AI StripedHyena config from HuggingFace
-        if model_family == "striped_hyena":
+        elif model_family == "striped_hyena":
             print("\nCreating Together AI StripedHyena config...")
             from transformers import AutoConfig, AutoModelForCausalLM
 
@@ -731,7 +934,7 @@ def build_model_with_predicted_config(
         raise ValueError(f"Final prediction accuracy {accuracy:.2f}% is outside the acceptable range.")
 
     # Skip detailed breakdown for SSM/Hyena/StripedHyena as structure is different
-    if model_family not in ["striped_hyena"]:
+    if model_family not in ["ssm", "hyena", "striped_hyena"]:
         attention_params_per_layer = 4 * (config.hidden_size ** 2)
         ffn_params_per_layer = 2 * config.hidden_size * config.intermediate_size
 
@@ -741,6 +944,10 @@ def build_model_with_predicted_config(
         print(f" - Attention layers: {total_attention_params:,} params")
         print(f" - Feed-forward layers: {total_ffn_params:,} params")
         print(f" - Other (norm, etc.): {param_count_actual - embedding_params - total_attention_params - total_ffn_params:,} params")
+    elif model_family == "hyena":
+        # Print hyena-specific breakdown
+        print(f" - Hyena layers: {len(config.ssm_layer_idxs)}")
+        print(f" - Attention layers: {len(config.attn_layer_idxs)}")
     elif model_family == "striped_hyena":
         # Print striped_hyena-specific breakdown
         n_attn = len(config.attn_layer_idxs) if hasattr(config, 'attn_layer_idxs') else 0
@@ -944,6 +1151,52 @@ def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1
             # Return early - data is already tokenized
             return train_dataset, test_dataset
 
+        # Load full opengenome2 from HuggingFace (5.5TB - not recommended)
+        elif dataset_name == "opengenome2":
+            dataset = load_dataset(data_label, name=None,
+                                   cache_dir=cache_dir,
+                                   trust_remote_code=True)
+
+            split_dataset = get_full_dataset(dataset, verbose=verbose)
+            filtered_dataset = split_dataset
+            stream = False
+
+        elif dataset_name == "opengenome2_stream":
+            # Use a specific subset to avoid rate limits
+            # Available subsets: https://huggingface.co/datasets/arcinstitute/opengenome2
+            # Options: "pretrain_random_archaea", "pretrain_random_bacteria",
+            #          "pretrain_random_eukaryota", "pretrain_random_virus", etc.
+            subset_name = "pretrain_random_bacteria"  # ~100GB subset, good for training
+            print(f"Loading opengenome2 subset: {subset_name}")
+
+            try:
+                dataset = load_dataset(
+                    data_label,
+                    name=subset_name,  # Use specific subset instead of full dataset
+                    cache_dir=cache_dir,
+                    streaming=True,
+                    trust_remote_code=True,
+                    token=True
+                )
+            except Exception as e:
+                print(f"Failed to load subset {subset_name}, trying without subset: {e}")
+                dataset = load_dataset(
+                    data_label,
+                    name=None,
+                    cache_dir=cache_dir,
+                    streaming=True,
+                    trust_remote_code=True,
+                    token=True,
+                    split="train"  # Just get train split
+                )
+
+            if hasattr(dataset, 'shuffle'):
+                split_dataset = dataset.shuffle(buffer_size=1000, seed=42)
+            else:
+                split_dataset = dataset["train"].shuffle(buffer_size=1000, seed=42)
+            filtered_dataset = split_dataset
+            stream = True
+
 
         if verbose and not stream:
             removed_count = len(split_dataset) - len(filtered_dataset)
@@ -955,10 +1208,11 @@ def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1
         split_dataset = filtered_dataset
 
         # NEW: Include genomics datasets in tokenization
-        if dataset_name in ["wikitext-2-v1", "wikitext-103-v1", "openwebtext2", "openwebtext2_stream"]:
+        if dataset_name in ["wikitext-2-v1", "wikitext-103-v1", "openwebtext2", "openwebtext2_stream",
+                           "opengenome2", "opengenome2_stream", "opengenome2_local"]:
 
             # Determine the text field name (genomics uses "sequence", text datasets use "text")
-            if dataset_name in ["opengenome2_local"]:
+            if dataset_name in ["opengenome2", "opengenome2_stream", "opengenome2_local"]:
                 text_field = "sequence"
             else:
                 text_field = "text"
@@ -978,6 +1232,8 @@ def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1
                 # NEW: Update cache path check for genomics
                 if dataset_name == "openwebtext2":
                     token_cache_path = "/mfs1/datasets/pile/openwebtext2/owt2_128"
+                elif dataset_name == "opengenome2":
+                    token_cache_path = f"{cache_dir}/opengenome2_tokenized_128"
                 else:
                     token_cache_path = None
 
@@ -1330,7 +1586,7 @@ def main():
 
     # Sequence length factor: longer sequences need more gradient accumulation
     # Reference is seq_length=128 for text data
-    seq_length_factor = 1.0 if seq_length == 128 else seq_length / 128.0 * 4
+    seq_length_factor = seq_length / 128.0
     print(f"Sequence length factor for grad accumulation: {seq_length_factor:.1f}x (seq_length={seq_length})")
 
     if world_size == 1:
@@ -1376,7 +1632,7 @@ def main():
         dataloader_num_workers = 4
         dataloader_prefetch_factor = 2
     elif seq_length >= 2048:
-        dataloader_num_workers = 4
+        dataloader_num_workers = 8
         dataloader_prefetch_factor = 4
     else:
         dataloader_num_workers = 12

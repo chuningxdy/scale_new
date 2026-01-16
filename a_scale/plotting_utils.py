@@ -323,8 +323,8 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
     ax.set_xlabel(x_axis_name, fontsize=14)
     ax.set_ylabel('Loss', fontsize=14)
 
-    # set y lim 2.5 to 8
-    ax.set_ylim([0.8, 1.6])
+    # set y lim 2.5 to 8 (0.8-1.6)
+    ax.set_ylim([1.2, 1.4])
 
     if False:
         # set ylim for max to be 3-6

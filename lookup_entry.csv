@@ -1,2 +1,2 @@
 data,model,loss,N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule
-opengenome2_local,striped_hyena,condcrossent,50000000,24,10000,0.001,0.1,0.0,cosine,adamw,na
+opengenome2_local,striped_hyena,condcrossent,50000000,48,5000,0.001,0.1,0.0,cosine,adamw,na
