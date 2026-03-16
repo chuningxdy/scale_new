@@ -1,0 +1,9 @@
+jax==0.4.35
+jaxlib==0.4.34
+numpy==1.26.4
+pyDOE==0.3.8
+matplotlib==3.8.4
+
+[cuda]
+jax[cuda12]==0.4.35
+nvidia-cuda-nvcc-cu12==12.4.131

@@ -83,8 +83,17 @@ def loss_estimation(neural_net,
             h_samples_type = "train"
         else:
             h_samples_type = "test"
+            #raise ValueError("test has these many rows: " + str(len(h_samples)))
         
         group_cols = list(h_samples.columns)
+        # if D in group_cols, and there are nan values in D, remove D from group_cols
+        if "D" in group_cols:
+            if h_samples["D"].isna().any():
+                group_cols.remove("D")
+        # do same for actual_N
+        if "actual_N" in group_cols:
+            if h_samples["actual_N"].isna().any():
+                group_cols.remove("actual_N")
         #group_cols.remove("K")
 
         # group by all columns except for K
@@ -92,6 +101,9 @@ def loss_estimation(neural_net,
         h_samples_grouped["group_id"] = h_samples_grouped.groupby(group_cols).ngroup()
         # get the unique group ids
         group_ids = h_samples_grouped["group_id"].unique()
+        #if h_samples_type == "test":
+        #    raise ValueError(h_samples_grouped[group_cols].isna().any(axis=1).sum())
+        
         # create a dictionary with keys being the group id and values being a list of all the Ks in that group
         group_id_dict = {}
         for group_id in group_ids:
@@ -299,9 +311,10 @@ def loss_estimation(neural_net,
 
                 # -- get NQS loss --
                 #raise ValueError("NQS loss estimation is not implemented yet")
-                use_actual_N_for_nqs = True
+                use_actual_N_for_nqs = False
                 if use_actual_N_for_nqs:
                     h_i_dict.update({"N": actual_N})
+                
                 
                 # empty dataframe
                 
@@ -368,7 +381,6 @@ def loss_estimation(neural_net,
 
    
 
-    
 
 
     eval_df["nqs_loss"] = eval_df["nqs_risk"] #eval_df.apply(lambda row: calc_nqs_from_bbv(row, fitted_nqs_dict), axis = 1)
@@ -399,7 +411,7 @@ def loss_estimation(neural_net,
     #raise ValueError("check eval_df_counter.csv for the loss counter")
 
     # delete rows with loss_counter > 0
-    eval_df = eval_df[eval_df["loss_counter"] == 0].copy()
+   # eval_df = eval_df[eval_df["loss_counter"] == 0].copy()
     # drop the loss_counter column
     eval_df.drop(columns = ["loss_counter"], inplace = True)
 
@@ -480,6 +492,12 @@ def loss_estimation(neural_net,
             h_samples = h_samples_train
 
 
+        # make sure the values of actual_N is populated for h_samples
+        # if there are nan values, populate them with the value from N
+        #h_samples["actual_N"] = h_samples.apply(lambda row: row["N"] if pd.isna(row["actual_N"]) else row["actual_N"], axis = 1)
+        # raise an error if h_samples["actual_N"] still has nan values
+        # raise an error if h_samples["N"] still has nan values
+
 
 
         group_cols = list(h_samples.columns)
@@ -501,6 +519,8 @@ def loss_estimation(neural_net,
         row_num_dict = {}
         for ii in range(len(h_samples_grouped)):
             row_num_dict[ii] = h_samples_grouped.iloc[ii]["group_id"]
+        
+
         
         started = False
         for i in range(len(h_samples)):
@@ -573,9 +593,18 @@ def loss_estimation(neural_net,
         # in eval_df, replace the rows with h_samples_type = "train" with
         #  the rows in nn_loss_df 
         eval_df_tst = eval_df[eval_df["h_samples_type"] == "test"]
+       # rows_with_10M = eval_df_tst[eval_df_tst["N"] == 10000000]
+        #raise ValueError("rows_with_10M: " + str(rows_with_10M))
         eval_df = pd.concat([nn_loss_df, eval_df_tst], axis = 0)
 
-
+        if eval_df["N"].isna().any():
+            raise ValueError("h_samples has nan values in N column")
+        if eval_df["actual_N"].isna().any():
+            # set actual_N to N where actual_N is nan
+            eval_df["actual_N"] = eval_df.apply(lambda row: row["N"] if pd.isna(row["actual_N"]) else row["actual_N"], axis = 1)
+        # display rows with N == 10000000
+        #rows_with_10M = eval_df[eval_df["N"] == 10000000]
+        #raise ValueError("rows_with_10M: " + str(rows_with_10M))
 
         eval_df["D"] = eval_df["ckpt"] * eval_df["B"] * 128
         fitted_baseline_dict = OmegaConf.to_container(fitted_baseline)
@@ -594,7 +623,11 @@ def loss_estimation(neural_net,
             alpha = fitted_baseline_dict["N_power"]
             B = fitted_baseline_dict["B"]
             beta = fitted_baseline_dict["D_power"]
+
+            
+            #    raise ValueError("row: " + str(row) + "return_Value" + str(E + A / row["actual_N"]**alpha + B / row["D"]**beta))
             return E + A / row["actual_N"]**alpha + B / row["D"]**beta
+        
         
         eval_df["chin_loss"] = eval_df.apply(lambda row: chin_predict_loss(row, fitted_baseline_dict), axis = 1)
         # save the eval_df to a csv file

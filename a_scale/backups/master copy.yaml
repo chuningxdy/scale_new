@@ -1,0 +1,205 @@
+defaults:
+  - _self_
+  - train: train # nn training settings other than data, model, and hypers, and optimizer
+  - a_scaling_model: zeroth
+  - chinchilla_1: parametric
+  - chinchilla_2: parametric
+  - deepseek: bs_lr
+  - loss_estimation: loss_estimation
+  - resource_allocation: resource_allocation
+  - samplers: samplers
+  - nqs_simulators: nqs_simulators
+  - hyper_selection: hyper_selection
+  - critical_batch_size: critical_batch_size
+
+
+optimizer_name: adam_cosine # sgd or adam or adam_cosine
+
+# ----------------------- Pipeline Options ------------------ #
+
+fit_nqs: false
+# if not fit, which one to use
+fitted_nqs: outputs/runs/saved_yamls/fitted_nqs_adam_cosine_7_multiple_Ns.yaml
+#outputs/runs/saved_yamls/fitted_nqs_adam_constant_7_lm1b.yaml
+#outputs/runs/saved_yamls/fitted_nqs_adam_cosine_7_multiple_Ns.yaml
+#outputs/runs/saved_yamls/fitted_nqs_adam_constant_7_lm1b.yaml # lm1b
+#OWT: outputs/runs/saved_yamls/fitted_nqs_adam_cosine_7_multiple_Ns.yaml
+
+
+
+#outputs/runs/saved_yamls/fitted_nqs_${optimizer_name}_7.yaml
+    # adam... }_7.yaml
+    #adam: outputs/runs/2025-09-12-00-28_openwebtext2_pythia_combo_eff_N_factor_dot1_dot7/1_fit_scaling_model/fitted_nqs_7.yaml
+    # 
+    #sgd: outputs/runs/2025-08-24-14-34_openwebtext2_pythia_sgd_pow/1_fit_scaling_model/fitted_nqs_7.yaml
+
+fit_chin2: true
+chin_opt_method: BFGS  # BFGS or scipy
+# if not fit, which one to use
+fitted_chin2: outputs/runs/saved_yamls/fitted_cp_adam_cosine.yaml
+#outputs/runs/saved_yamls/fitted_cp_adam_constant_lm1b.yaml
+#outputs/runs/saved_yamls/fitted_cp_adam_cosine.yaml
+# LM1B: outputs/runs/saved_yamls/fitted_cp_adam_constant_lm1b.yaml
+# OWT: outputs/runs/saved_yamls/fitted_cp_adam_cosine.yaml
+    #adam: scale_new/outputs/runs/2025-12-15-21-16_openwebtext2_pythia_adam_chin
+    # old: outputs/runs/2025-09-05-18-33_openwebtext2_pythia_chin_valid/3_fit_chinchilla_v2/fitted_cp.yaml
+    #sgd: outputs/runs/2025-09-20-16-08_openwebtext2_pythia_dot1_dot7_sgd/3_fit_chinchilla_v2/fitted_cp.yaml
+
+run_loss_estimation: false
+run_resource_allocation: false
+run_critical_batch_size: true
+run_variance_analysis: false
+
+
+train_data_PF: 80PF # standard is 80PF
+
+# ----------------------- NN configurations list ------------------ #
+
+fit_nqs_csv: inputs/h_samples_fit_nqs_owt_small_${optimizer_name}_${train_data_PF}.csv
+#inputs/h_samples_fit_nqs_owt_small_adam_constant_new.csv
+# inputs/h_samples_fit_nqs_owt_small_${optimizer_name}_new.csv
+#inputs/h_samples_critical_batch_size_lm1b_all_balanced_adam_cosine_train_clean.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_adam_cosine.csv
+#inputs/h_samples_fit_nqs_lm1b_small_adam_cosine_new.csv
+#inputs/h_samples_fit_nqs_owt_small_${optimizer_name}.csv
+test_nqs_csv: inputs/h_samples_all_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_fit_nqs_owt_small_adam_constant_new.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_very_large_B_add.csv
+#inputs/h_samples_all_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_fit_nqs_owt_small_${optimizer_name}_20PF.csv
+#inputs/h_samples_fit_nqs_lm1b_small_adam_cosine_new.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_very_large_K_add.csv
+#h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense_3.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}_multiple_N_full.csv
+#inputs/h_samples_test_nqs_owt_adam_NBK_corrected.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_adam_cosine_4.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}_extended.csv
+#inputs/h_samples_test_nqs_owt_valid_sgd.csv
+
+chin2_csv:  inputs/h_samples_fit_nqs_owt_small_${optimizer_name}_${train_data_PF}.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine_train.csv
+#inputs/h_samples_critical_batch_size_lm1b_all_balanced_adam_cosine_clean.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine_train.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}_81920PF.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine_train.csv
+#inputs/h_samples_critical_batch_size_lm1b_all_balanced_adam_cosine_train_clean.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine_train.csv # options: .csv, _train.csv, _train_valid.csv
+resource_allocation_csv: inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine.csv
+#inputs/h_samples_resource_allocation_owt_all_balanced_adam_cosine.csv
+#inputs/h_samples_resource_allocation_lm1b_all_balanced_adam_cosine.csv #LM1B
+#inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}.csv #OWT # options: .csv, _train.csv, _train_valid.csv
+critical_batch_size_csv: inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_BS_sch.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_BS_sch.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_very_large_B_add.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_critical_batch_size_lm1b_all_balanced_adam_cosine_clean.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_critical_batch_size_lm1b_all_balanced_adam_cosine_train_clean.csv
+ #inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}_20PF.csv
+#inputs/h_samples_heldoutBK_lm1b_adam_cosine.csv
+#inputs/h_samples_critical_batch_size_lm1b_all_balanced_adam_cosine_train_clean.csv
+#inputs/h_samples_test_nqs_owt_outofsample_BK.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}_train_clean.csv
+#inputs/h_samples_test_nqs_owt_in_sample_adamw_BS_sch.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_resource_allocation_genomes_all_balanced_adam_cosine_train.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense.csv
+#inputs/h_samples_resource_allocation_genomes_all_balanced_adam_cosine_train1.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense.csv
+#inputs/h_samples_resource_allocation_genomes_all_balanced_adam_cosine_train.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense.csv
+#inputs/h_samples_resource_allocation_genomes_all_balanced_adam_cosine_train.csv
+#inputs/h_samples_critical_batch_size_genomes_all_balanced_${optimizer_name}_train.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected.csv
+#inputs/h_samples_critical_batch_size_genomes_all_balanced_${optimizer_name}_train_missing_2.csv
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}_select.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+#inputs/h_samples_critical_batch_size_genomes_all_balanced_${optimizer_name}_test.csv # options: .csv, _train.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_very_large_K.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected_dense.csv 
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected.csv
+
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_corrected.csv
+
+#inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}_multiple_N_full.csv # options: .csv, _train.csv
+
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv # options: .csv, _train.csv
+
+#inputs/h_samples_test_nqs_owt_adam_cosine_NBK_fix_N.csv
+# inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv # options: .csv, _train.csv
+
+
+
+# ---------------------- NQS Hyperparameters to sweep ------------------ #
+
+# for sgd, this used to be 1.0 and 0.58; for adam, this used to be 0.1 and 0.7
+effective_model_size_factor_multiplier: 1.0 #0.1
+effective_model_size_factor_power: 1.0 #0.7
+use_lr_adapt: true
+lr_adapt_tolerance: 0.05 #0.1 #0.05, 0.001, 0.0001
+
+hydra:
+  sweeper:
+    params:
+      effective_model_size_factor_multiplier: 1.0, 0.3, 0.1, 0.03
+      effective_model_size_factor_power: 0.4, 0.5, 0.6, 0.7, 0.8
+      lr_adapt_tolerance: 0.05
+
+neural_net: # this is just a dictionary!! not the config yaml neural_net
+    #data: opengenome2_local #openwebtext2 #wikitext-103-v1 #infimnist #cifar5m
+    data: openwebtext2
+    loss: condcrossent
+    #model: striped_hyena #pythia #pythia #lama #simplecnn #twolayermlp
+    model: pythia
+    gpu_count: 1
+    # ******************************** #
+    #gpu_count:
+#seq_len: 2048 #2048
+seq_len: 128
+#vocab_size: 5 
+vocab_size: 3000
+
+# ---------------------------------------- #
+
+
+test_B: 128 #64 
+test_K: 50000 #12500
+test_N: 10000000 # 5 Mil = 103Mil/ chin 20 ratio
+test_lr: 2.0 #1.0
+
+# Generalize over the following dimensions
+test_momentum: 0.0 #0.9
+test_lr_schedule: step 
+test_step_decay_schedule:
+  decay_at: [0.5]
+  decay_amt: [1]
+  #decay_at: [0.5, 0.75]
+  #decay_amt: [0.1, 0.1]
+
+
+comment: ${neural_net.data}_${neural_net.model}_${chin_opt_method}_${train_data_PF}
+job_dir: outputs/runs/Paper/${now:%Y-%m-%d-%H-%M}_${comment}/
+nn_archive_file: /mfs1/u/chuning/scale/outputs/nn_archive/nn_archive.csv
+nqs_archive_file: /mfs1/u/chuning/scale/outputs/nqs_archive/nqs_archive.csv
+
+
+
+

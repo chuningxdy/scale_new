@@ -219,6 +219,14 @@ def train_nn_simple(nn_cfg, path):
 
 
 def train_hf_jax(nn_dict, h_dict, path):
+    #raise ValueError(nn_dict)
+
+    # check if gpu_count is in nn_dict
+    if "gpu_count" in nn_dict and nn_dict["gpu_count"] is not None:
+    #if nn_dict["gpu_count"] is not None:
+        gpu_count = nn_dict["gpu_count"]
+    else:
+        gpu_count = 1 # default to 4 gpus
 
     hf_temp_folder = 'outputs/nn_hf/'
     # add date and time to the folder name
@@ -263,11 +271,15 @@ def train_hf_jax(nn_dict, h_dict, path):
     #RESUME_FROM_CHECKPOINT = False
 
     if nn_dict["model"] in ["pythia", "llama", "striped_hyena"]:
-        if nn_dict["data"] in ["openwebtext2", "opengenome2_local"]:
-            if h_dict["lr_schedule"] == "step" and isinstance(h_dict["step_decay_schedule"], dict):
+        if nn_dict["data"] in ["openwebtext2", "opengenome2_local", "lm1b"] :
+            #raise ValueError('step_decay_schedule in h_dict: ', h_dict["step_decay_schedule"])
+            if h_dict["lr_schedule"] in ["step", "cosine"] and isinstance(h_dict["step_decay_schedule"], dict):
             # check if B_decay_amt in step_decay_schedule
                 if "B_decay_amt" in h_dict["step_decay_schedule"]:
                     path_to_script = "hf_utils_train_model_owt_BS_sch.py"
+                    # if cosine schedule
+                    if h_dict["lr_schedule"] == "cosine":
+                        path_to_script = "hf_utils_train_model_owt_BS_sch_with_cosine.py"
                 #else:
                 #    if RESUME_FROM_CHECKPOINT:
                  #       path_to_script = "hf_utils_train_model_resume_from_checkpoint.py"
@@ -279,8 +291,8 @@ def train_hf_jax(nn_dict, h_dict, path):
                 #else:
                 path_to_script = "hf_utils_train_model.py"
 
-        elif nn_dict["data"] == "lm1b":
-            path_to_script = "hf_utils_train_model_lm1b.py"
+        #elif nn_dict["data"] == "lm1b":
+        #    path_to_script = "hf_utils_train_model_lm1b.py"
         
         else:
             raise ValueError("Data is ", nn_dict["data"], ", not supported")
@@ -301,8 +313,11 @@ def train_hf_jax(nn_dict, h_dict, path):
     
 
     # Add it to the command
-    command = f"conda run --prefix {path_to_conda_env} python {path_to_script} {hf_temp_folder}"
-    #command = f"conda run --prefix {path_to_conda_env} torchrun --nproc_per_node=4 {path_to_script} {hf_temp_folder}" # distributed training
+    if gpu_count == 4:
+        command = f"conda run --prefix {path_to_conda_env} torchrun --nproc_per_node=4 {path_to_script} {hf_temp_folder}" # distributed training
+    else:
+        command = f"conda run --prefix {path_to_conda_env} python {path_to_script} {hf_temp_folder}" # not distributed training
+    #raise ValueError(command)
     # torchrun --nproc_per_node=2 hf_utils_train_model.py
     print("run command: ", path_to_script)
     print(h_dict["step_decay_schedule"])
@@ -371,10 +386,10 @@ def build_hf_jax(nn_dict, h_dict, path, return_model_details = False):
 
     path_to_conda_env = "/mfs1/u/chuning/torch_hf"
 
-    if nn_dict["model"] in ["pythia", "llama"]:
+    if nn_dict["model"] in ["pythia", "llama", "striped_hyena"]:
         if nn_dict["data"] == "lm1b":
-            path_to_script = "hf_utils_build_model_lm1b.py"
-        elif nn_dict["data"] == "openwebtext2":
+            path_to_script = "hf_utils_build_model.py" # _lm1b.py
+        elif nn_dict["data"] in ["openwebtext2", "opengenome2_local"]:
             path_to_script = "hf_utils_build_model.py"
         else:
             raise ValueError("Data is ", nn_dict["data"], ", not supported")
@@ -528,7 +543,7 @@ def train_nn(mdict, hdict, path):
 
 def build_nn(mdict, hdict, path = "outputs/llama_model/temp"):
 
-    if "model" in mdict and mdict["model"] in ["pythia", "llama"]:
+    if "model" in mdict and mdict["model"] in ["pythia", "llama", "striped_hyena"]:
         
         # call the function
         actual_N_value = build_hf_jax(nn_dict = mdict, h_dict = hdict, 

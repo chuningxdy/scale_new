@@ -1,0 +1,454 @@
+optimizer_name: adam_cosine
+fit_nqs: true
+fitted_nqs: outputs/runs/saved_yamls/fitted_nqs_adam_cosine_7_multiple_Ns.yaml
+fit_chin2: false
+chin_opt_method: BFGS
+fitted_chin2: outputs/runs/saved_yamls/fitted_cp_adam_cosine.yaml
+run_loss_estimation: true
+run_resource_allocation: true
+run_critical_batch_size: true
+run_variance_analysis: true
+train_data_PF: 80PF
+train_data_threshold: 80000000
+fit_nqs_csv: inputs/h_samples_fit_nqs_owt_small_${optimizer_name}_${train_data_PF}_new_new.csv
+test_nqs_csv: inputs/h_samples_all_owt_all_balanced_${optimizer_name}.csv
+chin2_csv: inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}_train.csv
+resource_allocation_csv: inputs/h_samples_resource_allocation_owt_all_balanced_${optimizer_name}.csv
+critical_batch_size_csv: inputs/h_samples_critical_batch_size_owt_all_balanced_${optimizer_name}.csv
+effective_model_size_factor_multiplier: 1.0
+effective_model_size_factor_power: 1.0
+lr_adapt_tolerance: 0.05
+use_lr_adapt: true
+neural_net:
+  data: openwebtext2
+  loss: condcrossent
+  model: pythia
+  gpu_count: 4
+seq_len: 128
+vocab_size: 3000
+test_B: 128
+test_K: 50000
+test_N: 10000000
+test_lr: 2.0
+test_momentum: 0.0
+test_lr_schedule: step
+test_step_decay_schedule:
+  decay_at:
+  - 0.5
+  decay_amt:
+  - 1
+comment: ${neural_net.data}_${neural_net.model}_${chin_opt_method}_${train_data_PF}
+job_dir: outputs/runs/Fig4/${now:%Y-%m-%d-%H-%M}_${comment}/
+nn_archive_file: /mfs1/u/chuning/scale/outputs/nn_archive/nn_archive.csv
+nqs_archive_file: /mfs1/u/chuning/scale/outputs/nqs_archive/nqs_archive.csv
+train:
+  logevery: 500
+  seed: 0
+  checkpoints:
+    iterations:
+    - 0
+    - 1
+    - 8
+    - 27
+    - 64
+    - 125
+    - 216
+    - 343
+    - 512
+    - 729
+    - 1000
+    - 1331
+    - 1728
+    - 2197
+    - 2744
+    - 3375
+    - 4096
+    - 4913
+    - 5832
+    - 6859
+    - 8000
+    - 9261
+    - 10648
+    - 12167
+    - 13824
+    - 15625
+    - 17576
+    - 19683
+    - 21952
+    - 24389
+    - 27000
+    - 29791
+    - 32768
+    - 35937
+    - 39304
+    - 42875
+    - 46656
+    - 50653
+    - 54872
+    - 59319
+    - 64000
+    - 68921
+    - 74088
+    - 79507
+    - 85184
+    - 91125
+    - 97336
+    - 103823
+    - 110592
+    - 117649
+    - 125000
+    - 132651
+    - 140608
+    - 148877
+    - 157464
+    - 166375
+    - 175616
+    - 185193
+    - 195112
+    - 205379
+    - 216000
+    - 226981
+    - 238328
+    - 250047
+    - 262144
+    - 274625
+    - 287496
+    - 300763
+    - 314432
+    - 328509
+    - 343000
+    - 357911
+    - 373248
+    - 389017
+    - 405224
+    - 421875
+    - 438976
+    - 456533
+    - 474552
+    - 493039
+    - 512000
+    - 531441
+    - 551368
+    - 571787
+    - 592704
+    - 614125
+    - 636056
+    - 658503
+    - 681472
+    - 704969
+    - 729000
+    - 753571
+    - 778688
+    - 804357
+    - 830584
+    - 857375
+    - 884736
+    - 912673
+    - 941192
+    - 970299
+    - 1000000
+    savestate: true
+    num_batches:
+      _target_: a_scale.nn.run_nn_utils.num_batches_for_eval
+      batch_size: ${h.B}
+      eval_size: 10000
+    evals:
+      accuracy:
+        _target_: a_scale.nn.losses.condacc
+        _partial_: true
+      cross_entropy:
+        _target_: a_scale.nn.losses.condcrossent
+        _partial_: true
+  wandb:
+    project: scale
+    entity: cmaddis
+    nameprefix: feb 1
+a_scaling_model:
+  _target_: a_scale.scaling_models.zeroth_order_scaling_model
+  _partial_: true
+  loss_threshold: 7.0
+  ignore_small_batches: true
+  effective_model_size_factor:
+  - ${effective_model_size_factor_multiplier}
+  - ${effective_model_size_factor_power}
+  include_embedding_params: false
+  number_of_initializations: 2000
+  seed: 6
+  method: latin_hypercube
+  a_range:
+  - 1.05
+  - 2.5
+  b_range:
+  - 0.6
+  - 2.5
+  ma_range:
+  - 10.0
+  - 100
+  mb_range:
+  - 0.05
+  - 20
+  c_range:
+  - 1.0
+  - 1.5
+  sigma_range:
+  - 0.1
+  - 10
+  gtol: 1.0e-08
+  max_steps: 5000
+  h_sampler_training: ${samplers.h_sampler_fit_nqs}
+  neural_net: ${neural_net}
+  scaling_model_dir: ${job_dir}1_fit_scaling_model/
+  fitted_nqs_file: ${a_scaling_model.scaling_model_dir}/fitted_nqs.yaml
+  nn_archive_file: ${nn_archive_file}
+chinchilla_1:
+  _target_: a_scale.baselines.baselines.chinchilla_parametric
+  _partial_: true
+  use_last_x_ckpt: 1
+  h_sampler_training: ${a_scaling_model.h_sampler_training}
+  neural_net: ${neural_net}
+  chinchilla_dir: ${job_dir}/2_fit_chinchilla_v1/
+  nn_archive_file: ${nn_archive_file}
+  eval_metric:
+    _target_: a_scale.evaluation_metrics.log_ASE
+    _partial_: true
+chinchilla_2:
+  _target_: a_scale.baselines.baselines.chinchilla_parametric
+  _partial_: true
+  opt_method: ${chin_opt_method}
+  use_last_x_ckpt: 1
+  h_sampler_training: ${samplers.h_sampler_fit_chinchilla}
+  neural_net: ${neural_net}
+  chinchilla_dir: ${job_dir}/3_fit_chinchilla_v2/
+  nn_archive_file: ${nn_archive_file}
+  eval_metric:
+    _target_: a_scale.evaluation_metrics.log_ASE
+    _partial_: true
+deepseek:
+  training_h_sampler: ${..samplers.h_sampler_deepseek}
+  neural_net: ${neural_net}
+loss_estimation:
+  _target_: a_scale.loss_estimation.loss_estimation
+  _partial_: true
+  h_sampler_train: ${a_scaling_model.h_sampler_training}
+  h_sampler_train_chinchilla: ${samplers.h_sampler_fit_chinchilla}
+  h_sampler_test: ${samplers.h_sampler_test_nqs}
+  test_last_ckpt_only: false
+  loss_threshold: ${a_scaling_model.loss_threshold}
+  ignore_small_batches: ${a_scaling_model.ignore_small_batches}
+  fitted_nqs: {}
+  fitted_baselines: {}
+  effective_model_size_factor: ${a_scaling_model.effective_model_size_factor}
+  include_embedding_params: ${a_scaling_model.include_embedding_params}
+  neural_net: ${neural_net}
+  a_scaling_model: ${a_scaling_model}
+  chinchilla_1: ${chinchilla_1}
+  chinchilla_2: ${chinchilla_2}
+  nqs_simulator: ${nqs_simulators.EM_six}
+  eval_metric:
+    _target_: a_scale.evaluation_metrics.log_ASE
+    _partial_: true
+  loss_estimation_dir: ${job_dir}4_loss_estimation/
+  nn_archive_file: ${nn_archive_file}
+  nqs_archive_file: ${nqs_archive_file}
+resource_allocation:
+  _target_: a_scale.resource_allocation.resource_allocation
+  _partial_: true
+  max_iters_per_run: 10000000
+  seq_len: ${seq_len}
+  h_sampler_nn: ${samplers.h_sampler_resource_allocation_nn}
+  h_sampler_nqs: ${samplers.h_sampler_resource_allocation_nqs}
+  fitted_nqs: {}
+  fitted_baselines: {}
+  neural_net: ${neural_net}
+  nqs_simulator: ${nqs_simulators.EM_six}
+  resource_allocation_dir: ${job_dir}5_resource_allocation
+  nn_archive_file: ${nn_archive_file}
+  nqs_archive_file: ${nqs_archive_file}
+  effective_model_size_factor: ${a_scaling_model.effective_model_size_factor}
+  include_embedding_params: ${a_scaling_model.include_embedding_params}
+  use_lr_adapt: ${use_lr_adapt}
+  lr_adapt_tolerance: ${lr_adapt_tolerance}
+  B: ${test_B}
+  lr: ${test_lr}
+  momentum: ${test_momentum}
+  end_lr: 0.1
+  lr_schedule: ${test_lr_schedule}
+  optimizer: sgd
+  step_decay_schedule:
+    decay_at: ${test_step_decay_schedule.decay_at}
+    decay_amt: ${test_step_decay_schedule.decay_amt}
+samplers:
+  h_sampler_fit_chinchilla:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: ${chin2_csv}
+    seq_len: ${seq_len}
+  h_sampler_fit_nqs:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: ${fit_nqs_csv}
+    seq_len: ${seq_len}
+  h_sampler_test_nqs:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: ${test_nqs_csv}
+    seq_len: ${seq_len}
+  nqs_sampler_grid_search:
+    _target_: a_scale.sampling.sample_six_params_grid
+    _partial_: true
+    a_min: 1.406185
+    a_max: 1.406186
+    a_levels: 1
+    b_min: 1.294854
+    b_max: 1.294855
+    b_levels: 1
+    ma_min: 60.317233
+    ma_max: 60.317234
+    ma_levels: 1
+    mb_min: 69.999999
+    mb_max: 70.0
+    mb_levels: 1
+    eps_min: 3.313224
+    eps_max: 3.313225
+    eps_levels: 1
+    sigma_min: 0.716753
+    sigma_max: 0.716754
+    sigma_levels: 1
+  h_sampler_resource_allocation_nqs:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: ${samplers.h_sampler_resource_allocation_nn.file_path}
+    seq_len: ${seq_len}
+  h_sampler_resource_allocation_nn:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: ${resource_allocation_csv}
+    seq_len: ${seq_len}
+  h_sampler_critical_batch_size:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: ${critical_batch_size_csv}
+    seq_len: ${seq_len}
+  h_sampler_hyper_selection_NQS:
+    _target_: a_scale.sampling.samplers.h_sampler_grid_and_random_isoflop
+    _partial_: true
+    respect_nn_archi: true
+    neural_net: ${neural_net}
+    seq_len: ${seq_len}
+    vocab_size: ${vocab_size}
+    compute_budget: ${hyper_selection.test.C}
+    time_budget: 1000000
+    use_grid: false
+    use_random_isoflops: true
+    n_samples: 1
+    rand_key: 6
+    isoflop_fracs:
+    - 1
+    space_N: 1
+    space_B: 1
+    space_K: 1
+    space_lr: 0.3
+    space_end_lr: 1
+    space_momentum: 1
+    max_N: ${hyper_selection.test.N}
+    min_N: ${hyper_selection.test.N}
+    max_B: ${hyper_selection.max_B}
+    min_B: ${hyper_selection.min_B}
+    max_K: 1000000
+    min_K: 5000
+    min_lr: ${hyper_selection.min_lr}
+    max_lr: ${hyper_selection.max_lr}
+    min_end_lr: ${hyper_selection.end_lr}
+    max_end_lr: ${hyper_selection.end_lr}
+    min_momentum: ${hyper_selection.momentum}
+    max_momentum: ${hyper_selection.momentum}
+    lr_schedule_options:
+    - ${hyper_selection.lr_schedule}
+    optimizer_options:
+    - ${hyper_selection.optimizer}
+    step_decay_schedule_options:
+    - ${hyper_selection.step_decay_schedule}
+  h_sampler_hyper_selection_deepseek:
+    _target_: a_scale.sampling.h_sampler_from_csv
+    _partial_: true
+    file_path: inputs/h_samples_hyper_selection_deepseek.csv
+    seq_len: ${seq_len}
+  h_sampler_hyper_selection_test:
+    _target_: a_scale.sampling.h_sampler_single_point
+    _partial_: true
+    seq_len: ${seq_len}
+    'N': ${hyper_selection.test.N}
+    B: 1
+    K: 1
+    lr: 1
+    momentum: ${hyper_selection.momentum}
+    end_lr: ${hyper_selection.end_lr}
+    lr_schedule: ${hyper_selection.lr_schedule}
+    optimizer: ${hyper_selection.optimizer}
+    step_decay_schedule: ${hyper_selection.step_decay_schedule}
+nqs_simulators:
+  exact:
+    _target_: a_scale.nqs.expected_nqs_from_cfg
+    _partial_: true
+  gamma_function_approx:
+    _target_: a_scale.nqs.approx_expected_nqs_from_cfg
+    _partial_: true
+  EM:
+    _target_: a_scale.nqs.EM_nqs_from_cfg
+    _partial_: true
+  EM_six:
+    _target_: a_scale.nqs.EM_nqs_from_cfg_six
+    _partial_: true
+    LRA_tol: ${lr_adapt_tolerance}
+hyper_selection:
+  _target_: a_scale.hyper_selection.hyper_selection
+  _partial_: true
+  seq_len: ${seq_len}
+  vocab_size: ${vocab_size}
+  fitted_nqs: {}
+  neural_net: ${neural_net}
+  nqs_simulator: ${nqs_simulators.EM_six}
+  hyper_selection_dir: ${job_dir}6_hyper_selection
+  nn_archive_file: ${nn_archive_file}
+  nqs_archive_file: ${nqs_archive_file}
+  h_sampler_hyper_selection_deepseek: ${samplers.h_sampler_hyper_selection_deepseek}
+  h_sampler_hyper_selection_NQS: ${samplers.h_sampler_hyper_selection_NQS}
+  h_sampler_hyper_selection_test: ${samplers.h_sampler_hyper_selection_test}
+  effective_model_size_factor: ${a_scaling_model.effective_model_size_factor}
+  include_embedding_params: ${a_scaling_model.include_embedding_params}
+  test:
+    C: 6144000
+    'N': 5000000
+  deepseek:
+    max_N: 5000000
+    min_N: 5000000
+    max_K: 20000
+    min_K: 5000
+  min_B: 8
+  max_B: 32
+  min_lr: 1.0
+  max_lr: 2.5
+  momentum: ${test_momentum}
+  end_lr: 0.1
+  lr_schedule: ${test_lr_schedule}
+  optimizer: sgd
+  step_decay_schedule:
+    decay_at: ${test_step_decay_schedule.decay_at}
+    decay_amt: ${test_step_decay_schedule.decay_amt}
+critical_batch_size:
+  _target_: a_scale.critical_batch_size.critical_batch_size
+  _partial_: true
+  slope_at_critical_batch_size: 0.01
+  seq_len: ${seq_len}
+  vocab_size: ${vocab_size}
+  fitted_nqs: {}
+  neural_net: ${neural_net}
+  nqs_simulator: ${nqs_simulators.EM_six}
+  critical_batch_size_dir: ${job_dir}6_critical_batch_size/
+  nn_archive_file: ${nn_archive_file}
+  nqs_archive_file: ${nqs_archive_file}
+  h_sampler: ${samplers.h_sampler_critical_batch_size}
+  effective_model_size_factor: ${a_scaling_model.effective_model_size_factor}
+  include_embedding_params: ${a_scaling_model.include_embedding_params}
+  use_lr_adapt: ${use_lr_adapt}
+  lr_adapt_tolerance: ${lr_adapt_tolerance}

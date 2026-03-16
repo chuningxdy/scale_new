@@ -85,7 +85,7 @@ def critical_batch_size(slope_at_critical_batch_size,
         if use_lr_adapt:
             #pass
             h_i_dict_to_run["lr_schedule"] = "optimized"
-            h_i_dict_to_run["step_decay_schedule"] = "na"
+            #h_i_dict_to_run["step_decay_schedule"] = "na"
         
         #raise ValueError(h_i_dict_to_run)
 

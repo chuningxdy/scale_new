@@ -277,6 +277,7 @@ from a_scale.nqs.nqs_sgd import EM_nqs_from_cfg_six_optimized, EM_nqs_from_cfg_s
 def EM_nqs_from_cfg_six(nqs_cfg, working_file_path = None, LRA_tol= 0.001):
     #raise ValueError("The LRA_tol is set to:", LRA_tol)
     if nqs_cfg.h.lr_schedule in ["optimized"]:
+        #raise ValueError("doing optimized LRA cosine, cfg is:", nqs_cfg)
         return EM_nqs_from_cfg_six_optimized(nqs_cfg, working_file_path, LRA_tol=LRA_tol)
     elif nqs_cfg.h.lr_schedule in ["step", "constant"]:
         return EM_nqs_from_cfg_six_standard(nqs_cfg, working_file_path)

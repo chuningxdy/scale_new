@@ -1859,7 +1859,6 @@ openwebtext2,pythia,condcrossent,Run_2025_09_14_23_02_17_133755,10000000,15,2000
 openwebtext2,pythia,condcrossent,Run_2025_09_15_00_31_29_174938,10000000,30,10000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",outputs/nn_archive/runs/Run_2025_09_15_00_31_29_174938/
 openwebtext2,pythia,condcrossent,Run_2025_09_15_01_17_23_682163,10000000,61,5000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",outputs/nn_archive/runs/Run_2025_09_15_01_17_23_682163/
 openwebtext2,pythia,condcrossent,Run_2025_09_15_01_40_50_527045,10000000,123,2500,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",outputs/nn_archive/runs/Run_2025_09_15_01_40_50_527045/
-openwebtext2,pythia,condcrossent,Run_2025_09_15_01_52_56_340741,10000000,247,1250,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",outputs/nn_archive/runs/Run_2025_09_15_01_52_56_340741/
 openwebtext2,pythia,condcrossent,Run_2025_09_15_01_59_02_174832,10000000,495,625,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",outputs/nn_archive/runs/Run_2025_09_15_01_59_02_174832/
 openwebtext2,pythia,condcrossent,Run_2025_09_15_02_28_25_023550,90509667,48,71612,0.001,0.1,0.0,constant,adamw,na,outputs/nn_archive/runs/Run_2025_09_15_02_28_25_023550/
 openwebtext2,pythia,condcrossent,Run_2025_09_15_02_21_11_095862,128000000,48,52854,0.001,0.1,0.0,constant,adamw,na,outputs/nn_archive/runs/Run_2025_09_15_02_21_11_095862/
@@ -2455,11 +2454,6 @@ openwebtext2,pythia,condcrossent,Run_2026_01_06_07_22_55_653029,256000000,12,102
 openwebtext2,pythia,condcrossent,Run_2026_01_06_08_00_50_036755,64000000,24,204800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_06_08_00_50_036755/
 openwebtext2,pythia,condcrossent,Run_2026_01_06_09_34_12_495434,128000000,12,204800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_06_09_34_12_495434/
 openwebtext2,pythia,condcrossent,Run_2026_01_06_22_03_37_505563,16000000,192,102400,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_06_22_03_37_505563/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_08_19_24_56_693509,5000000,3,80000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_08_19_24_56_693509/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_08_19_53_57_167618,5000000,12,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_08_19_53_57_167618/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_08_20_02_04_022357,5000000,48,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_08_20_02_04_022357/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_08_20_24_08_232583,5000000,384,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_08_20_24_08_232583/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_08_20_32_49_808084,5000000,1536,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_08_20_32_49_808084/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_14_17_52_09_075678,50000000,96,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_14_17_52_09_075678/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_14_18_15_00_797303,50000000,384,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_14_18_15_00_797303/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_14_18_37_09_976406,50000000,1536,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_14_18_37_09_976406/
@@ -2476,7 +2470,6 @@ opengenome2_local,striped_hyena,condcrossent,Run_2026_01_14_21_02_08_379491,5000
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_14_21_26_06_636567,5000000,6144,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_14_21_26_06_636567/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_43_20_678821,50000000,1,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_43_20_678821/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_50_13_388226,50000000,3,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_50_13_388226/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_41_16_844694,5000000,6,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_41_16_844694/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_54_17_279168,50000000,6,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_54_17_279168/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_56_43_971238,50000000,12,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_56_43_971238/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_58_47_387897,50000000,24,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_58_47_387897/
@@ -2494,18 +2487,14 @@ opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_36_36_760495,5000
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_38_47_202127,5000000,48,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_38_47_202127/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_40_46_021789,5000000,96,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_40_46_021789/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_42_42_600328,5000000,192,312,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_42_42_600328/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_44_37_347672,5000000,384,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_44_37_347672/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_46_31_662518,5000000,768,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_46_31_662518/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_48_23_620630,5000000,1,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_48_23_620630/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_52_29_621965,5000000,3,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_52_29_621965/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_54_56_019852,5000000,6,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_54_56_019852/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_56_14_243473,5000000,12,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_56_14_243473/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_57_12_301252,5000000,24,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_57_12_301252/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_58_03_354708,5000000,48,312,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_58_03_354708/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_58_51_601421,5000000,96,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_58_51_601421/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_21_59_39_245182,5000000,192,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_21_59_39_245182/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_20_40_18_150190,5000000,3,320000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_20_40_18_150190/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_22_26_25_088483,5000000,6,160000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_22_26_25_088483/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_23_16_03_487972,5000000,12,80000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_23_16_03_487972/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_15_23_48_48_318498,5000000,24,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_15_23_48_48_318498/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_00_16_26_636975,5000000,48,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_00_16_26_636975/
@@ -2513,7 +2502,6 @@ opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_00_41_15_084286,5000
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_01_05_37_474858,5000000,192,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_01_05_37_474858/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_01_38_09_732707,50000000,3,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_01_38_09_732707/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_01_54_08_728059,50000000,6,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_01_54_08_728059/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_03_06_425362,50000000,12,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_03_06_425362/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_01_46_40_003729,50000000,192,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_01_46_40_003729/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_10_16_284655,50000000,24,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_10_16_284655/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_16_38_468566,50000000,48,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_16_38_468566/
@@ -2524,6 +2512,559 @@ opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_07_14_063329,5000
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_13_14_095512,50000000,768,312,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_13_14_095512/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_34_49_967959,50000000,384,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_34_49_967959/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_40_42_501630,50000000,768,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_40_42_501630/
-opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_32_37_794978,50000000,12,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_32_37_794978/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_46_35_456044,5000000,768,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_46_35_456044/
 opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_02_58_58_851891,50000000,24,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_02_58_58_851891/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_03_10_37_433468,5000000,3072,312,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_03_10_37_433468/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_03_22_58_771190,50000000,48,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_03_22_58_771190/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_16_21_17_832366,50000000,1,15000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_16_21_17_832366/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_16_31_30_847805,5000000,1,60000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_16_31_30_847805/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_19_06_37_692935,5000000,96,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_19_06_37_692935/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_19_10_10_158928,5000000,384,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_19_10_10_158928/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_16_19_27_47_374699,5000000,1,15000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_16_19_27_47_374699/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_00_57_56_359936,50000000,12,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_00_57_56_359936/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_01_18_29_238952,5000000,6,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_01_18_29_238952/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_02_41_55_802896,5000000,3,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_02_41_55_802896/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_04_04_24_712919,5000000,6,160000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_04_04_24_712919/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_03_54_04_541399,5000000,48,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_03_54_04_541399/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_04_04_52_045965,5000000,384,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_04_04_52_045965/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_04_14_59_942666,5000000,1536,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_04_14_59_942666/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_03_52_28_137692,50000000,1,60000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_03_52_28_137692/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_04_25_15_615857,50000000,12,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_04_25_15_615857/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_05_45_47_893764,5000000,3,80000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_05_45_47_893764/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_08_42_03_533717,5000000,12,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_08_42_03_533717/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_16_38_37_157053,50000000,6,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_16_38_37_157053/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_16_37_22_952396,50000000,24,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_16_37_22_952396/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_16_55_08_522230,50000000,12,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_16_55_08_522230/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_16_57_46_769254,50000000,48,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_16_57_46_769254/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_17_17_56_177647,50000000,96,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_17_17_56_177647/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_17_08_33_876031,50000000,3,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_17_08_33_876031/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_17_33_07_152161,50000000,192,626,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_17_33_07_152161/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_16_39_04_138836,50000000,1,120000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_16_39_04_138836/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_17_46_40_684311,50000000,384,312,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_17_46_40_684311/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_18_00_17_412430,50000000,768,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_18_00_17_412430/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_17_18_13_25_214884,50000000,1536,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_17_18_13_25_214884/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_04_28_06_094677,5000000,24,389,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_04_28_06_094677/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_04_31_33_708962,2000000,24,24922,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_04_31_33_708962/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_05_14_50_444747,4000000,24,12461,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_05_14_50_444747/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_05_40_43_922489,8000000,24,6230,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_05_40_43_922489/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_05_54_23_031045,16000000,24,3115,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_05_54_23_031045/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_03_50_633683,32000000,24,1557,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_03_50_633683/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_09_46_320597,64000000,24,778,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_09_46_320597/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_13_34_960083,128000000,24,389,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_13_34_960083/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_18_08_327045,2000000,24,6239,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_18_08_327045/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_29_22_295638,4000000,24,3119,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_29_22_295638/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_36_14_085951,8000000,24,1559,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_36_14_085951/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_40_22_238429,16000000,24,779,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_40_22_238429/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_43_09_867532,32000000,24,389,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_43_09_867532/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_45_09_527118,2000000,24,1559,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_45_09_527118/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_48_21_232462,4000000,24,779,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_48_21_232462/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_50_29_031165,8000000,24,389,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_50_29_031165/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_06_51_52_841417,2000000,24,100029,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_06_51_52_841417/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_09_36_32_218166,4000000,24,50014,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_09_36_32_218166/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_11_17_49_674535,8000000,24,25007,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_11_17_49_674535/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_12_14_16_778058,16000000,24,12503,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_12_14_16_778058/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_12_50_03_718812,32000000,24,6251,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_12_50_03_718812/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_13_11_57_837144,64000000,24,3125,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_13_11_57_837144/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_13_25_25_092473,128000000,24,1562,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_13_25_25_092473/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_15_12_39_558831,2000000,96,24,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_15_12_39_558831/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_15_13_15_917630,2000000,96,24922,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_15_13_15_917630/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_15_36_34_493407,4000000,96,12461,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_15_36_34_493407/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_15_49_11_273498,8000000,96,6230,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_15_49_11_273498/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_15_56_43_511869,16000000,96,3115,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_15_56_43_511869/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_16_01_36_099861,32000000,96,1557,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_16_01_36_099861/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_16_05_18_862324,64000000,96,778,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_16_05_18_862324/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_16_08_19_503951,128000000,96,389,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_16_08_19_503951/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_16_11_15_071654,2000000,96,100029,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_16_11_15_071654/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_17_44_14_526840,4000000,96,50014,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_17_44_14_526840/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_18_33_28_495416,8000000,96,25007,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_18_33_28_495416/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_19_01_33_054364,16000000,96,12503,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_19_01_33_054364/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_19_18_59_928451,32000000,96,6251,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_19_18_59_928451/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_19_31_58_468876,64000000,96,3125,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_19_31_58_468876/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_19_42_03_131652,128000000,96,1562,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_19_42_03_131652/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_20_25_12_569627,2000000,384,24922,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_20_25_12_569627/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_21_10_43_331437,4000000,384,12461,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_21_10_43_331437/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_21_37_19_888181,8000000,384,6230,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_21_37_19_888181/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_21_57_45_735285,16000000,384,3115,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_21_57_45_735285/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_18_22_13_04_218410,32000000,384,1557,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_18_22_13_04_218410/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_02_12_27_365773,65000000,48,1000,0.0003,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_02_12_27_365773/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_02_14_44_434953,100000000,48,1000,0.0003,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_02_14_44_434953/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_02_18_02_301629,180000000,48,1000,0.0003,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_02_18_02_301629/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_02_42_07_485736,16250000,768,20345,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_02_42_07_485736/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_05_53_48_996454,32500000,768,10173,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_05_53_48_996454/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_08_22_09_642300,65000000,768,5086,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_08_22_09_642300/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_10_18_39_317559,130000000,768,2543,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_10_18_39_317559/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_12_09_18_497801,260000000,768,1272,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_12_09_18_497801/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_13_33_37_382488,65000000,49152,79,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_13_33_37_382488/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_15_32_28_942661,65000000,12288,318,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_15_32_28_942661/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_17_26_20_983797,65000000,3072,1272,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_17_26_20_983797/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_19_25_18_637511,65000000,192,20345,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_19_25_18_637511/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_21_23_03_106107,65000000,48,81380,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_21_23_03_106107/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_23_37_43_070037,20155644,768,35965,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_23_37_43_070037/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_19_16_18_12_311852,8125000,768,40690,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_19_16_18_12_311852/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_20_06_05_31_204060,40311289,768,17983,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_06_05_31_204060/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_20_10_48_43_821263,80622577,768,8991,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_10_48_43_821263/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_21_25_11_620036,4062500,12,10,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_21_25_11_620036/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_21_28_19_635624,4062500,48,2,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_21_28_19_635624/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_21_30_11_934406,4062500,768,81380,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_21_30_11_934406/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_22_41_40_123644,4062500,768,20345,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_22_41_40_123644/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_23_00_44_319134,8125000,768,10173,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_23_00_44_319134/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_23_11_41_978059,16250000,768,5086,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_23_11_41_978059/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_23_18_13_336827,32500000,768,2543,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_23_18_13_336827/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_23_22_31_345649,65000000,768,1272,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_23_22_31_345649/
+openwebtext2,pythia,condcrossent,Run_2026_01_20_23_25_36_078206,8125000,768,40690,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_20_23_25_36_078206/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_00_06_02_382367,16250000,768,20345,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_00_06_02_382367/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_00_28_40_453143,32500000,768,10173,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_00_28_40_453143/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_00_42_16_082400,65000000,768,5086,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_00_42_16_082400/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_00_50_35_356855,130000000,768,2543,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_00_50_35_356855/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_00_57_17_982740,260000000,768,1272,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_00_57_17_982740/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_01_03_20_759705,65000000,6144,159,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_01_03_20_759705/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_01_05_50_593957,65000000,1536,636,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_01_05_50_593957/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_01_08_23_600694,65000000,384,2543,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_01_08_23_600694/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_01_12_34_525183,65000000,96,10173,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_01_12_34_525183/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_01_27_05_495314,4062500,48,2,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_01_27_05_495314/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_01_27_43_353113,4062500,768,81380,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_01_27_43_353113/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_06_55_17_333339,4062500,768,20345,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_06_55_17_333339/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_08_17_54_600886,8125000,768,10173,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_08_17_54_600886/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_09_22_41_889679,16250000,768,5086,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_09_22_41_889679/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_10_10_54_765242,32500000,768,2543,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_10_10_54_765242/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_10_48_24_182524,65000000,768,1272,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_10_48_24_182524/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_11_17_14_926734,65000000,6144,159,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_11_17_14_926734/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_11_46_54_863780,65000000,1536,636,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_11_46_54_863780/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_12_16_17_761090,65000000,384,2543,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_12_16_17_761090/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_12_46_43_249787,65000000,96,10173,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_12_46_43_249787/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_13_18_03_191859,65000000,24,40690,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_13_18_03_191859/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_14_06_42_639552,16250000,12288,318,0.0,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_14_06_42_639552/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_02_51_075298,10000000,41,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_02_51_075298/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_17_19_423652,10000000,82,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_17_19_423652/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_26_32_142409,10000000,164,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_26_32_142409/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_31_40_444856,10000000,329,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_31_40_444856/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_34_50_804768,10000000,658,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_34_50_804768/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_37_35_328070,10000000,1316,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_37_35_328070/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_40_11_937150,10000000,164,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_40_11_937150/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_16_57_21_058161,10000000,329,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_16_57_21_058161/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_17_07_20_695281,10000000,658,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_17_07_20_695281/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_17_15_32_367778,10000000,1316,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_17_15_32_367778/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_17_23_11_244782,10000000,2633,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_17_23_11_244782/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_17_30_37_622169,10000000,5266,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_17_30_37_622169/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_17_37_51_996828,10000000,48,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_17_37_51_996828/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_17_56_36_951000,10000000,96,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_17_56_36_951000/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_05_50_235464,10000000,192,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_05_50_235464/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_11_01_049615,10000000,384,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_11_01_049615/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_14_22_968759,10000000,768,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_14_22_968759/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_17_24_494090,10000000,1536,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_17_24_494090/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_20_12_417817,10000000,144,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_20_12_417817/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_37_40_200546,10000000,288,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_37_40_200546/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_47_01_486667,10000000,576,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_47_01_486667/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_18_54_24_023516,10000000,1152,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_18_54_24_023516/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_01_14_056524,10000000,2304,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_01_14_056524/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_07_50_779221,10000000,4608,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_07_50_779221/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_14_18_921980,10000000,15,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_14_18_921980/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_32_48_508084,10000000,30,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_32_48_508084/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_42_50_710328,10000000,61,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_42_50_710328/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_48_06_751483,10000000,123,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_48_06_751483/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_51_08_737401,10000000,247,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_51_08_737401/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_19_53_14_334619,10000000,495,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_19_53_14_334619/
+opengenome2_local,striped_hyena,condcrossent,Run_2026_01_21_15_18_30_142142,50000000,768,31789,0.0001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_15_18_30_142142/
+lm1b,llama,condcrossent,Run_2026_01_22_05_07_39_241885,16000000,134,565,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_05_07_39_241885/
+lm1b,llama,condcrossent,Run_2026_01_22_05_27_21_561437,2000000,1934,18074,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_05_27_21_561437/
+lm1b,llama,condcrossent,Run_2026_01_22_05_49_20_683148,4000000,1434,12258,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_05_49_20_683148/
+lm1b,llama,condcrossent,Run_2026_01_22_05_59_46_369934,8000000,1119,8890,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_05_59_46_369934/
+lm1b,llama,condcrossent,Run_2026_01_22_06_13_12_652453,16000000,818,5918,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_13_12_652453/
+lm1b,llama,condcrossent,Run_2026_01_22_06_19_59_836698,32000000,620,4135,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_19_59_836698/
+lm1b,llama,condcrossent,Run_2026_01_22_06_25_30_082718,64000000,446,2699,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_25_30_082718/
+lm1b,llama,condcrossent,Run_2026_01_22_06_29_39_645189,128000000,338,1878,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_29_39_645189/
+lm1b,llama,condcrossent,Run_2026_01_22_06_33_10_398673,2000000,1056,8246,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_33_10_398673/
+lm1b,llama,condcrossent,Run_2026_01_22_06_39_26_195501,4000000,783,5594,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_39_26_195501/
+lm1b,llama,condcrossent,Run_2026_01_22_06_44_42_531018,8000000,611,4057,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_44_42_531018/
+lm1b,llama,condcrossent,Run_2026_01_22_06_49_14_437577,16000000,446,2705,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_49_14_437577/
+lm1b,llama,condcrossent,Run_2026_01_22_06_52_46_340318,32000000,338,1886,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_52_46_340318/
+lm1b,llama,condcrossent,Run_2026_01_22_06_55_46_052518,64000000,244,1232,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_55_46_052518/
+lm1b,llama,condcrossent,Run_2026_01_22_06_58_10_531347,128000000,184,860,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_06_58_10_531347/
+lm1b,llama,condcrossent,Run_2026_01_22_07_00_10_980198,256000000,134,564,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_00_10_980198/
+lm1b,llama,condcrossent,Run_2026_01_22_07_01_55_800123,1000000,848,6201,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_01_55_800123/
+lm1b,llama,condcrossent,Run_2026_01_22_07_06_53_130392,2000000,578,3772,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_06_53_130392/
+lm1b,llama,condcrossent,Run_2026_01_22_07_10_11_286796,4000000,428,2563,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_10_11_286796/
+lm1b,llama,condcrossent,Run_2026_01_22_07_12_57_015895,8000000,334,1856,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_12_57_015895/
+lm1b,llama,condcrossent,Run_2026_01_22_07_15_28_061959,16000000,244,1237,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_15_28_061959/
+lm1b,llama,condcrossent,Run_2026_01_22_07_17_34_628057,32000000,185,862,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_17_34_628057/
+lm1b,llama,condcrossent,Run_2026_01_22_07_19_23_988419,64000000,133,565,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_19_23_988419/
+lm1b,llama,condcrossent,Run_2026_01_22_07_20_57_930804,250000,865,6368,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_20_57_930804/
+lm1b,llama,condcrossent,Run_2026_01_22_07_24_58_307526,500000,610,4055,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_24_58_307526/
+lm1b,llama,condcrossent,Run_2026_01_22_07_27_54_533928,1000000,463,2838,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_27_54_533928/
+lm1b,llama,condcrossent,Run_2026_01_22_07_30_31_068284,2000000,316,1724,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_30_31_068284/
+lm1b,llama,condcrossent,Run_2026_01_22_07_32_22_001615,4000000,234,1171,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_32_22_001615/
+lm1b,llama,condcrossent,Run_2026_01_22_07_33_58_832318,8000000,183,847,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_33_58_832318/
+lm1b,llama,condcrossent,Run_2026_01_22_07_35_35_721442,10000000,48,40000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_07_35_35_721442/
+lm1b,llama,condcrossent,Run_2026_01_22_08_15_17_483357,10000000,96,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_08_15_17_483357/
+lm1b,llama,condcrossent,Run_2026_01_22_08_36_16_664644,10000000,192,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_08_36_16_664644/
+lm1b,llama,condcrossent,Run_2026_01_22_08_47_18_446584,10000000,384,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_08_47_18_446584/
+lm1b,llama,condcrossent,Run_2026_01_22_08_53_04_167656,10000000,768,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_08_53_04_167656/
+lm1b,llama,condcrossent,Run_2026_01_22_08_56_25_583186,10000000,1536,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_08_56_25_583186/
+lm1b,llama,condcrossent,Run_2026_01_22_08_58_31_552257,10000000,3072,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_08_58_31_552257/
+lm1b,llama,condcrossent,Run_2026_01_22_09_00_23_023347,10000000,6144,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_00_23_023347/
+lm1b,llama,condcrossent,Run_2026_01_22_09_02_12_649262,10000000,12288,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_02_12_649262/
+lm1b,llama,condcrossent,Run_2026_01_22_09_04_02_424025,10000000,24576,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_04_02_424025/
+lm1b,llama,condcrossent,Run_2026_01_22_09_05_49_467192,10000000,48,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_05_49_467192/
+lm1b,llama,condcrossent,Run_2026_01_22_09_16_29_127352,10000000,96,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_16_29_127352/
+lm1b,llama,condcrossent,Run_2026_01_22_09_22_21_168582,10000000,192,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_22_21_168582/
+lm1b,llama,condcrossent,Run_2026_01_22_09_25_48_362557,10000000,384,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_25_48_362557/
+lm1b,llama,condcrossent,Run_2026_01_22_09_27_54_411285,10000000,768,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_27_54_411285/
+lm1b,llama,condcrossent,Run_2026_01_22_09_29_20_002947,10000000,1536,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_29_20_002947/
+lm1b,llama,condcrossent,Run_2026_01_22_09_30_32_024758,10000000,3072,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_30_32_024758/
+lm1b,llama,condcrossent,Run_2026_01_22_09_31_37_759375,10000000,6144,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_31_37_759375/
+lm1b,llama,condcrossent,Run_2026_01_22_09_32_45_311341,10000000,12288,39,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_32_45_311341/
+lm1b,llama,condcrossent,Run_2026_01_22_09_33_50_788142,10000000,24,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_33_50_788142/
+lm1b,llama,condcrossent,Run_2026_01_22_09_39_37_164679,10000000,48,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_39_37_164679/
+lm1b,llama,condcrossent,Run_2026_01_22_09_42_52_662472,10000000,96,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_42_52_662472/
+lm1b,llama,condcrossent,Run_2026_01_22_09_44_57_163034,10000000,192,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_44_57_163034/
+lm1b,llama,condcrossent,Run_2026_01_22_09_46_25_662741,10000000,384,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_46_25_662741/
+lm1b,llama,condcrossent,Run_2026_01_22_09_47_30_766060,10000000,768,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_47_30_766060/
+lm1b,llama,condcrossent,Run_2026_01_22_09_48_23_635597,10000000,1536,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_48_23_635597/
+lm1b,llama,condcrossent,Run_2026_01_22_09_49_18_327028,10000000,3072,39,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_49_18_327028/
+lm1b,llama,condcrossent,Run_2026_01_22_09_50_11_770499,100000000,48,40000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_09_50_11_770499/
+lm1b,llama,condcrossent,Run_2026_01_22_10_35_46_580417,100000000,96,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_10_35_46_580417/
+lm1b,llama,condcrossent,Run_2026_01_22_10_59_42_004016,100000000,192,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_10_59_42_004016/
+lm1b,llama,condcrossent,Run_2026_01_22_11_12_53_809189,100000000,384,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_11_12_53_809189/
+lm1b,llama,condcrossent,Run_2026_01_22_11_20_14_303357,100000000,768,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_11_20_14_303357/
+lm1b,llama,condcrossent,Run_2026_01_22_11_26_03_942264,100000000,1536,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_11_26_03_942264/
+lm1b,llama,condcrossent,Run_2026_01_22_11_31_32_648094,100000000,3072,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_11_31_32_648094/
+lm1b,llama,condcrossent,Run_2026_01_22_11_36_50_362485,100000000,6144,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_11_36_50_362485/
+lm1b,llama,condcrossent,Run_2026_01_22_15_36_35_644075,100000000,48,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_15_36_35_644075/
+lm1b,llama,condcrossent,Run_2026_01_22_15_48_43_544352,100000000,96,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_15_48_43_544352/
+lm1b,llama,condcrossent,Run_2026_01_22_15_55_22_041214,100000000,192,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_15_55_22_041214/
+lm1b,llama,condcrossent,Run_2026_01_22_15_59_22_946890,100000000,384,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_15_59_22_946890/
+lm1b,llama,condcrossent,Run_2026_01_22_16_01_54_110848,100000000,768,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_01_54_110848/
+lm1b,llama,condcrossent,Run_2026_01_22_16_04_04_681603,100000000,1536,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_04_04_681603/
+lm1b,llama,condcrossent,Run_2026_01_22_16_06_09_826885,100000000,3072,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_06_09_826885/
+lm1b,llama,condcrossent,Run_2026_01_22_16_08_10_689549,100000000,6144,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_08_10_689549/
+lm1b,llama,condcrossent,Run_2026_01_22_16_10_09_736604,100000000,24,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_10_09_736604/
+lm1b,llama,condcrossent,Run_2026_01_22_16_16_51_050330,100000000,48,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_16_51_050330/
+lm1b,llama,condcrossent,Run_2026_01_22_16_20_39_887232,100000000,96,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_20_39_887232/
+lm1b,llama,condcrossent,Run_2026_01_22_16_23_03_082494,100000000,192,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_23_03_082494/
+lm1b,llama,condcrossent,Run_2026_01_22_16_24_38_436924,100000000,384,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_24_38_436924/
+lm1b,llama,condcrossent,Run_2026_01_22_16_25_55_751175,100000000,768,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_25_55_751175/
+lm1b,llama,condcrossent,Run_2026_01_22_16_27_04_220105,100000000,1536,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_27_04_220105/
+lm1b,llama,condcrossent,Run_2026_01_22_16_28_12_878183,100000000,3072,39,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_28_12_878183/
+lm1b,llama,condcrossent,Run_2026_01_22_16_29_20_599612,8000000,2046,19444,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_16_29_20_599612/
+lm1b,llama,condcrossent,Run_2026_01_22_17_07_14_906989,16000000,1495,12943,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_17_07_14_906989/
+lm1b,llama,condcrossent,Run_2026_01_22_17_55_37_600407,32000000,1133,9042,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_17_55_37_600407/
+openwebtext2,pythia,condcrossent,Run_2026_01_22_18_44_27_283337,3000000,4,200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_18_44_27_283337/
+openwebtext2,pythia,condcrossent,Run_2026_01_22_18_45_25_454230,3000000,40,200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_18_45_25_454230/
+lm1b,llama,condcrossent,Run_2026_01_22_18_37_27_653282,64000000,816,5903,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_18_37_27_653282/
+lm1b,llama,condcrossent,Run_2026_01_22_19_10_41_322854,128000000,617,4110,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_19_10_41_322854/
+lm1b,llama,condcrossent,Run_2026_01_22_19_39_55_680374,256000000,448,2713,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_19_39_55_680374/
+lm1b,llama,condcrossent,Run_2026_01_22_20_02_46_185302,16000000,2734,28318,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_20_02_46_185302/
+lm1b,llama,condcrossent,Run_2026_01_23_01_48_01_871656,32000000,2073,19776,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_01_48_01_871656/
+lm1b,llama,condcrossent,Run_2026_01_23_02_33_10_603214,64000000,1492,12918,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_02_33_10_603214/
+lm1b,llama,condcrossent,Run_2026_01_23_03_09_01_189505,128000000,1128,8993,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_03_09_01_189505/
+lm1b,llama,condcrossent,Run_2026_01_23_03_40_48_712749,256000000,819,5940,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_03_40_48_712749/
+lm1b,llama,condcrossent,Run_2026_01_23_04_06_03_839309,512000000,599,3952,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_04_06_03_839309/
+lm1b,llama,condcrossent,Run_2026_01_23_05_10_32_561445,10000000,384,80000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_05_10_32_561445/
+lm1b,llama,condcrossent,Run_2026_01_23_06_32_29_866869,10000000,768,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_06_32_29_866869/
+lm1b,llama,condcrossent,Run_2026_01_23_07_14_36_698018,10000000,1536,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_07_14_36_698018/
+lm1b,llama,condcrossent,Run_2026_01_23_07_36_32_776110,10000000,3072,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_07_36_32_776110/
+lm1b,llama,condcrossent,Run_2026_01_23_07_54_34_710391,10000000,6144,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_07_54_34_710391/
+lm1b,llama,condcrossent,Run_2026_01_23_08_11_44_541729,10000000,12288,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_08_11_44_541729/
+lm1b,llama,condcrossent,Run_2026_01_23_08_28_25_024808,10000000,24576,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_08_28_25_024808/
+lm1b,llama,condcrossent,Run_2026_01_23_08_44_57_866736,10000000,49152,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_08_44_57_866736/
+lm1b,llama,condcrossent,Run_2026_01_23_09_01_24_801940,10000000,98304,312,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_09_01_24_801940/
+lm1b,llama,condcrossent,Run_2026_01_23_09_17_44_860853,10000000,196608,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_09_17_44_860853/
+lm1b,llama,condcrossent,Run_2026_01_23_09_34_02_780218,10000000,768,160000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_09_34_02_780218/
+lm1b,llama,condcrossent,Run_2026_01_23_12_22_07_358294,10000000,1536,80000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_12_22_07_358294/
+lm1b,llama,condcrossent,Run_2026_01_23_13_46_34_340152,10000000,3072,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_13_46_34_340152/
+lm1b,llama,condcrossent,Run_2026_01_23_14_56_38_627904,10000000,6144,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_14_56_38_627904/
+lm1b,llama,condcrossent,Run_2026_01_23_19_00_07_967646,10000000,384,80000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_19_00_07_967646/
+lm1b,llama,condcrossent,Run_2026_01_23_20_21_45_957442,10000000,768,40000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_20_21_45_957442/
+lm1b,llama,condcrossent,Run_2026_01_23_21_04_03_975405,10000000,1536,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_21_04_03_975405/
+lm1b,llama,condcrossent,Run_2026_01_23_21_25_31_458969,10000000,3072,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_21_25_31_458969/
+lm1b,llama,condcrossent,Run_2026_01_23_21_43_30_602281,10000000,6144,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_21_43_30_602281/
+lm1b,llama,condcrossent,Run_2026_01_23_22_00_38_170004,10000000,12288,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_22_00_38_170004/
+lm1b,llama,condcrossent,Run_2026_01_23_22_17_21_403804,10000000,24576,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_22_17_21_403804/
+lm1b,llama,condcrossent,Run_2026_01_23_22_33_54_517085,10000000,768,160000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_23_22_33_54_517085/
+lm1b,llama,condcrossent,Run_2026_01_24_01_22_15_094578,10000000,1536,80000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_01_22_15_094578/
+lm1b,llama,condcrossent,Run_2026_01_24_02_46_13_361818,10000000,3072,40000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_02_46_13_361818/
+lm1b,llama,condcrossent,Run_2026_01_24_03_56_11_453560,10000000,6144,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_03_56_11_453560/
+lm1b,llama,condcrossent,Run_2026_01_24_05_02_15_678496,10000000,12288,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_05_02_15_678496/
+lm1b,llama,condcrossent,Run_2026_01_24_06_06_40_613240,10000000,24576,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_06_06_40_613240/
+lm1b,llama,condcrossent,Run_2026_01_24_07_10_26_639052,10000000,49152,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_07_10_26_639052/
+lm1b,llama,condcrossent,Run_2026_01_24_15_52_06_042628,10000000,98304,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_15_52_06_042628/
+lm1b,llama,condcrossent,Run_2026_01_24_16_55_12_936056,10000000,196608,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_16_55_12_936056/
+lm1b,llama,condcrossent,Run_2026_01_24_17_58_12_405385,10000000,393216,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_17_58_12_405385/
+lm1b,llama,condcrossent,Run_2026_01_24_19_00_58_562718,10000000,49152,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_19_00_58_562718/
+lm1b,llama,condcrossent,Run_2026_01_24_19_17_26_940914,10000000,98304,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_19_17_26_940914/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_20_27_14_557970,128000000,3072,800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_20_27_14_557970/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_20_34_00_074052,181019335,544,3200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_20_34_00_074052/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_20_41_30_157777,256000000,1536,800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_20_41_30_157777/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_20_48_11_402916,256000000,3072,400,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_20_48_11_402916/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_20_54_46_088706,512000000,768,800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_20_54_46_088706/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_01_03_776025,512000000,1536,400,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_01_03_776025/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_07_14_382302,512000000,3072,200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_07_14_382302/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_13_07_797702,2000000,1934,18074,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_13_07_797702/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_28_15_834913,4000000,1434,12258,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_28_15_834913/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_40_15_313755,8000000,1119,8890,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_40_15_313755/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_49_52_818363,16000000,818,5918,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_49_52_818363/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_21_57_12_280327,32000000,620,4135,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_21_57_12_280327/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_03_14_832770,64000000,446,2699,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_03_14_832770/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_07_41_029507,128000000,338,1878,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_07_41_029507/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_11_30_228181,2000000,1056,8246,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_11_30_228181/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_19_11_102935,4000000,783,5594,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_19_11_102935/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_25_06_998540,8000000,611,4057,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_25_06_998540/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_30_13_152110,16000000,446,2705,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_30_13_152110/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_34_13_879956,32000000,338,1886,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_34_13_879956/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_37_35_825375,64000000,244,1232,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_37_35_825375/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_40_22_728782,128000000,184,860,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_40_22_728782/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_42_42_151498,256000000,134,564,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_42_42_151498/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_44_47_762104,1000000,848,6201,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_44_47_762104/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_50_09_549313,2000000,578,3772,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_50_09_549313/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_54_17_829244,4000000,428,2563,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_54_17_829244/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_22_57_42_128149,8000000,334,1856,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_22_57_42_128149/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_00_37_319102,16000000,244,1237,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_00_37_319102/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_03_11_591318,32000000,185,862,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_03_11_591318/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_05_22_894824,64000000,133,565,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_05_22_894824/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_07_19_687509,250000,865,6368,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_07_19_687509/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_12_01_352400,500000,610,4055,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_12_01_352400/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_15_32_483158,1000000,463,2838,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_15_32_483158/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_18_41_866886,2000000,316,1724,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_18_41_866886/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_21_13_343488,4000000,234,1171,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_21_13_343488/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_23_25_026645,8000000,183,847,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_23_25_026645/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_25_27_817793,16000000,134,565,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_25_27_817793/
+openwebtext2,pythia,condcrossent,Run_2026_01_22_20_35_14_696962,3000000,4,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [100.0, 100.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_20_35_14_696962/
+openwebtext2,pythia,condcrossent,Run_2026_01_22_20_38_58_303938,3000000,400,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_22_20_38_58_303938/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_22_20_49_483186,3000000,4,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [10.0, 10.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_22_20_49_483186/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_22_22_37_830063,3000000,40,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_22_22_37_830063/
+openwebtext2,pythia,condcrossent,Run_2026_01_21_22_23_31_632734,3000000,4,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_21_22_23_31_632734/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_46_58_759734,2000000,6144,25600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_46_58_759734/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_00_32_30_111818,3000000,40000,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.01, 0.01]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_00_32_30_111818/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_00_33_40_557714,3000000,400,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.1, 0.1]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_00_33_40_557714/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_00_37_36_340633,3000000,1600,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.25, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_00_37_36_340633/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_00_38_39_674007,3000000,1600,200,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_00_38_39_674007/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_00_22_27_965545,4000000,6144,12800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_00_22_27_965545/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_00_46_54_272390,8000000,6144,6400,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_00_46_54_272390/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_04_17_092311,16000000,6144,3200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_04_17_092311/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_18_36_100298,32000000,6144,1600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_18_36_100298/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_37_05_282637,3000000,100,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [4.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_37_05_282637/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_40_40_535585,3000000,400,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_40_40_535585/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_42_22_390878,3000000,1600,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.25, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_42_22_390878/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_43_58_921619,3000000,1600,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_43_58_921619/
+openwebtext2,pythia,condcrossent,Run_2026_01_24_23_07_28_129901,8000000,96,409600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_24_23_07_28_129901/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_46_31_976443,3000000,4,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [10.0, 10.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_46_31_976443/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_53_24_017601,3000000,40,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_53_24_017601/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_55_15_073722,3000000,160,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.25, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_55_15_073722/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_57_04_291372,3000000,4,1000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_57_04_291372/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_58_56_862198,3000000,100,1000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_58_56_862198/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_00_56_329180,3000000,400,1000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_00_56_329180/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_02_52_136695,3000000,1600,1000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_02_52_136695/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_05_35_895646,3000000,4,1000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_05_35_895646/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_07_29_020639,3000000,40,1000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_07_29_020639/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_09_23_698116,3000000,160,1000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_09_23_698116/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_29_08_058417,1000000,12288,25600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_29_08_058417/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_15_33_435578,2000000,12288,12800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_15_33_435578/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_02_48_29_567660,4000000,12288,6400,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_02_48_29_567660/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_03_11_33_677246,8000000,12288,3200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_03_11_33_677246/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_03_28_13_945885,16000000,12288,1600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_03_28_13_945885/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_01_50_57_402170,16000000,48,409600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_01_50_57_402170/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_03_42_18_726647,500000,49152,12800,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_03_42_18_726647/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_04_49_58_617753,1000000,49152,6400,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_04_49_58_617753/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_05_33_36_777389,2000000,49152,3200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_05_33_36_777389/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_06_04_54_725478,4000000,49152,1600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_06_04_54_725478/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_04_40_51_217549,32000000,24,409600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_04_40_51_217549/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_06_26_59_503591,250000,49152,25600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_06_26_59_503591/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_07_43_33_315847,64000000,12,409600,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_07_43_33_315847/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_23_31_184953,3000000,100,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [4.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_23_31_184953/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_27_04_053051,3000000,400,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_27_04_053051/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_28_39_070158,3000000,1600,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.25, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_28_39_070158/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_30_18_992342,3000000,1600,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_30_18_992342/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_32_48_169438,3000000,4,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [10.0, 10.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_32_48_169438/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_39_36_823745,3000000,40,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_39_36_823745/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_41_22_023804,3000000,160,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.25, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_41_22_023804/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_13_43_07_766311,3000000,4,1000,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.01, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [1.0, 1.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_13_43_07_766311/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_11_17_24_337238,8000000,48,819200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_11_17_24_337238/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_17_20_27_176198,16000000,24,819200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_17_20_27_176198/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_01_58_49_719343,100000000,48,40000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_01_58_49_719343/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_02_48_29_460514,100000000,96,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_02_48_29_460514/
+openwebtext2,pythia,condcrossent,Run_2025_09_15_01_52_56_340741,10000000,247,1250,0.001,0.1,0.0,step,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",outputs/nn_archive/runs/Run_2025_09_15_01_52_56_340741/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_14_42_427506,100000000,192,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_14_42_427506/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_29_07_681283,100000000,384,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_29_07_681283/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_37_08_102124,100000000,768,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_37_08_102124/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_43_07_582013,100000000,1536,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_43_07_582013/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_31_39_708883,10000000,82,10000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [2.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_31_39_708883/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_48_40_024656,100000000,3072,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_48_40_024656/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_53_58_700989,100000000,6144,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_53_58_700989/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_59_13_767400,100000000,12288,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_59_13_767400/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_03_53_24_300699,10000000,164,5000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [2.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_03_53_24_300699/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_04_22_562003,100000000,24576,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_04_22_562003/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_04_41_540118,10000000,329,2500,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [2.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_04_41_540118/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_10_49_479379,10000000,658,1250,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [2.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_10_49_479379/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_15_54_433719,10000000,1316,625,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [2.0, 4.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_15_54_433719/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_09_31_039732,100000000,48,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_09_31_039732/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_23_05_767424,100000000,96,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_23_05_767424/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_30_33_538695,100000000,192,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_30_33_538695/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_35_10_962362,100000000,384,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_35_10_962362/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_38_13_599580,100000000,768,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_38_13_599580/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_20_38_453862,10000000,329,10000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.5, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_20_38_453862/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_40_41_683412,100000000,1536,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_40_41_683412/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_43_06_759817,100000000,3072,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_43_06_759817/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_45_25_674193,100000000,6144,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_45_25_674193/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_47_44_140217,100000000,12288,39,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_47_44_140217/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_42_05_097166,10000000,658,5000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.5, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_42_05_097166/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_50_02_125645,100000000,24,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_50_02_125645/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_53_04_275062,10000000,1316,2500,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.5, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_53_04_275062/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_57_24_035981,100000000,48,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_57_24_035981/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_04_59_02_573755,10000000,2633,1250,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.5, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_04_59_02_573755/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_01_47_077408,100000000,96,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_01_47_077408/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_04_44_005048,100000000,192,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_04_44_005048/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_06_52_540149,100000000,384,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_06_52_540149/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_04_11_641987,10000000,5266,625,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.333333, 0.666667], ""decay_amt"": [1.0, 1.0], ""B_decay_amt"": [0.5, 0.25]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_04_11_641987/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_08_37_872098,100000000,768,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_08_37_872098/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_10_18_254404,100000000,1536,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_10_18_254404/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_11_52_889470,100000000,3072,39,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_11_52_889470/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_08_56_285696,10000000,96,10000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [3.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_08_56_285696/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_27_32_288110,10000000,192,5000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [3.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_27_32_288110/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_37_07_867222,10000000,384,2500,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [3.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_37_07_867222/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_42_54_920301,10000000,768,1250,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [3.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_42_54_920301/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_47_53_846871,10000000,1536,625,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [3.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_47_53_846871/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_05_52_32_682076,10000000,288,10000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [0.33333]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_05_52_32_682076/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_06_11_03_617084,10000000,576,5000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [0.33333]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_06_11_03_617084/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_06_20_50_164870,10000000,1152,2500,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [0.33333]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_06_20_50_164870/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_06_26_31_101677,10000000,2304,1250,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [0.33333]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_06_26_31_101677/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_06_31_30_778040,10000000,4608,625,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.5], ""decay_amt"": [1.0], ""B_decay_amt"": [0.33333]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_06_31_30_778040/
+openwebtext2,pythia,condcrossent,Run_2026_01_25_23_50_11_878130,32000000,12,819200,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_25_23_50_11_878130/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_06_36_17_254037,10000000,30,10000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_06_36_17_254037/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_07_27_52_458821,10000000,61,5000,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_07_27_52_458821/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_07_54_11_171018,10000000,123,2500,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_07_54_11_171018/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_08_07_19_726021,10000000,247,1250,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_08_07_19_726021/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_08_13_43_723782,10000000,495,625,0.001,0.1,0.0,cosine,adamw,"{""decay_at"": [0.2, 0.4, 0.6, 0.8], ""decay_amt"": [1.0, 1.0, 1.0, 1.0], ""B_decay_amt"": [2.0, 4.0, 8.0, 16.0]}",/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_08_13_43_723782/
+openwebtext2,pythia,condcrossent,Run_2026_01_26_16_34_05_076694,10000000,96,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_26_16_34_05_076694/
+lm1b,llama,condcrossent,Run_2026_01_27_18_16_10_313467,16000000,2734,28318,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_18_16_10_313467/
+lm1b,llama,condcrossent,Run_2026_01_27_19_24_04_154783,10000000,1536,5000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_24_04_154783/
+lm1b,llama,condcrossent,Run_2026_01_27_19_30_08_433453,10000000,3072,2500,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_30_08_433453/
+lm1b,llama,condcrossent,Run_2026_01_27_19_35_12_786166,10000000,6144,1250,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_35_12_786166/
+lm1b,llama,condcrossent,Run_2026_01_27_19_40_07_854814,10000000,12288,625,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_40_07_854814/
+lm1b,llama,condcrossent,Run_2026_01_27_19_44_57_074059,10000000,24576,313,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_44_57_074059/
+lm1b,llama,condcrossent,Run_2026_01_27_19_49_40_199990,10000000,49152,156,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_49_40_199990/
+lm1b,llama,condcrossent,Run_2026_01_27_19_54_27_944854,10000000,98304,78,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_54_27_944854/
+lm1b,llama,condcrossent,Run_2026_01_27_19_31_23_492986,10000000,192,40000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_31_23_492986/
+lm1b,llama,condcrossent,Run_2026_01_27_19_59_20_466940,10000000,384,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_19_59_20_466940/
+lm1b,llama,condcrossent,Run_2026_01_27_20_09_00_052732,10000000,384,20000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_20_09_00_052732/
+lm1b,llama,condcrossent,Run_2026_01_27_20_20_05_385889,10000000,768,10000,0.001,0.1,0.0,constant,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_20_20_05_385889/
+lm1b,llama,condcrossent,Run_2026_01_27_20_38_23_170462,32000000,2073,19776,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_20_38_23_170462/
+lm1b,llama,condcrossent,Run_2026_01_27_21_23_42_388163,64000000,1492,12918,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_21_23_42_388163/
+lm1b,llama,condcrossent,Run_2026_01_27_21_59_35_159275,128000000,1128,8993,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_21_59_35_159275/
+lm1b,llama,condcrossent,Run_2026_01_27_22_39_21_475507,2000000,1056,8246,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_39_21_475507/
+lm1b,llama,condcrossent,Run_2026_01_27_22_46_49_294996,10000000,48,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_46_49_294996/
+lm1b,llama,condcrossent,Run_2026_01_27_22_46_43_278106,4000000,783,5594,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_46_43_278106/
+lm1b,llama,condcrossent,Run_2026_01_27_22_50_39_271674,10000000,96,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_50_39_271674/
+lm1b,llama,condcrossent,Run_2026_01_27_22_52_48_650159,10000000,192,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_52_48_650159/
+lm1b,llama,condcrossent,Run_2026_01_27_22_54_37_915169,10000000,384,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_54_37_915169/
+lm1b,llama,condcrossent,Run_2026_01_27_22_31_17_936818,256000000,819,5940,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_31_17_936818/
+lm1b,llama,condcrossent,Run_2026_01_27_22_56_20_408051,10000000,768,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_56_20_408051/
+lm1b,llama,condcrossent,Run_2026_01_27_22_52_47_650018,8000000,611,4057,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_52_47_650018/
+lm1b,llama,condcrossent,Run_2026_01_27_22_57_57_891955,10000000,1536,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_57_57_891955/
+lm1b,llama,condcrossent,Run_2026_01_27_22_59_36_393284,10000000,3072,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_59_36_393284/
+lm1b,llama,condcrossent,Run_2026_01_27_22_58_13_707772,16000000,446,2705,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_58_13_707772/
+lm1b,llama,condcrossent,Run_2026_01_27_23_01_09_513815,10000000,6144,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_01_09_513815/
+lm1b,llama,condcrossent,Run_2026_01_27_23_02_40_274863,10000000,12288,39,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_02_40_274863/
+lm1b,llama,condcrossent,Run_2026_01_27_23_04_11_231461,10000000,24,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_04_11_231461/
+lm1b,llama,condcrossent,Run_2026_01_27_23_02_29_883730,32000000,338,1886,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_02_29_883730/
+lm1b,llama,condcrossent,Run_2026_01_27_23_06_05_027358,64000000,244,1232,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_06_05_027358/
+lm1b,llama,condcrossent,Run_2026_01_27_23_09_05_621513,128000000,184,860,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_09_05_621513/
+lm1b,llama,condcrossent,Run_2026_01_27_23_11_46_399240,256000000,134,564,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_11_46_399240/
+lm1b,llama,condcrossent,Run_2026_01_27_22_56_31_699954,512000000,599,3952,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_22_56_31_699954/
+lm1b,llama,condcrossent,Run_2026_01_27_23_14_04_676848,1000000,848,6201,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_14_04_676848/
+lm1b,llama,condcrossent,Run_2026_01_27_23_18_11_719667,2000000,578,3772,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_18_11_719667/
+lm1b,llama,condcrossent,Run_2026_01_27_23_20_49_936782,4000000,428,2563,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_20_49_936782/
+lm1b,llama,condcrossent,Run_2026_01_27_23_23_15_955647,8000000,334,1856,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_23_15_955647/
+lm1b,llama,condcrossent,Run_2026_01_27_23_25_17_958887,16000000,244,1237,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_25_17_958887/
+lm1b,llama,condcrossent,Run_2026_01_27_23_27_04_590750,32000000,185,862,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_27_04_590750/
+lm1b,llama,condcrossent,Run_2026_01_27_23_28_39_335370,64000000,133,565,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_28_39_335370/
+lm1b,llama,condcrossent,Run_2026_01_27_23_29_58_222041,250000,865,6368,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_29_58_222041/
+lm1b,llama,condcrossent,Run_2026_01_27_23_33_08_550992,500000,610,4055,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_33_08_550992/
+lm1b,llama,condcrossent,Run_2026_01_27_23_35_15_641936,1000000,463,2838,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_35_15_641936/
+lm1b,llama,condcrossent,Run_2026_01_27_23_37_05_257718,2000000,316,1724,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_37_05_257718/
+lm1b,llama,condcrossent,Run_2026_01_27_23_17_53_258908,8000000,2046,19444,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_17_53_258908/
+lm1b,llama,condcrossent,Run_2026_01_27_23_38_37_326089,4000000,234,1171,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_38_37_326089/
+lm1b,llama,condcrossent,Run_2026_01_27_23_40_00_217957,8000000,183,847,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_40_00_217957/
+lm1b,llama,condcrossent,Run_2026_01_27_23_41_23_334761,16000000,134,565,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_41_23_334761/
+lm1b,llama,condcrossent,Run_2026_01_27_23_44_42_895468,10000000,48,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_44_42_895468/
+lm1b,llama,condcrossent,Run_2026_01_27_23_45_51_788278,10000000,96,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_45_51_788278/
+lm1b,llama,condcrossent,Run_2026_01_27_23_46_45_735153,10000000,192,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_46_45_735153/
+lm1b,llama,condcrossent,Run_2026_01_27_23_47_33_576071,10000000,384,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_47_33_576071/
+lm1b,llama,condcrossent,Run_2026_01_27_23_48_20_356286,10000000,768,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_48_20_356286/
+lm1b,llama,condcrossent,Run_2026_01_27_23_49_10_740620,10000000,1536,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_49_10_740620/
+lm1b,llama,condcrossent,Run_2026_01_27_23_49_57_197002,10000000,3072,39,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_49_57_197002/
+lm1b,llama,condcrossent,Run_2026_01_27_23_39_25_823131,16000000,1495,12943,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_39_25_823131/
+lm1b,llama,condcrossent,Run_2026_01_27_23_50_41_834606,100000000,48,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_50_41_834606/
+lm1b,llama,condcrossent,Run_2026_01_27_23_42_34_866260,10000000,96,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_42_34_866260/
+lm1b,llama,condcrossent,Run_2026_01_27_23_57_11_801600,100000000,96,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_57_11_801600/
+lm1b,llama,condcrossent,Run_2026_01_28_00_02_54_509419,100000000,192,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_02_54_509419/
+lm1b,llama,condcrossent,Run_2026_01_27_23_54_58_789715,32000000,1133,9042,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_27_23_54_58_789715/
+lm1b,llama,condcrossent,Run_2026_01_28_00_01_52_675956,10000000,192,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_01_52_675956/
+lm1b,llama,condcrossent,Run_2026_01_28_00_08_10_335665,100000000,384,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_08_10_335665/
+lm1b,llama,condcrossent,Run_2026_01_28_00_11_47_278046,10000000,384,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_11_47_278046/
+lm1b,llama,condcrossent,Run_2026_01_28_00_13_11_683715,100000000,768,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_13_11_683715/
+lm1b,llama,condcrossent,Run_2026_01_28_00_08_32_628171,64000000,816,5903,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_08_32_628171/
+lm1b,llama,condcrossent,Run_2026_01_28_00_17_23_764242,10000000,768,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_17_23_764242/
+lm1b,llama,condcrossent,Run_2026_01_28_00_18_00_341921,100000000,1536,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_18_00_341921/
+lm1b,llama,condcrossent,Run_2026_01_28_00_22_17_707626,10000000,1536,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_22_17_707626/
+lm1b,llama,condcrossent,Run_2026_01_28_00_22_47_296070,100000000,3072,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_22_47_296070/
+lm1b,llama,condcrossent,Run_2026_01_28_00_19_01_086199,128000000,617,4110,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_19_01_086199/
+lm1b,llama,condcrossent,Run_2026_01_28_00_27_02_142271,10000000,3072,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_27_02_142271/
+lm1b,llama,condcrossent,Run_2026_01_28_00_27_34_243064,100000000,6144,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_27_34_243064/
+lm1b,llama,condcrossent,Run_2026_01_28_00_32_19_881709,100000000,24,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_32_19_881709/
+lm1b,llama,condcrossent,Run_2026_01_28_00_28_10_634828,256000000,448,2713,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_28_10_634828/
+lm1b,llama,condcrossent,Run_2026_01_28_00_31_39_932886,10000000,6144,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_31_39_932886/
+lm1b,llama,condcrossent,Run_2026_01_28_00_35_18_123114,100000000,48,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_35_18_123114/
+lm1b,llama,condcrossent,Run_2026_01_28_00_37_24_242260,100000000,96,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_37_24_242260/
+lm1b,llama,condcrossent,Run_2026_01_28_00_36_18_259047,10000000,12288,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_36_18_259047/
+lm1b,llama,condcrossent,Run_2026_01_28_00_39_17_603342,100000000,192,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_39_17_603342/
+lm1b,llama,condcrossent,Run_2026_01_28_00_41_03_503827,100000000,384,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_41_03_503827/
+lm1b,llama,condcrossent,Run_2026_01_28_00_42_43_291630,100000000,768,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_42_43_291630/
+lm1b,llama,condcrossent,Run_2026_01_28_00_41_03_044469,10000000,24576,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_41_03_044469/
+lm1b,llama,condcrossent,Run_2026_01_28_00_44_23_676500,100000000,1536,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_44_23_676500/
+lm1b,llama,condcrossent,Run_2026_01_28_00_45_39_820179,100000000,1536,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_45_39_820179/
+lm1b,llama,condcrossent,Run_2026_01_28_00_46_01_196314,100000000,3072,39,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_46_01_196314/
+lm1b,llama,condcrossent,Run_2026_01_28_00_46_31_957596,100000000,3072,39,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_46_31_957596/
+lm1b,llama,condcrossent,Run_2026_01_28_00_35_51_330495,2000000,1934,18074,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_35_51_330495/
+lm1b,llama,condcrossent,Run_2026_01_28_00_48_59_540505,4000000,1434,12258,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_48_59_540505/
+lm1b,llama,condcrossent,Run_2026_01_28_00_59_49_834720,8000000,1119,8890,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_00_59_49_834720/
+lm1b,llama,condcrossent,Run_2026_01_28_01_08_38_282959,16000000,818,5918,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_08_38_282959/
+lm1b,llama,condcrossent,Run_2026_01_28_01_15_34_270354,32000000,620,4135,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_15_34_270354/
+lm1b,llama,condcrossent,Run_2026_01_28_01_03_28_365041,10000000,192,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_03_28_365041/
+lm1b,llama,condcrossent,Run_2026_01_28_01_21_13_438771,64000000,446,2699,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_21_13_438771/
+lm1b,llama,condcrossent,Run_2026_01_28_01_25_22_154704,128000000,338,1878,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_25_22_154704/
+lm1b,llama,condcrossent,Run_2026_01_28_01_02_52_513305,100000000,96,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_02_52_513305/
+lm1b,llama,condcrossent,Run_2026_01_28_01_24_43_390968,10000000,384,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_24_43_390968/
+lm1b,llama,condcrossent,Run_2026_01_28_01_29_06_737288,100000000,192,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_29_06_737288/
+lm1b,llama,condcrossent,Run_2026_01_28_01_44_00_800404,10000000,1536,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_44_00_800404/
+lm1b,llama,condcrossent,Run_2026_01_28_01_48_29_586211,100000000,384,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_48_29_586211/
+lm1b,llama,condcrossent,Run_2026_01_28_02_00_39_106151,10000000,3072,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_00_39_106151/
+lm1b,llama,condcrossent,Run_2026_01_28_02_07_02_807929,100000000,768,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_07_02_807929/
+lm1b,llama,condcrossent,Run_2026_01_28_02_17_02_836253,10000000,6144,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_17_02_836253/
+lm1b,llama,condcrossent,Run_2026_01_28_01_28_59_916025,10000000,12288,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_01_28_59_916025/
+lm1b,llama,condcrossent,Run_2026_01_28_02_24_47_061437,100000000,1536,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_24_47_061437/
+lm1b,llama,condcrossent,Run_2026_01_28_02_33_10_299174,10000000,12288,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_33_10_299174/
+lm1b,llama,condcrossent,Run_2026_01_28_02_42_33_971956,100000000,3072,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_42_33_971956/
+lm1b,llama,condcrossent,Run_2026_01_28_02_49_18_754913,10000000,24576,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_49_18_754913/
+lm1b,llama,condcrossent,Run_2026_01_28_03_00_07_279673,100000000,6144,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_00_07_279673/
+lm1b,llama,condcrossent,Run_2026_01_28_03_05_23_303476,10000000,49152,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_05_23_303476/
+lm1b,llama,condcrossent,Run_2026_01_28_03_17_34_736924,10000000,49152,156,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_17_34_736924/
+lm1b,llama,condcrossent,Run_2026_01_28_03_21_21_717036,10000000,98304,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_21_21_717036/
+lm1b,llama,condcrossent,Run_2026_01_28_02_33_19_726571,10000000,24576,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_02_33_19_726571/
+lm1b,llama,condcrossent,Run_2026_01_28_03_33_49_901676,10000000,98304,78,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_33_49_901676/
+lm1b,llama,condcrossent,Run_2026_01_28_03_37_22_175597,10000000,768,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_37_22_175597/
+lm1b,llama,condcrossent,Run_2026_01_28_03_37_23_405168,10000000,49152,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_03_37_23_405168/
+lm1b,llama,condcrossent,Run_2026_01_28_04_41_20_431273,10000000,98304,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_04_41_20_431273/
+lm1b,llama,condcrossent,Run_2026_01_28_05_44_30_093954,10000000,196608,625,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_05_44_30_093954/
+lm1b,llama,condcrossent,Run_2026_01_28_06_47_35_759905,10000000,393216,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_06_47_35_759905/
+lm1b,llama,condcrossent,Run_2026_01_28_07_50_27_030633,10000000,98304,313,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_07_50_27_030633/
+lm1b,llama,condcrossent,Run_2026_01_28_13_56_26_676904,32000000,3793,43278,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_13_56_26_676904/
+lm1b,llama,condcrossent,Run_2026_01_28_16_46_17_049176,64000000,2730,28263,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_16_46_17_049176/
+lm1b,llama,condcrossent,Run_2026_01_28_19_01_43_108274,128000000,2065,19674,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_19_01_43_108274/
+lm1b,llama,condcrossent,Run_2026_01_28_21_01_40_998849,256000000,1499,12992,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_21_01_40_998849/
+lm1b,llama,condcrossent,Run_2026_01_28_22_37_03_949312,512000000,1095,8654,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_22_37_03_949312/
+lm1b,llama,condcrossent,Run_2026_01_28_23_55_09_585478,10000000,24576,20000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_28_23_55_09_585478/
+lm1b,llama,condcrossent,Run_2026_01_29_04_08_13_911398,10000000,49152,10000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_29_04_08_13_911398/
+lm1b,llama,condcrossent,Run_2026_01_29_08_19_52_551054,10000000,98304,5000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_29_08_19_52_551054/
+lm1b,llama,condcrossent,Run_2026_01_29_12_30_38_912766,10000000,196608,2500,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_29_12_30_38_912766/
+lm1b,llama,condcrossent,Run_2026_01_29_16_40_37_906667,10000000,393216,1250,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_29_16_40_37_906667/
+lm1b,llama,condcrossent,Run_2026_01_29_20_49_03_678335,10000000,12288,40000,0.001,0.1,0.0,cosine,adamw,na,/mfs1/u/chuning/scale/outputs/nn_archive/runs/Run_2026_01_29_20_49_03_678335/

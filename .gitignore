@@ -1,3 +1,11 @@
 outputs/
 datasets/
+exploration/hessian_*
+exploration/tinystories_*
+exploration/outputs
+exploration/inputs
+exploration/.cache
+exploration/checkpoints
+exploration/tuning_results
 *.png
+*.pdf

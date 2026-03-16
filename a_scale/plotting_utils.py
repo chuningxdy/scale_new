@@ -127,12 +127,12 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
     nn_critical_values = []
 
     for C in unique_C_values:
-        if not first_C:
-            z_old = z.copy()
-            p_old = np.poly1d(p.coeffs)
-            x_at_min_old = x_at_min.copy()
-            y_at_min_old = y_at_min.copy()
-            print(y_at_min_old)
+        #if not first_C:
+        #    z_old = z.copy()
+        #    p_old = np.poly1d(p.coeffs)
+         #   x_at_min_old = x_at_min.copy()
+         #   y_at_min_old = y_at_min.copy()
+         #   print(y_at_min_old)
         #raise ValueError("df shape: ", df.shape)
         # print all unique C values in df
         #print("Unique C values in df: ", df['C'].unique())
@@ -175,14 +175,14 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
         # fit a quadratic curve to the data for NN_loss, use x-axis on the log scale
         df_model['log_x_axis'] = np.log10(df_model[x_axis_name])
 
-        z = np.polyfit(df_model['log_x_axis'], df_model['NN_loss'], 2)
-        p = np.poly1d(z)
-        x_fit = np.linspace(df_model['log_x_axis'].min(), df_model['log_x_axis'].max(), 100)
-        y_fit = p(x_fit)
-        if first_C:
-            label_parab = 'NN Loss Parabolic Fit (C = {:.2f})'.format(C)
-        else:
-            label_parab = None
+        #z = np.polyfit(df_model['log_x_axis'], df_model['NN_loss'], 2)
+        #p = np.poly1d(z)
+        #x_fit = np.linspace(df_model['log_x_axis'].min(), df_model['log_x_axis'].max(), 100)
+        #y_fit = p(x_fit)
+        #if first_C:
+        #    label_parab = 'NN Loss Parabolic Fit (C = {:.2f})'.format(C)
+        #else:
+         #   label_parab = None
         #ax.plot(10**x_fit, y_fit,
         #        color=color_map[C],
         #        linestyle=line_style_dict['nn'],
@@ -190,22 +190,22 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
         #        alpha=alpha_dict['nn'],
         #        label=label_parab)
         # find the minimum of the Parabola, and mark it with a vertical line
-        x_at_min = -z[1] / (2 * z[0])
+        #x_at_min = -z[1] / (2 * z[0])
         # make sure the min_x is within the range of x_fit
-        if x_at_min < x_fit.min():
-            x_at_min = x_fit.min()
-        if x_at_min > x_fit.max():
-            x_at_min = x_fit.max()
-        x_at_min = 10**x_at_min
-        y_at_min = p(np.log10(x_at_min))
-        print(y_at_min)
-        line_label = None
-        if first_C:
-            line_label = 'NN Loss Minima (C = {:.2f})'.format(C)
-        if True:
-            ax.axvline(x=x_at_min, color=color_map[C], linestyle=':', 
-                    linewidth=3, alpha=0.7,
-                        label=line_label)
+        #if x_at_min < x_fit.min():
+        #    x_at_min = x_fit.min()
+        #if x_at_min > x_fit.max():
+        #    x_at_min = x_fit.max()
+        #x_at_min = 10**x_at_min
+        #y_at_min = p(np.log10(x_at_min))
+        #print(y_at_min)
+        #line_label = None
+        #if first_C:
+         #   line_label = 'NN Loss Minima (C = {:.2f})'.format(C)
+        #if True:
+        #    ax.axvline(x=x_at_min, color=color_map[C], linestyle=':', 
+        #            linewidth=3, alpha=0.7,
+        #                label=line_label)
 
         if x_axis_name == 'B' and not first_C:
             # add critical batch size (in addition to optimal bs)
@@ -214,19 +214,19 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
             # i.e. solve for x where p(x) = y_at_min_old
             # use the quadratic formula
             # p(x) = z[0] * x^2 + z[1] * x + z[2] = y_at_min_old
-            x_at_old_ymin = (-z[1] + np.sqrt(z[1]**2 - 4 * z[0] * (z[2] - y_at_min_old))) / (2 * z[0])
-            print("calced_ymin_old: ", p(x_at_old_ymin))
-            old_y_at_min_old = p_old(x_at_old_ymin)
-            x_at_old_ymin = 10**x_at_old_ymin
+           # x_at_old_ymin = (-z[1] + np.sqrt(z[1]**2 - 4 * z[0] * (z[2] - y_at_min_old))) / (2 * z[0])
+           # print("calced_ymin_old: ", p(x_at_old_ymin))
+            #old_y_at_min_old = p_old(x_at_old_ymin)
+           # x_at_old_ymin = 10**x_at_old_ymin
             # pick the larger of the two solutions
             # place vertical line at x_at_old_ymin, label it as "Critical Batch Size (C = old C)"
-            label = None
+           # label = None
             if second_C:
                 label = 'Critical Batch Size (C = {:.2f})'.format(C_old)
-            if False:
-                ax.axvline(x=x_at_old_ymin, color=color_map[C_old], linestyle='--',
-                        linewidth=3, alpha=0.7,
-                        label=label)
+           # if False:
+           #     ax.axvline(x=x_at_old_ymin, color=color_map[C_old], linestyle='--',
+           #             linewidth=3, alpha=0.7,
+           #             label=label)
             # add a star for the critical batch size, at (x_at_old_ymin, y_at_min_old)
             label = None
             if second_C:
@@ -237,15 +237,15 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
             #            marker=star_style_dict['nn'],
             #            s=star_size['nn'],
              #           label=label)
-            if False:
-                ax.scatter(x_at_old_ymin, old_y_at_min_old,
-                            color=color_map[C_old],
-                            edgecolor='black',
-                            marker=star_style_dict['nn'],
-                            s=star_size['nn'],
-                            label=label)
+           # if False:
+           #     ax.scatter(x_at_old_ymin, old_y_at_min_old,
+           #                 color=color_map[C_old],
+           #                 edgecolor='black',
+            #                marker=star_style_dict['nn'],
+            #                s=star_size['nn'],
+            #                label=label)
             # add this tuple to the critical_batch_size_list
-            critical_batch_size_list.append((C_old, x_at_old_ymin, y_at_min_old))
+           # critical_batch_size_list.append((C_old, x_at_old_ymin, y_at_min_old))
             
             
         for model in models_to_plot:
@@ -293,13 +293,13 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
             if first_C:
                 model_min_loss_label = '{} Loss Minima (C = {:.2f})'.format(model.upper(), C)
             print("min_model_loss: ", min_model_loss)
-            if False:
-                ax.scatter(min_model_loss_x, min_model_loss,
-                            color=color_map[C],
-                            edgecolor='black',
-                            marker=star_style_dict[model],
-                            s=star_size[model],
-                            label=model_min_loss_label)
+           # if False:
+           #     ax.scatter(min_model_loss_x, min_model_loss,
+            #                color=color_map[C],
+            #                edgecolor='black',
+            #                marker=star_style_dict[model],
+             #               s=star_size[model],
+             #               label=model_min_loss_label)
         
         if first_C:
             second_C = True
@@ -324,7 +324,8 @@ def IsoX_plot(df_in, x_axis_name, seq_len = 128, models_to_plot = ['nqs'], outpu
     ax.set_ylabel('Loss', fontsize=14)
 
     # set y lim 2.5 to 8 (0.8-1.6)
-    ax.set_ylim([1.2, 1.4])
+    #ax.set_ylim([1.2, 1.4])
+    ax.set_ylim([2.5, 8])
 
     if False:
         # set ylim for max to be 3-6

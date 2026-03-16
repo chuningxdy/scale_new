@@ -672,14 +672,16 @@ class CustomTrainer(Trainer):
                 if self.lr_scheduler_type == "constant":
                     self.lr_scheduler = get_constant_schedule(self.optimizer)
                 # CHANGE: Added cosine schedule with warmup support
-                elif self.lr_scheduler_type == "cosine":
-                    # Cosine schedule with warmup (1% of training steps for warmup)
-                    self.lr_scheduler = get_cosine_schedule_with_warmup(
-                        self.optimizer,
-                        num_warmup_steps=int(num_training_steps * 0.01),
-                        num_training_steps=num_training_steps
-                    )
-                elif self.lr_scheduler_type == "step":
+             #   elif self.lr_scheduler_type == "cosine":
+             #       # Cosine schedule with warmup (1% of training steps for warmup)
+             #       self.lr_scheduler = get_cosine_schedule_with_warmup(
+             #           self.optimizer,
+             #           num_warmup_steps=int(num_training_steps * 0.01),
+              #          num_training_steps=num_training_steps
+              #      )
+                #elif self.lr_scheduler_type == "step":
+                elif self.lr_scheduler_type in ["step", "cosine"]:
+                    #raise ValueError("here")
                     if self.step_decay_schedule_dict is None:
                         raise ValueError("step_decay_schedule_dict must be provided for step decay schedule")
 

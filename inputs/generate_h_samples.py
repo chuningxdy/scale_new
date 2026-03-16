@@ -17,12 +17,12 @@ if os.path.exists(out_file):
     df_existing = pd.read_csv(out_file)
 
     #40
-    out_path = "/mfs1/u/chuning/scale_new/outputs/runs/LRA_investigation/2026-01-06-22-01_openwebtext2_pythia_adam_cosine/6_critical_batch_size/h_samples_with_nn_loss.csv"
+    out_path = "/mfs1/u/chuning/scale_new/outputs/runs/Paper/2026-01-24-20-39_openwebtext2_pythia_adam_cosine_heldoutNBK/6_critical_batch_size/h_samples_with_nn_loss.csv"
+    #"/mfs1/u/chuning/scale_new/outputs/runs/Genome/2026-01-19-04-43_openwebtext2_pythia_adam_cosine/6_critical_batch_size/h_samples_with_nn_loss.csv"
     #2026-01-05-19-55_openwebtext2_pythia_adam_cosine/6_critical_batch_size/h_samples_with_nn_loss.csv"
     #"/mfs1/u/chuning/scale_new/outputs/runs/LRA_investigation/2026-01-02-17-18_openwebtext2_pythia_adam_cosine/4_loss_estimation/eval_df.csv" # LRA old
     #SN:"/mfs1/u/chuning/scale_new/outputs/runs/LRA_investigation/2026-01-01-19-49_openwebtext2_pythia_adam_cosine/4_loss_estimation/eval_df.csv"
-    out_path2 = "/mfs1/u/chuning/scale_new/outputs/runs/LRA_investigation/2026-01-14-19-36_openwebtext2_pythia_adam_cosine/6_critical_batch_size/h_samples_with_nn_loss.csv"
-
+    out_path2 = "/mfs1/u/chuning/scale_new/outputs/runs/Paper/2026-01-24-20-39_openwebtext2_pythia_adam_cosine_heldoutNBK/6_critical_batch_size/h_samples_with_nn_loss.csv"
     # left join with existing file to see if any rows match
     df_out = pd.read_csv(out_path)
     df_out2 = pd.read_csv(out_path2)

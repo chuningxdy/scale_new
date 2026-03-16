@@ -1,0 +1,1347 @@
+44a45,91
+> # NEW: SSM configurations based on the table in configurations.png
+> SSM_configs = pd.DataFrame({
+>     'model': [
+>         '1', '6', '17', '29', '40', '59', '69', '84', '99', '114', '121', '135' ,
+>         '158', '175', '203', '232', '266', '303', '383', '473', '572', '680',
+>         '798', '926', '1063', '1209'
+>     ],
+>     'd_model': [
+>         128, 320, 448, 512, 576, 640, 640, 704, 768, 768, 768, 768,
+>         832, 832, 896, 896, 960, 1024, 1152, 1280, 1408, 1536,
+>         1664, 1792, 1920, 1920
+>     ],
+>     'glu_size': [
+>         336, 848, 1200, 1360, 1536, 1696, 1712, 1872, 2048, 2048, 2048, 2048,
+>         2224, 2224, 2384, 2384, 2560, 2736, 3072, 3408, 3760, 4096,
+>         4432, 4784, 5120, 5120
+>     ],
+>     'kv_size': [
+>         64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,
+>         64, 64, 64, 64, 64, 64, 64, 64, 128, 128,
+>         128, 128, 128, 128
+>     ],
+>     'n_heads': [
+>         2, 5, 7, 8, 8, 10, 10, 11, 12, 12, 12, 12,
+>         13, 13, 14, 14, 15, 16, 18, 20, 11, 12,
+>         13, 14, 15, 15
+>     ],
+>     'n_layer': [
+>         4, 5, 7, 9, 10, 12, 14, 14, 14, 16, 17, 19,
+>         19, 21, 21, 24, 24, 24, 24, 24, 24, 24,
+>         24, 24, 24, 25
+>     ],
+>     'learning_rate': [
+>         9.77e-4, 9.57e-4, 9.36e-4, 9.15e-4, 8.95e-4, 8.70e-4, 8.56e-4,
+>         8.37e-4, 8.18e-4, 8.00e-4, 7.75e-4, 7.50e-4,
+>         7.25e-4, 7.00e-4, 6.75e-4, 6.50e-4, 6.25e-4,
+>         6.00e-4, 5.66e-4, 5.33e-4, 5.00e-4, 4.75e-4,
+>         4.55e-4, 4.33e-4, 4.15e-4, 4.11e-4
+>     ],
+>     'total_parameters_count': [
+>         1e6, 6e6, 17e6, 29e6, 40e6, 59e6, 69e6, 84e6, 99e6, 114e6, 121e6, 135e6,
+>         158e6, 175e6, 203e6, 232e6, 266e6, 303e6, 383e6, 473e6, 572e6, 680e6,
+>         798e6, 926e6, 1063e6, 1209e6
+>     ]
+> })
+> 
+> 
+51c98
+< from transformers import AutoTokenizer, LlamaConfig, LlamaForCausalLM, GPTNeoXConfig, GPTNeoXForCausalLM
+---
+> from transformers import AutoTokenizer, GPTNeoXConfig, GPTNeoXForCausalLM, LlamaConfig, LlamaForCausalLM
+60c107
+<     
+---
+> 
+64c111
+<         
+---
+> 
+70c117
+<     
+---
+> 
+72c119
+<     
+---
+> 
+74c121
+<     
+---
+> 
+78c125
+<         plt.suptitle(f'Log-Log Regression: Model Architecture vs. Parameter Count\nModel family: {df["model"].iloc[0].split("-")[0]}', 
+---
+>         plt.suptitle(f'Log-Log Regression: Model Architecture vs. Parameter Count\nModel family: {df["model"].iloc[0].split("-")[0]}',
+80c127
+<     
+---
+> 
+84c131
+<         
+---
+> 
+87c134
+<         
+---
+> 
+90c137
+<         
+---
+> 
+93c140
+<             
+---
+> 
+95c142
+<             
+---
+> 
+98c145
+<             
+---
+> 
+100c147
+<             
+---
+> 
+102c149
+<             ax.text(0.05, 0.95, eqn_text, transform=ax.transAxes, 
+---
+>             ax.text(0.05, 0.95, eqn_text, transform=ax.transAxes,
+104c151
+<             
+---
+> 
+107c154
+<             
+---
+> 
+111c158
+<             
+---
+> 
+113c160
+<                 ax.annotate(model, (X_billions[j], y_actual[j]), 
+---
+>                 ax.annotate(model, (X_billions[j], y_actual[j]),
+115c162
+<             
+---
+> 
+118c165
+<     
+---
+> 
+124c171
+<     
+---
+> 
+128c175
+<         
+---
+> 
+131c178
+<             
+---
+> 
+137c184
+<         
+---
+> 
+148c195
+<             
+---
+> 
+153c200
+<             
+---
+> 
+158c205
+<     
+---
+> 
+160a208,367
+> # NEW: Function for SSM config prediction
+> def func_ssm_config_from_params_count(df, plot_filename=None):
+>     """
+>     Creates a function that predicts SSM model config values based on parameter count.
+>     Predicts ALL architecture parameters: d_model, glu_size, kv_size, n_heads, n_layer
+> 
+>     Args:
+>         df: DataFrame with SSM model configs including total_parameters_count
+>         plot_filename: If provided, save a visualization to this filename
+> 
+>     Returns:
+>         A function that takes parameter count and returns predicted config values for SSM
+>     """
+>     X = np.log(df['total_parameters_count'])
+>     X_millions = df['total_parameters_count'] / 1e6
+> 
+>     # Predict all architecture parameters from the table
+>     target_columns = ['d_model', 'glu_size', 'kv_size', 'n_heads', 'n_layer']
+> 
+>     models = {}
+> 
+>     if plot_filename:
+>         fig = plt.figure(figsize=(20, 12))
+>         gs = gridspec.GridSpec(2, 3)
+>         plt.suptitle(f'Log-Log Regression: SSM Architecture vs. Parameter Count\nModel family: StripedHyena',
+>                     fontsize=16)
+> 
+>     for i, col in enumerate(target_columns):
+>         y = np.log(df[col])
+>         y_actual = df[col]
+> 
+>         slope, intercept, r_value, p_value, std_err = stats.linregress(X, y)
+>         models[col] = (intercept, slope)
+> 
+>         print(f"Log-log regression for {col}:")
+>         print(f"Intercept: {intercept:.4f}, Coefficient: {slope:.4f}, R²: {r_value**2:.4f}")
+> 
+>         if plot_filename:
+>             ax = plt.subplot(gs[i // 3, i % 3])
+> 
+>             ax.scatter(X_millions, y_actual, color='blue', s=100, alpha=0.7, label='Actual values')
+> 
+>             x_range = np.logspace(np.log10(min(X_millions)*0.7), np.log10(max(X_millions)*1.3), 100)
+>             y_pred = np.exp(intercept + slope * np.log(x_range * 1e6))
+> 
+>             ax.plot(x_range, y_pred, 'r-', linewidth=2, label=f'Regression (R²={r_value**2:.3f})')
+> 
+>             eqn_text = f"ln(y) = {intercept:.2f} + {slope:.2f} × ln(x)"
+>             ax.text(0.05, 0.95, eqn_text, transform=ax.transAxes,
+>                    fontsize=10, va='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+> 
+>             ax.set_xscale('log')
+>             ax.set_yscale('log')
+> 
+>             ax.set_xlabel('Parameter Count (millions)', fontsize=12)
+>             ax.set_ylabel(col.replace('_', ' ').title(), fontsize=12)
+>             ax.set_title(f'{col.replace("_", " ").title()} vs Model Size', fontsize=14)
+> 
+>             for j, model in enumerate(df['model']):
+>                 ax.annotate(model, (X_millions[j], y_actual[j]),
+>                            xytext=(5, 5), textcoords='offset points', fontsize=9)
+> 
+>             ax.grid(True, which='both', linestyle='--', linewidth=0.5, alpha=0.7)
+>             ax.legend(loc='best')
+> 
+>     if plot_filename:
+>         plt.tight_layout(rect=[0, 0, 1, 0.96])
+>         plt.savefig(plot_filename, dpi=300, bbox_inches='tight')
+>         print(f"Plot saved to {plot_filename}")
+>         plt.close()
+> 
+>     def predict_ssm_config(params_count):
+>         """
+>         Predicts SSM model configuration based on parameter count.
+> 
+>         Args:
+>             params_count: Total parameter count (e.g., 47e6 for 47M)
+> 
+>         Returns:
+>             Dictionary with predicted configuration values for SSM
+>         """
+>         log_params = np.log(params_count)
+>         result = {'non_embed_parameters_count': params_count}
+> 
+>         # Predict d_model - round to multiple of 16 for GPU efficiency
+>         intercept, slope = models['d_model']
+>         predicted_d_model = np.exp(intercept + slope * log_params)
+>         result['d_model'] = int(round(predicted_d_model / 16) * 16)
+>         if result['d_model'] < 16:
+>             result['d_model'] = 16
+> 
+>         # Predict glu_size (inner_mlp_size) - round to multiple of 16
+>         intercept, slope = models['glu_size']
+>         predicted_glu_size = np.exp(intercept + slope * log_params)
+>         result['glu_size'] = int(round(predicted_glu_size / 16) * 16)
+>         if result['glu_size'] < 16:
+>             result['glu_size'] = 16
+> 
+>         # Predict kv_size (per-head dimension) - typically 64 or 128
+>         intercept, slope = models['kv_size']
+>         predicted_kv_size = np.exp(intercept + slope * log_params)
+>         # round to nearest 16
+>         result['kv_size'] = int(round(predicted_kv_size / 16) * 16)
+>         if result['kv_size'] < 16:
+>             result['kv_size'] = 16
+> 
+>         # Derive n_heads from d_model and kv_size (following SSM_configs pattern)
+>         # Pattern: n_heads = d_model / kv_size
+>         d_model = result['d_model']
+>         kv_size = result['kv_size']
+> 
+>         # Calculate n_heads from the pattern
+>         n_heads = d_model // kv_size
+>         if n_heads < 1:
+>             n_heads = 1
+> 
+>         # Ensure GQA compatibility: n_heads % (n_heads // proj_groups) == 0
+>         # For proj_groups=4, valid n_heads are: 4, 5, 6, 7, 8, 10, 12, 15, 16, 20, 24, ...
+>         # Simplest approach: round to nearest multiple of 4 (always valid for GQA)
+>         proj_groups = 4
+> 
+>         def is_gqa_compatible(n, proj_groups):
+>             """Check if n_heads is compatible with GQA"""
+>             if n < proj_groups:
+>                 return True  # When n < proj_groups, num_heads_kv = 0 which uses n directly
+>             num_heads_kv = n // proj_groups
+>             return num_heads_kv > 0 and n % num_heads_kv == 0
+> 
+>         if not is_gqa_compatible(n_heads, proj_groups):
+>             # Find nearest valid n_heads
+>             # Search in both directions for a valid value
+>             for delta in range(1, n_heads + 10):
+>                 if n_heads - delta >= 1 and is_gqa_compatible(n_heads - delta, proj_groups):
+>                     n_heads = n_heads - delta
+>                     break
+>                 if is_gqa_compatible(n_heads + delta, proj_groups):
+>                     n_heads = n_heads + delta
+>                     break
+> 
+>         result['n_heads'] = n_heads
+> 
+>         # Adjust d_model to match: d_model = n_heads * kv_size
+>         # This ensures the pattern is maintained
+>         result['d_model'] = n_heads * kv_size
+> 
+>         # Predict n_layer (number of layers)
+>         intercept, slope = models['n_layer']
+>         predicted_n_layer = np.exp(intercept + slope * log_params)
+>         result['n_layer'] = int(round(predicted_n_layer))
+>         if result['n_layer'] < 2:
+>             result['n_layer'] = 2
+> 
+>         return result
+> 
+>     return predict_ssm_config
+> 
+> # test func_ssm_config_from_params_count
+> func_ssm_config_from_params_count(SSM_configs, plot_filename="ssm_config_regression.png")
+> 
+> 
+162,163c369,370
+<         target_param_count, 
+<         tokenizer_path, 
+---
+>         target_param_count,
+>         tokenizer_path,
+166c373,375
+<         save_dir=None):
+---
+>         save_dir=None,
+>         hybrid_pattern="alternate",
+>         vocab_size_override=None):  # Use this to override tokenizer vocab (e.g., 5 for binary genome data)
+169c378
+<     
+---
+> 
+174c383
+<         
+---
+> 
+188,191c397,405
+<     else: 
+<         raise ValueError("Invalid model class. Choose 'llama' or 'pythia'.")
+<     
+<     predictor = func_config_from_params_count(reference_configs) 
+---
+>     # Add support for Together AI StripedHyena from HuggingFace
+>     elif model_family == "striped_hyena":
+>         print(f"\nBuilding a Together AI StripedHyena model with target size: {target_param_count/1e6:.1f}M parameters")
+>         from transformers import AutoConfig, AutoModelForCausalLM
+>         # Use the Together StripedHyena architecture with custom config
+>         config_creation_function = "striped_hyena_config"  # Special marker for custom handling
+>         model_creation_function = "striped_hyena_model"    # Special marker for custom handling
+>     else:
+>         raise ValueError("Invalid model class. Choose 'llama', 'pythia', 'striped_hyena'.")
+193,201c407,430
+<     
+<     print(f"\nLoading custom tokenizer from {tokenizer_path}")
+<     try:
+<         tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+<         vocab_size = len(tokenizer.get_vocab())
+<         print(f"Tokenizer loaded successfully with vocab size: {vocab_size}")
+<     except Exception as e:
+<         print(f"Error loading tokenizer: {e}")
+<         print("Falling back to default vocab size of 3000")
+---
+>     # Use SSM predictor for SSM/Hyena/StripedHyena models (same architecture config table)
+>     if model_family in ["striped_hyena"]:
+>         predictor = func_ssm_config_from_params_count(SSM_configs)
+>     else:
+>         predictor = func_config_from_params_count(reference_configs)
+> 
+> 
+>     # Handle vocab size
+>     if vocab_size_override is not None:
+>         vocab_size = vocab_size_override
+>         print(f"\nUsing vocab_size override: {vocab_size}")
+>         tokenizer = None
+>     elif tokenizer_path is not None:
+>         print(f"\nLoading custom tokenizer from {tokenizer_path}")
+>         try:
+>             tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+>             vocab_size = len(tokenizer.get_vocab())
+>             print(f"Tokenizer loaded successfully with vocab size: {vocab_size}")
+>         except Exception as e:
+>             print(f"Error loading tokenizer: {e}")
+>             print("Falling back to default vocab size of 3000")
+>             vocab_size = 3000
+>     else:
+>         print("No tokenizer path provided, using default vocab size of 3000")
+203c432,499
+<     
+---
+>         tokenizer = None
+> 
+> 
+> 
+>     def simplified_param_count(config_dict, vocab_size, model_family, hybrid_pattern="alternate", hyena_kernel_size=127):
+>         # Helper function to get layer counts based on hybrid_pattern
+>         def get_layer_counts(n_layer, hybrid_pattern):
+>             if hybrid_pattern == "alternate":
+>                 n_mix_layers = (n_layer + 1) // 2  # Even indices: 0,2,4,...
+>                 n_attn_layers = n_layer // 2      # Odd indices: 1,3,5,...
+>             elif hybrid_pattern in ["ssm_heavy", "evo2_7b", "every_4"]:
+>                 # Every 4th layer is attention, starting at 3
+>                 n_attn_layers = len(list(range(3, n_layer, 4)))
+>                 n_mix_layers = n_layer - n_attn_layers
+>             elif hybrid_pattern in ["evo2_40b", "every_8"]:
+>                 # Every 8th layer is attention, starting at 7
+>                 n_attn_layers = len(list(range(7, n_layer, 8)))
+>                 n_mix_layers = n_layer - n_attn_layers
+>             elif hybrid_pattern in ["ssm_only", "hyena_only"]:
+>                 n_mix_layers = n_layer
+>                 n_attn_layers = 0
+>             elif hybrid_pattern == "attn_only":
+>                 n_mix_layers = 0
+>                 n_attn_layers = n_layer
+>             else:
+>                 # Default to every_4 for hyena, alternate for ssm
+>                 n_attn_layers = len(list(range(3, n_layer, 4)))
+>                 n_mix_layers = n_layer - n_attn_layers
+>             return n_mix_layers, n_attn_layers
+> 
+>         # Together AI StripedHyena from HuggingFace
+>         if model_family == "striped_hyena":
+>             d_model = config_dict['d_model']
+>             n_layer = config_dict['n_layer']
+>             d_inner = config_dict['glu_size']  # Maps to inner_mlp_size
+>             n_heads = config_dict['n_heads']
+> 
+>             # StripedHyena config defaults
+>             proj_groups = 4  # GQA groups (default from StripedHyena config)
+>             n_kv_heads = max(1, n_heads // proj_groups)
+>             short_filter_length = 3  # Default short filter length
+>             state_size = 2  # Default state size for poles/residues
+> 
+>             n_hyena_layers, n_attn_layers = get_layer_counts(n_layer, hybrid_pattern)
+> 
+>             # StripedHyena ParallelGatedConvBlock (Hyena layer) params:
+>             # - pre_norm (RMSNorm): d_model
+>             # - post_norm (RMSNorm): d_model
+>             # - projections: Linear(d_model, 3*d_model) with bias = 3*d_model*d_model + 3*d_model
+>             # - out_filter_dense: Linear(d_model, d_model) with bias = d_model*d_model + d_model
+>             # - mlp (ParallelGatedMLP): l1 + l2 + l3 = 3 * d_model * d_inner (no bias)
+>             # - filter.D: d_model
+>             # - filter.short_filter_weight: (3*d_model, 1, short_filter_length) = 3*d_model*short_filter_length
+>             # - filter.short_filter_bias: 3*d_model
+>             # - filter.poles: (d_model, state_size, 1, 2) = d_model * state_size * 2
+>             # - filter.residues: (d_model, state_size, 1, 2) = d_model * state_size * 2
+>             hyena_layer_params = (
+>                 d_model +                                    # pre_norm
+>                 d_model +                                    # post_norm
+>                 3 * d_model * d_model + 3 * d_model +        # projections (weight + bias)
+>                 d_model * d_model + d_model +                # out_filter_dense (weight + bias)
+>                 3 * d_model * d_inner +                      # mlp (SwiGLU: l1, l2, l3)
+>                 d_model +                                    # filter.D
+>                 3 * d_model * short_filter_length +          # filter.short_filter_weight
+>                 3 * d_model +                                # filter.short_filter_bias
+>                 d_model * state_size * 2 +                   # filter.poles
+>                 d_model * state_size * 2                     # filter.residues
+>             )
+204a501,525
+>             # StripedHyena AttentionBlock params (using flash_attn MHA with GQA):
+>             # - pre_norm (RMSNorm): d_model
+>             # - post_norm (RMSNorm): d_model
+>             # - inner_mha_cls (MHA with GQA, proj_groups=4, no bias):
+>             #   - q_proj: d_model * d_model (n_heads * head_dim = d_model)
+>             #   - k_proj: d_model * (d_model / proj_groups)
+>             #   - v_proj: d_model * (d_model / proj_groups)
+>             #   - out_proj: d_model * d_model
+>             # - mlp (ParallelGatedMLP): 3 * d_model * d_inner
+>             attn_layer_params = (
+>                 d_model +                                    # pre_norm
+>                 d_model +                                    # post_norm
+>                 d_model * d_model +                          # q_proj
+>                 d_model * d_model // proj_groups +           # k_proj (GQA)
+>                 d_model * d_model // proj_groups +           # v_proj (GQA)
+>                 d_model * d_model +                          # out_proj
+>                 3 * d_model * d_inner                        # mlp (SwiGLU)
+>             )
+> 
+>             total_layer_params = n_hyena_layers * hyena_layer_params + n_attn_layers * attn_layer_params
+> 
+>             # Final norm
+>             final_norm_params = d_model
+> 
+>             simplified_non_embedding_params_cnt = total_layer_params + final_norm_params
+206,208c527,529
+<     def simplified_param_count(config_dict, vocab_size):
+<         hidden_size_config = config_dict['hidden_size']
+<         num_layers_config = config_dict['num_hidden_layers']
+---
+>             # Embeddings (UNTIED due to bug in StripedHyena code - embed and unembed are separate)
+>             embedding_params_cnt = vocab_size * d_model * 2  # embed + unembed
+>             simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
+210,212c531,536
+<         simplified_non_embedding_params_cnt = 12 * num_layers_config * hidden_size_config ** 2
+<         embedding_params_cnt = vocab_size * hidden_size_config * 2
+<         simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
+---
+>         else:
+>             hidden_size_config = config_dict['hidden_size']
+>             num_layers_config = config_dict['num_hidden_layers']
+>             simplified_non_embedding_params_cnt = 12 * num_layers_config * hidden_size_config ** 2
+>             embedding_params_cnt = vocab_size * hidden_size_config * 2
+>             simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
+215d538
+<     
+217c540,541
+<         
+---
+> 
+> 
+225c549
+<         non_embed_params_simplified, total_params_simplified = simplified_param_count(config_dict, vocab_size)
+---
+>         non_embed_params_simplified, total_params_simplified = simplified_param_count(config_dict, vocab_size, model_family, hybrid_pattern)
+239c563
+<     
+---
+> 
+242c566
+<     
+---
+> 
+248,256c572,662
+<         
+<         config = config_creation_function(
+<             vocab_size=vocab_size,
+<             hidden_size=config_dict['hidden_size'],
+<             intermediate_size=config_dict['intermediate_size'],
+<             num_hidden_layers=config_dict['num_hidden_layers'],
+<             num_attention_heads=config_dict['num_attention_heads']
+<         )
+<     
+---
+> 
+>         # Create Together AI StripedHyena config from HuggingFace
+>         if model_family == "striped_hyena":
+>             print("\nCreating Together AI StripedHyena config...")
+>             from transformers import AutoConfig, AutoModelForCausalLM
+> 
+>             # Determine layer pattern based on hybrid_pattern
+>             def get_striped_hyena_layer_idxs(n_layer, hybrid_pattern):
+>                 if hybrid_pattern == "alternate":
+>                     # Alternate: even=hyena, odd=attention
+>                     attn_layer_idxs = list(range(1, n_layer, 2))
+>                 elif hybrid_pattern in ["ssm_heavy", "evo2_7b", "every_4"]:
+>                     # Every 4th layer is attention
+>                     attn_layer_idxs = list(range(3, n_layer, 4))
+>                 elif hybrid_pattern in ["evo2_40b", "every_8"]:
+>                     # Every 8th layer is attention
+>                     attn_layer_idxs = list(range(7, n_layer, 8))
+>                 elif hybrid_pattern in ["ssm_only", "hyena_only"]:
+>                     attn_layer_idxs = []
+>                 elif hybrid_pattern == "attn_only":
+>                     attn_layer_idxs = list(range(n_layer))
+>                 else:
+>                     # Default to every_4
+>                     attn_layer_idxs = list(range(3, n_layer, 4))
+>                 return attn_layer_idxs
+> 
+>             attn_layer_idxs = get_striped_hyena_layer_idxs(config_dict['n_layer'], hybrid_pattern)
+>             # Hyena layers are all layers NOT in attn_layer_idxs
+>             hyena_layer_idxs = [i for i in range(config_dict['n_layer']) if i not in attn_layer_idxs]
+> 
+>             # Load the base config from Together's StripedHyena and modify it
+>             # Using trust_remote_code=True to load the custom architecture
+>             try:
+>                 base_config = AutoConfig.from_pretrained(
+>                     "togethercomputer/StripedHyena-Hessian-7B",
+>                     trust_remote_code=True
+>                 )
+>             except Exception as e:
+>                 raise ValueError(
+>                     f"Failed to load Together AI StripedHyena config from HuggingFace: {e}\n"
+>                     "Please ensure you have internet access and the transformers library is up to date.\n"
+>                     "You may need to run: pip install --upgrade transformers"
+>                 )
+> 
+>             # Override with our predicted architecture values
+>             base_config.vocab_size = vocab_size
+>             base_config.hidden_size = config_dict['d_model']
+>             base_config.num_filters = config_dict['d_model']  # Must equal hidden_size for the assertion
+>             base_config.num_layers = config_dict['n_layer']
+>             base_config.num_attention_heads = config_dict['n_heads']
+>             base_config.inner_mlp_size = config_dict['glu_size']  # StripedHyena uses inner_mlp_size, not intermediate_size
+>             base_config.head_dim = config_dict['kv_size']
+>             base_config.attn_layer_idxs = attn_layer_idxs
+>             base_config.hyena_layer_idxs = hyena_layer_idxs
+>             base_config.tie_word_embeddings = True
+>             # Note: StripedHyena's tie_embeddings has a bug (references self.emb instead of self.embedding_layer)
+>             # Keep it False to use separate unembed weights (default behavior)
+>             # Set dtypes - use float32 for Hyena blocks to avoid numerical instability
+>             # The Hyena filter uses complex exponentials that can overflow in bfloat16
+>             base_config.hyena_block_dtype = "float32"
+>             base_config.attn_block_dtype = "bfloat16"
+>             base_config.mlp_dtype = "bfloat16"
+>             # Disable vocab_size adjustment to avoid mismatch in loss computation
+>             # (the model adjusts vocab_size to be divisible by this value, but loss uses config.vocab_size)
+>             base_config.make_vocab_size_divisible_by = 1
+>             # Enable flash attention for faster training
+>             base_config.use_flash_attention_2 = True
+>             base_config.use_flash_attn = True
+> 
+>             config = base_config
+> 
+>             print(f"  Architecture Details:")
+>             print(f"    - hidden_size (d_model): {config_dict['d_model']}")
+>             print(f"    - num_filters: {config_dict['d_model']}")
+>             print(f"    - inner_mlp_size (glu_size): {config_dict['glu_size']}")
+>             print(f"    - num_attention_heads: {config_dict['n_heads']}")
+>             print(f"    - head_dim (kv_size): {config_dict['kv_size']}")
+>             print(f"    - num_layers: {config_dict['n_layer']}")
+>             print(f"    - hybrid_pattern: {hybrid_pattern}")
+>             print(f"    - Attention layers at indices: {attn_layer_idxs}")
+>             print(f"  Note: Using Together AI StripedHyena from HuggingFace (trust_remote_code=True)")
+> 
+>         else:
+>             config = config_creation_function(
+>                 vocab_size=vocab_size,
+>                 hidden_size=config_dict['hidden_size'],
+>                 intermediate_size=config_dict['intermediate_size'],
+>                 num_hidden_layers=config_dict['num_hidden_layers'],
+>                 num_attention_heads=config_dict['num_attention_heads']
+>             )
+> 
+260c666
+<         
+---
+> 
+264c670,710
+<             model = model_creation_function(config)
+---
+>             # Create model from config
+>             if model_family == "striped_hyena":
+>                 # Special handling for Together AI StripedHyena
+>                 # Convert string dtypes to torch dtypes for model construction
+>                 dtype_map = {"bfloat16": torch.bfloat16, "float32": torch.float32, "float16": torch.float16}
+>                 dtype_fields = ['hyena_block_dtype', 'attn_block_dtype', 'mlp_dtype']
+>                 original_dtypes = {}
+>                 for field in dtype_fields:
+>                     if hasattr(config, field) and isinstance(getattr(config, field), str):
+>                         original_dtypes[field] = getattr(config, field)
+>                         setattr(config, field, dtype_map.get(getattr(config, field), torch.bfloat16))
+> 
+>                 from transformers import AutoModelForCausalLM
+>                 model = AutoModelForCausalLM.from_config(
+>                     config,
+>                     trust_remote_code=True
+>                 )
+> 
+>                 # Stable pole initialization for Hyena filters
+>                 # The poles must have |poles| < 1 so that log(poles) has negative real part,
+>                 # ensuring exp(log_poles * t) decays over time instead of exploding.
+>                 # This is standard practice for SSMs (similar to S4, Mamba's log-space A matrix).
+>                 print("  Applying stable pole initialization for Hyena filters...")
+>                 with torch.no_grad():
+>                     for name, module in model.named_modules():
+>                         if hasattr(module, 'poles') and hasattr(module, 'residues'):
+>                             # poles shape: [num_systems, state_size, 1, 2] where last dim is [real, imag]
+>                             poles_complex = torch.view_as_complex(module.poles.data.float())
+>                             magnitude = poles_complex.abs()
+>                             phase = poles_complex / (magnitude + 1e-8)
+>                             # Clamp magnitude to [0.5, 0.99] for stable but expressive filters
+>                             stable_magnitude = 0.5 + 0.49 * torch.sigmoid(magnitude)  # Maps to ~[0.62, 0.99]
+>                             stable_poles = stable_magnitude * phase
+>                             module.poles.data = torch.view_as_real(stable_poles).to(module.poles.dtype)
+> 
+>                 # Convert back to strings for JSON serialization when saving
+>                 for field, str_dtype in original_dtypes.items():
+>                     setattr(config, field, str_dtype)
+>             else:
+>                 model = model_creation_function(config)
+>             print(f"  Model class: {model.__class__.__name__}")
+266,267c712,713
+<             raise ValueError("Model initialization failed. Please check the configuration.")
+<         
+---
+>             raise ValueError(f"Model initialization failed: {e}. Please check the configuration.")
+> 
+269,270c715,724
+<         
+<         embedding_params = config.vocab_size * config.hidden_size * 2
+---
+> 
+>         # Calculate embedding parameters
+>         if model_family in ["ssm", "hyena"]:
+>             embedding_params = config.vocab_size * config.d_model  # Tied embeddings (count once)
+>         elif model_family == "striped_hyena":
+>             # Untied embeddings due to bug in StripedHyena code (embed and unembed are separate)
+>             embedding_params = config.vocab_size * config.hidden_size * 2
+>         else:
+>             embedding_params = config.vocab_size * config.hidden_size * 2  # Embedding + LM head
+> 
+279,287c733,750
+<     attention_params_per_layer = 4 * (config.hidden_size ** 2)
+<     ffn_params_per_layer = 2 * config.hidden_size * config.intermediate_size
+<     
+<     total_attention_params = attention_params_per_layer * config.num_hidden_layers
+<     total_ffn_params = ffn_params_per_layer * config.num_hidden_layers
+<     
+<     print(f" - Attention layers: {total_attention_params:,} params")
+<     print(f" - Feed-forward layers: {total_ffn_params:,} params")
+<     print(f" - Other (norm, etc.): {param_count_actual - embedding_params - total_attention_params - total_ffn_params:,} params")
+---
+>     # Skip detailed breakdown for SSM/Hyena/StripedHyena as structure is different
+>     if model_family not in ["striped_hyena"]:
+>         attention_params_per_layer = 4 * (config.hidden_size ** 2)
+>         ffn_params_per_layer = 2 * config.hidden_size * config.intermediate_size
+> 
+>         total_attention_params = attention_params_per_layer * config.num_hidden_layers
+>         total_ffn_params = ffn_params_per_layer * config.num_hidden_layers
+> 
+>         print(f" - Attention layers: {total_attention_params:,} params")
+>         print(f" - Feed-forward layers: {total_ffn_params:,} params")
+>         print(f" - Other (norm, etc.): {param_count_actual - embedding_params - total_attention_params - total_ffn_params:,} params")
+>     elif model_family == "striped_hyena":
+>         # Print striped_hyena-specific breakdown
+>         n_attn = len(config.attn_layer_idxs) if hasattr(config, 'attn_layer_idxs') else 0
+>         n_hyena = len(config.hyena_layer_idxs) if hasattr(config, 'hyena_layer_idxs') else 0
+>         print(f" - Hyena layers: {n_hyena} at {config.hyena_layer_idxs if hasattr(config, 'hyena_layer_idxs') else []}")
+>         print(f" - Attention layers: {n_attn}")
+> 
+290c753
+<     
+---
+> 
+293,294c756,765
+<         model.save_pretrained(save_dir)
+<         if os.path.exists(tokenizer_path):
+---
+>         # Convert any torch.dtype fields to strings for JSON serialization
+>         if model_family == "striped_hyena":
+>             dtype_to_str = {torch.bfloat16: "bfloat16", torch.float32: "float32", torch.float16: "float16"}
+>             for attr in dir(model.config):
+>                 val = getattr(model.config, attr, None)
+>                 if isinstance(val, torch.dtype):
+>                     setattr(model.config, attr, dtype_to_str.get(val, str(val)))
+>         # safe_serialization=False needed for weight-tied models (embedding <-> lm_head)
+>         model.save_pretrained(save_dir, safe_serialization=False)
+>         if tokenizer_path and tokenizer and os.path.exists(tokenizer_path):
+297,299d767
+<     
+<     return model, config, non_embedding_params_actual, param_count_actual
+< 
+300a769
+>     return model, config, non_embedding_params_actual, param_count_actual
+301a771,777
+> # test build_model_with_predicted_config
+> #model, config, non_embed_params, total_params = build_model_with_predicted_config(
+>  #   target_param_count=47_000_000,
+>   #  tokenizer_path="datasets/tokenizers/genome_tokenizer",
+>   #  model_family="ssm",
+>   #  save_dir=None
+> #)
+302a779
+> #raise ValueError("Stop after test")
+337c814
+<     
+---
+> 
+340c817
+<     
+---
+> 
+342c819
+<     
+---
+> 
+346c823
+<         
+---
+> 
+351c828
+< def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1000, 
+---
+> def prepare_datasets(tokenizer, dataset_name, seq_length, cache_dir, test_size=1000,
+355c832
+<         
+---
+> 
+364c841
+<             
+---
+> 
+370c847
+<         
+---
+> 
+379a857,861
+>         # NEW: Add support for genomics dataset
+>         elif dataset_name in ["opengenome2", "opengenome2_stream"]:
+>             data_label = "arcinstitute/opengenome2"  # ~5.5TB dataset, 8.8T base pairs
+>         elif dataset_name == "opengenome2_local":
+>             data_label = "/mfs1/datasets/pile/opengenome2_16gb"  # Local ~16GB subset
+394c876
+<         
+---
+> 
+405c887
+<             
+---
+> 
+414c896
+<             
+---
+> 
+419a902,940
+>         # Load local opengenome2 subset from binary file (~16GB downloaded)
+>         elif dataset_name == "opengenome2_local":
+>             print(f"Loading local opengenome2 binary dataset from {data_label}")
+>             import numpy as np
+>             from torch.utils.data import Dataset as TorchDataset, Subset
+> 
+>             class BinaryGenomeDataset(TorchDataset):
+>                 """PyTorch Dataset for binary genome data (uint16 format)
+>                 Vocab: A=0, C=1, G=2, T=3, N=4 (5 tokens total)
+>                 """
+>                 def __init__(self, data_path, seq_length=2048):
+>                     bin_file = os.path.join(data_path, "opengenome2_2048_uint16.bin")
+>                     self.data = np.memmap(bin_file, dtype=np.uint16, mode='r')
+>                     self.seq_length = seq_length
+>                     self.num_sequences = len(self.data) // seq_length
+>                     print(f"  Loaded {self.num_sequences:,} sequences of length {seq_length}")
+> 
+>                 def __len__(self):
+>                     return self.num_sequences
+> 
+>                 def __getitem__(self, idx):
+>                     start = idx * self.seq_length
+>                     end = start + self.seq_length
+>                     tokens = torch.tensor(self.data[start:end].astype(np.int64), dtype=torch.long)
+>                     return {"input_ids": tokens}
+> 
+>             # Create dataset and split with random (but fixed) test set selection
+>             full_dataset = BinaryGenomeDataset(data_label, seq_length=seq_length)
+>             total_size = len(full_dataset)
+> 
+>             # Randomly select test indices (fixed seed for reproducibility)
+>             rng = np.random.RandomState(seed=42)
+>             all_indices = np.arange(total_size)
+>             rng.shuffle(all_indices)
+>             test_indices = all_indices[:test_size].tolist()
+>             train_indices = all_indices[test_size:].tolist()
+> 
+>             train_dataset = Subset(full_dataset, train_indices)
+>             test_dataset = Subset(full_dataset, test_indices)
+421,422c942,948
+<         
+<         if verbose:
+---
+>             print(f"  Train: {len(train_dataset):,}, Test: {len(test_dataset):,} (randomly selected, seed=42)")
+> 
+>             # Return early - data is already tokenized
+>             return train_dataset, test_dataset
+> 
+> 
+>         if verbose and not stream:
+426c952,954
+<         
+---
+>         elif verbose and stream:
+>             print("Streaming dataset loaded (size unknown until iteration)")
+> 
+428a957
+>         # NEW: Include genomics datasets in tokenization
+430d958
+<             def tokenize_with_stride(examples):
+431a960,966
+>             # Determine the text field name (genomics uses "sequence", text datasets use "text")
+>             if dataset_name in ["opengenome2_local"]:
+>                 text_field = "sequence"
+>             else:
+>                 text_field = "text"
+> 
+>             def tokenize_with_stride(examples):
+433c968
+<                     examples["text"],
+---
+>                     examples[text_field],
+435c970
+<                     stride=1,  
+---
+>                     stride=1,
+440d974
+<             
+444,447c978,984
+<                 if dataset_name != "openwebtext2":
+<                     raise ValueError("Dataset name must be openwebtext2 for this code to work")
+<                 token_cache_path = "/mfs1/datasets/pile/openwebtext2/owt2_128"
+<                 if os.path.exists(token_cache_path):
+---
+>                 # NEW: Update cache path check for genomics
+>                 if dataset_name == "openwebtext2":
+>                     token_cache_path = "/mfs1/datasets/pile/openwebtext2/owt2_128"
+>                 else:
+>                     token_cache_path = None
+> 
+>                 if token_cache_path and os.path.exists(token_cache_path):
+460,463c997,1001
+<                     print("Saving tokenized dataset to", token_cache_path)
+<                     tokenized_dataset.save_to_disk(token_cache_path)
+<                     print("Tokenized dataset saved successfully.")
+<                 
+---
+>                     if token_cache_path:
+>                         print("Saving tokenized dataset to", token_cache_path)
+>                         tokenized_dataset.save_to_disk(token_cache_path)
+>                         print("Tokenized dataset saved successfully.")
+> 
+468c1006
+<                     remove_columns=["text"])                 
+---
+>                     remove_columns=[text_field])  # Use correct field name for genomics
+472,474c1010,1013
+<             
+<             print("Number of examples:", len(tokenized_dataset))
+<             
+---
+>                 print("Number of examples:", len(tokenized_dataset))
+>             else:
+>                 print("Streaming dataset tokenized (processing on-the-fly)")
+> 
+476c1015
+<             
+---
+> 
+482c1021
+<                     stride=1,  
+---
+>                     stride=1,
+487c1026
+<             
+---
+> 
+498c1037
+<             
+---
+> 
+502c1041
+<             split_dataset = tokenized_dataset.train_test_split(test_size=test_size_frac, seed=42)  
+---
+>             split_dataset = tokenized_dataset.train_test_split(test_size=test_size_frac, seed=42)
+510c1049
+<             
+---
+> 
+529,530c1068,1069
+<         
+<         def __init__(self, 
+---
+> 
+>         def __init__(self,
+545c1084
+<             
+---
+> 
+547d1085
+<             
+549,550c1087,1103
+<     
+<         def create_optimizer_and_scheduler(self, 
+---
+>         def _save(self, output_dir=None, state_dict=None):
+>             """Override _save to handle weight-tied models (embedding <-> lm_head)"""
+>             output_dir = output_dir if output_dir is not None else self.args.output_dir
+>             os.makedirs(output_dir, exist_ok=True)
+> 
+>             # Use safe_serialization=False for weight-tied models
+>             self.model.save_pretrained(output_dir, safe_serialization=False)
+> 
+>             if self.tokenizer is not None:
+>                 self.tokenizer.save_pretrained(output_dir)
+> 
+>             # Save training args
+>             torch.save(self.args, os.path.join(output_dir, "training_args.bin"))
+> 
+> 
+> 
+>         def create_optimizer_and_scheduler(self,
+568c1121
+<                 
+---
+> 
+573,574c1126,1127
+<                         self.optimizer, 
+<                         num_warmup_steps = int(num_training_steps * 0.01), 
+---
+>                         self.optimizer,
+>                         num_warmup_steps = int(num_training_steps * 0.01),
+579c1132
+<                     
+---
+> 
+581,582c1134,1135
+<                 
+<                     lr_values = [1.0]  
+---
+> 
+>                     lr_values = [1.0]
+591c1144
+<                     
+---
+> 
+604c1157
+<             
+---
+> 
+607c1160
+<             
+---
+> 
+609c1162
+<             
+---
+> 
+611c1164
+<         
+---
+> 
+614c1167
+<             
+---
+> 
+619c1172
+<             
+---
+> 
+622c1175
+<             
+---
+> 
+624c1177
+<         
+---
+> 
+627,628c1180,1181
+<            
+<             
+---
+> 
+> 
+645c1198
+<             
+---
+> 
+654c1207
+<         
+---
+> 
+656c1209
+<         
+---
+> 
+658c1211
+<         
+---
+> 
+660c1213
+<     input_path = hf_temp_folder + 'input/' 
+---
+>     input_path = hf_temp_folder + 'input/'
+663c1216
+<     
+---
+> 
+668c1221
+<     
+---
+> 
+671c1224
+<     
+---
+> 
+676c1229
+<     
+---
+> 
+679a1233
+>     # NEW: Add tokenizer path for genomics data
+687a1242,1247
+>     elif nn_dict["data"] in ["opengenome2", "opengenome2_stream"]:
+>         # DNA single-nucleotide tokenizer (Evo2-style): A, C, G, T, N + special tokens (vocab=9)
+>         tokenizer_path = "datasets/tokenizers/dna_single_nucleotide"
+>     elif nn_dict["data"] == "opengenome2_local":
+>         # Binary format uses simple vocab: A=0, C=1, G=2, T=3, N=4 (vocab=5)
+>         tokenizer_path = None  # No tokenizer needed - data is pre-tokenized
+690,696c1250,1275
+<     tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+<     
+<     data_collator = DataCollatorForLanguageModeling(
+<             tokenizer=tokenizer,
+<             mlm=False,
+<             return_tensors="pt"
+<         )
+---
+> 
+>     # Handle tokenizer and data collator
+>     if nn_dict["data"] == "opengenome2_local":
+>         # No tokenizer needed for binary data - create a simple collator
+>         tokenizer = None
+>         vocab_size_override = 5  # A, C, G, T, N
+> 
+>         def simple_collator(batch):
+>             """Simple collator for pre-tokenized binary data"""
+>             input_ids = torch.stack([item["input_ids"] for item in batch])
+>             # Labels are same as input_ids, shifted by the model during loss computation
+>             return {"input_ids": input_ids, "labels": input_ids.clone()}
+> 
+>         data_collator = simple_collator
+>     else:
+>         tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+>         vocab_size_override = None
+> 
+>         data_collator = DataCollatorForLanguageModeling(
+>                 tokenizer=tokenizer,
+>                 mlm=False,
+>                 return_tensors="pt"
+>             )
+> 
+>     # Get hybrid_pattern from nn_dict, default to "alternate" for StripedHyena-style
+>     hybrid_pattern = nn_dict.get("hybrid_pattern", "alternate")
+702,703c1281,1284
+<             model_family=nn_dict["model"], 
+<             reference_configs=Pythia_configs
+---
+>             model_family=nn_dict["model"],
+>             reference_configs=Pythia_configs,
+>             hybrid_pattern=hybrid_pattern,
+>             vocab_size_override=vocab_size_override  # Use 5 for opengenome2_local
+705c1286
+<     
+---
+> 
+709c1290
+<     
+---
+> 
+716a1298,1305
+>     # Set sequence length based on dataset type
+>     if nn_dict["data"] in ["opengenome2", "opengenome2_stream", "opengenome2_local"]:
+>         seq_length = 2048  # Longer context for genomics data
+>     else:
+>         seq_length = 128   # Default for text datasets (owt, wikitext, etc.)
+> 
+>     print(f"Using sequence length: {seq_length}")
+> 
+720c1309
+<             seq_length=128,
+---
+>             seq_length=seq_length,
+725c1314
+<     
+---
+> 
+729c1318
+<     
+---
+> 
+735,736c1324,1327
+<     
+<     # CHANGE: Updated gradient accumulation logic accounting for multi-GPU
+---
+> 
+>     # CHANGE: Updated gradient accumulation logic accounting for multi-GPU and sequence length
+>     # For genomics data (seq_length=2048), memory usage is ~16x higher than text (seq_length=128)
+>     # Scale gradient accumulation accordingly to avoid OOM
+739c1330,1335
+<     
+---
+> 
+>     # Sequence length factor: longer sequences need more gradient accumulation
+>     # Reference is seq_length=128 for text data
+>     seq_length_factor = 1.0 if seq_length == 128 else seq_length / 128.0 * 4
+>     print(f"Sequence length factor for grad accumulation: {seq_length_factor:.1f}x (seq_length={seq_length})")
+> 
+741,742c1337,1338
+<         num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256)/4
+<         num_grad_accu2 = h_dict['B']/3072
+---
+>         num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256)/4 * seq_length_factor
+>         num_grad_accu2 = h_dict['B']/3072 * seq_length_factor
+745,746c1341,1342
+<         num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256 * world_size)/4
+<         num_grad_accu2 = h_dict['B']/(3072 * world_size)
+---
+>         num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256 * world_size)/4 * seq_length_factor
+>         num_grad_accu2 = h_dict['B']/(3072 * world_size) * seq_length_factor
+748c1344
+<     
+---
+> 
+757c1353
+<         
+---
+> 
+770c1366
+<         
+---
+> 
+777c1373,1390
+<     # CHANGE: Modified TrainingArguments - only set ddp params if actually in multi-GPU mode
+---
+>     # Adjust dataloader settings based on sequence length
+>     # H100/A100 have plenty of memory, so we can use more workers even for long sequences
+>     if seq_length >= 8192:
+>         dataloader_num_workers = 4
+>         dataloader_prefetch_factor = 2
+>     elif seq_length >= 2048:
+>         dataloader_num_workers = 4
+>         dataloader_prefetch_factor = 4
+>     else:
+>         dataloader_num_workers = 12
+>         dataloader_prefetch_factor = 4
+> 
+>     # Reduce eval batch size for long sequences to avoid OOM
+>     eval_batch_size = max(1, BS // 2) if seq_length >= 2048 else BS
+> 
+>     # Modified TrainingArguments
+>     # Use bf16 for striped_hyena (flash kernels require consistent bf16), fp16 for others
+>     use_bf16 = nn_dict["model"] == "striped_hyena"
+781c1394
+<         "per_device_eval_batch_size": BS,
+---
+>         "per_device_eval_batch_size": eval_batch_size,
+784c1397,1398
+<         "dataloader_num_workers": 12,
+---
+>         "eval_steps": 1000,  # Evaluate every 1000 steps
+>         "dataloader_num_workers": dataloader_num_workers,
+786c1400
+<         "dataloader_prefetch_factor": 2,
+---
+>         "dataloader_prefetch_factor": dataloader_prefetch_factor,
+792c1406,1407
+<         "fp16": True,
+---
+>         "bf16": use_bf16,
+>         "fp16": not use_bf16,
+795c1410,1413
+<     
+---
+> 
+>     print(f"DataLoader: num_workers={dataloader_num_workers}, prefetch_factor={dataloader_prefetch_factor}")
+>     print(f"Batch sizes: train={BS}, eval={eval_batch_size}")
+> 
+806c1424
+<     
+---
+> 
+809c1427
+<     
+---
+> 
+839c1457
+<         
+---
+> 
+844c1462
+<         
+---
+> 
+850c1468
+<                 
+---
+> 
+853c1471
+<                 
+---
+> 
+857c1475
+<                     
+---
+> 
+860c1478
+<                 
+---
+> 
+869c1487
+<         
+---
+> 
+884c1502
+<         
+---
+> 
+897c1515
+<         
+---
+> 
+903c1521
+<         
+---
+> 
+906c1524
+<         
+---
+> 
+912c1530
+<         
+---
+> 
+920c1538
+<         
+---
+> 
+924c1542
+<             
+---
+> 
+927c1545
+<             
+---
+> 
+954c1572
+<     
+---
+> 
+970c1588
+<     
+---
+> 
+978c1596
+<     
+---
+> 
+982c1600
+<     
+---
+> 
+992,995c1610,1613
+<  
+<  # command to run: 
+<  # Single GPU: python hf_utils_train_model.py
+<  # Multi-GPU:  torchrun --nproc_per_node=2 hf_utils_train_model.py
+\ No newline at end of file
+---
+> 
+>  # command to run:
+>  # Single GPU: python hf_utils_train_model_general.py
+>  # Multi-GPU:  torchrun --nproc_per_node=2 hf_utils_train_model_general.py

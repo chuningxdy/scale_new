@@ -1,0 +1,2 @@
+train_slice_count,train_flops,test_flops,overlap_flops,train_n,test_n_pure,test_n_all,train_mse,test_mse_pure,test_mse_all,train_huber,test_huber_pure,test_huber_all,fitted_A,fitted_B,fitted_E,fitted_N_power,fitted_D_power
+9,"['5.5e+18', '9.7e+18', '2.8e+19', '5.6e+19', '8.7e+19', '2.8e+20', '5.6e+20', '1.0e+21', '3.0e+21']","['1.0e+21', '3.0e+21']","['1.0e+21', '3.0e+21']",144,0,24,0.0007122368197772308,,0.00013269005783937197,9.33876622472995e-06,,9.603990384698884e-06,828.8948190745398,34589.771119084275,1.949932093967106,0.3780697696570138,0.5006874887939112

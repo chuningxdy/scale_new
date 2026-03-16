@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+nqs/__init__.py
+nqs/_core.py
+nqs.egg-info/PKG-INFO
+nqs.egg-info/SOURCES.txt
+nqs.egg-info/dependency_links.txt
+nqs.egg-info/requires.txt
+nqs.egg-info/top_level.txt

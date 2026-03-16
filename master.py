@@ -123,15 +123,34 @@ def main(cfg: DictConfig):
 
     # -------------- Var Analysis --------------- #
     run_variance_analysis = cfg.run_variance_analysis #True
-    if run_resource_allocation and run_critical_batch_size and run_variance_analysis:
-        # run the script var_analysis_in_pipe.py with the command line argument of the job directory
+    if run_variance_analysis:
+        # call the function scale_new/table1_owt.py with the argument that is the folder of the job directory
         logger.info("running the variance analysis procedure")
+        # run script using command line argument
         import subprocess
-        # run var_analysis_in_pipe.py with the job directory as argument
-        subprocess.run(["python", "var_analysis_in_pipe.py", cfg.job_dir])
+
+        # add /mfs1/u/chuning/scale_new to the job directory path
+        full_job_dir = os.path.abspath(cfg.job_dir)
+        if cfg.neural_net.data == "lm1b":
+            table1_script = "table1_lm1b.py"
+        elif cfg.neural_net.data == "openwebtext2":
+            table1_script = "table1_owt.py"
+        else:
+            raise ValueError("data not recognized for variance analysis")
+        command_text = ["python", table1_script, full_job_dir, str(cfg.train_data_threshold)]
+        subprocess.run(command_text)
         logger.info("variance analysis complete")
-    elif run_variance_analysis:
-        logger.info("skipping the variance analysis procedure because resource allocation or critical batch size was not run.")
+
+
+    #if run_resource_allocation and run_critical_batch_size and run_variance_analysis:
+    #    # run the script var_analysis_in_pipe.py with the command line argument of the job directory
+    #    logger.info("running the variance analysis procedure")
+    #    import subprocess
+        # run var_analysis_in_pipe.py with the job directory as argument
+    #    subprocess.run(["python", "var_analysis_in_pipe.py", cfg.job_dir])
+    #    logger.info("variance analysis complete")
+    #elif run_variance_analysis:
+    #    logger.info("skipping the variance analysis procedure because loss estimation or resource allocation or critical batch size was not run.")
 
 
 

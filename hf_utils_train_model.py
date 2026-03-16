@@ -386,7 +386,7 @@ def build_model_with_predicted_config(
     """
 
     if model_family == "llama":
-        raise ValueError("Llama model family is not supported yet. Use 'pythia' instead.")
+       #raise ValueError("Llama model family is not supported yet. Use 'pythia' instead.")
         print(f"\nBuilding a LLaMA model with target size: {target_param_count/1e9:.1f}B parameters")
         config_creation_function = LlamaConfig
         model_creation_function = LlamaForCausalLM
@@ -528,7 +528,24 @@ def build_model_with_predicted_config(
             embedding_params_cnt = vocab_size * d_model * 2  # embed + unembed
             simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
 
+        elif model_family == "llama":
+            # LLaMA with SwiGLU FFN - more accurate parameter estimation
+            hidden_size_config = config_dict['hidden_size']
+            num_layers_config = config_dict['num_hidden_layers']
+            intermediate_size_config = config_dict['intermediate_size']
+            # Per layer:
+            # - Attention: 4 × hidden_size² (Q, K, V, O projections)
+            # - FFN (SwiGLU): 3 × hidden_size × intermediate_size (gate, up, down)
+            # - RMSNorm: 2 × hidden_size (pre-attention, pre-FFN)
+            attention_params = 4 * hidden_size_config ** 2
+            ffn_params = 3 * hidden_size_config * intermediate_size_config
+            norm_params = 2 * hidden_size_config
+            # Final RMSNorm: hidden_size
+            simplified_non_embedding_params_cnt = num_layers_config * (attention_params + ffn_params + norm_params) + hidden_size_config
+            embedding_params_cnt = vocab_size * hidden_size_config * 2
+            simplified_total_params_cnt = simplified_non_embedding_params_cnt + embedding_params_cnt
         else:
+            # Pythia and other models
             hidden_size_config = config_dict['hidden_size']
             num_layers_config = config_dict['num_hidden_layers']
             simplified_non_embedding_params_cnt = 12 * num_layers_config * hidden_size_config ** 2
@@ -1334,11 +1351,11 @@ def main():
     print(f"Sequence length factor for grad accumulation: {seq_length_factor:.1f}x (seq_length={seq_length})")
 
     if world_size == 1:
-        num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256)/4 * seq_length_factor
+        num_grad_accu1 = 1.5 * h_dict['N']/1_000_000 * h_dict['B']/(128 *256)/4 * seq_length_factor
         num_grad_accu2 = h_dict['B']/3072 * seq_length_factor
         num_grad_accu = max(num_grad_accu1, num_grad_accu2)
     else:
-        num_grad_accu1 = h_dict['N']/1_000_000 * h_dict['B']/(128 *256 * world_size)/4 * seq_length_factor
+        num_grad_accu1 = 1.5 * h_dict['N']/1_000_000 * h_dict['B']/(128 *256 * world_size)/4 * seq_length_factor
         num_grad_accu2 = h_dict['B']/(3072 * world_size) * seq_length_factor
         num_grad_accu = max(num_grad_accu1, num_grad_accu2)
 

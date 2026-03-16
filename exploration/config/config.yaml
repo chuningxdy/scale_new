@@ -1,0 +1,46 @@
+# Hydra configuration for Hessian training pipeline
+
+# Model
+model_name: "roneneldan/TinyStories-8M"
+train_from_scratch: true  # If true, use random weights; if false, use pretrained
+
+# Training hyperparameters (sweep these)
+batch_size: 256
+learning_rate: 1e-4
+
+# Training settings
+total_steps: 10000
+warmup_steps: 0 #100
+weight_decay: 0.0 #0.01
+lr_scheduler_type: "constant"  # "constant", "linear", "cosine", etc.
+max_grad_norm: -1  # -1 or 0 to disable gradient clipping
+max_length: 256
+eval_steps: 500
+eval_samples: 1000
+
+# Hessian analysis settings
+hessian_eval_interval: 500
+hessian_batch_size: 64
+top_k: 10
+max_iter_multiplier: 4  # MAX_ITER = top_k * this
+slq_iter: 200
+min_fit_index: 20
+
+# Analysis settings
+eigenvalue_indices: [1, 2, 4, 8, 16, 32, 64, 128]
+lanczos_indices: [1, 2, 3]
+eigenvalue_source: "slq_interp"
+
+# Plot settings
+plot_xlim: [1e-1, 1e7]
+plot_ylim: [1e-3, 1e5]
+
+# Hydra settings
+hydra:
+  job:
+    chdir: true  # Change to output directory
+  run:
+    dir: outputs/${hydra.job.name}/bs${batch_size}_lr${learning_rate}_${lr_scheduler_type}
+  sweep:
+    dir: outputs/${hydra.job.name}
+    subdir: bs${batch_size}_lr${learning_rate}_${lr_scheduler_type}

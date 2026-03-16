@@ -6,12 +6,12 @@ import numpy as np
 
 
 # base file
-base_file = 'h_samples_critical_batch_size_owt_all_balanced_adam_cosine_train.csv'
+base_file = 'h_samples_resource_allocation_owt_all_balanced_adam_cosine_train.csv'
 
 #level = 236000000/4
 
 # out file
-out_file = 'h_samples_critical_batch_size_genomes_all_balanced_adam_cosine_train.csv'
+out_file = 'h_samples_resource_allocation_genomes_all_balanced_adam_cosine_train.csv'
 
 # read base file
 df_base = pd.read_csv(base_file)
@@ -55,6 +55,15 @@ print(df_filtered[['N', 'B', 'K', 'R']].head(10))
 print("Last 10 rows of N, B, K, R after K adjustment:")
 print(df_filtered[['N', 'B', 'K', 'R']].tail(10))
 
+if True:
+    fixed_B = 24
+    # rescale K to match fixed B
+    # K = 1e9/N/B * C/6 /2048
+    df_filtered['K'] = 1e9 / df_filtered['N'] / fixed_B * df_filtered['C'] / 6 / 2048
+    df_filtered['K'] = df_filtered['K'].astype(int)
+    #(df_filtered['K'] * df_filtered['B'] / fixed_B).astype(int)
+    df_filtered['B'] = fixed_B
+
 # drop D
 df_filtered = df_filtered.drop(columns=['D'])
 
@@ -96,9 +105,9 @@ plt.close()
 
 
 # check if out_file exists
-if os.path.exists(out_file):
-    print(f"Output file {out_file} already exists. Exiting to avoid overwrite.")
-    exit(1)
+#if os.path.exists(out_file):
+ #   print(f"Output file {out_file} already exists. Exiting to avoid overwrite.")
+ #   exit(1)
 
 write_to_file = True
 if write_to_file:

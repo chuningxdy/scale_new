@@ -41,7 +41,7 @@ def df_row_to_dict(df, row_id):
     if "lr_schedule" in df.columns:
         step_decay_schedule = "na"
         # check in row_id of that column lr_schedule, the value = step
-        if df.iloc[row_id]["lr_schedule"] == "step":
+        if df.iloc[row_id]["lr_schedule"] in ["step"]:
             # load json formatted value string to dictionary
             step_decay_schedule = json.loads(df.iloc[row_id]["step_decay_schedule"])
             # check if step_decay_schedule decay_amt is all 1.0 
@@ -52,7 +52,22 @@ def df_row_to_dict(df, row_id):
                 dict.update({"lr_schedule": "constant"})
             #else:
             #    raise ValueError("step_decay_schedule: " + str(step_decay_schedule) + " is not valid")
+        elif df.iloc[row_id]["lr_schedule"] in ["cosine"]:
+            step_decay_schedule = json.loads(df.iloc[row_id]["step_decay_schedule"])
+            if (not ("B_decay_amt" in step_decay_schedule)) and all([x == 1.0 for x in step_decay_schedule["decay_amt"]]):
+                step_decay_schedule = "na"
+                dict.update({"lr_schedule": "cosine"})
+                #raise ValueError("step_decay_schedule: " + str(step_decay_schedule) + " is not valid for cosine")
+        elif step_decay_schedule == "optimized": # this only happens for NQS
+            #raise ValueError("optimized lr_schedule not supported in df_row_to_dict")
+            if not df.iloc[row_id]["step_decay_schedule"] == "na":
+                step_decay_schedule  = json.loads(df.iloc[row_id]["step_decay_schedule"])
+                if (not ("B_decay_amt" in step_decay_schedule)) and all([x == 1.0 for x in step_decay_schedule["decay_amt"]]):
+                    step_decay_schedule = "na"
+                    dict.update({"lr_schedule": "constant"})
+
         # update the entry "step_decay_schedule" with the dictionary
+        #raise ValueError("step_decay_schedule before update:", step_decay_schedule)
         dict.update({"step_decay_schedule": step_decay_schedule})
         print("step_decay_schedule:", step_decay_schedule)
     return dict
@@ -68,7 +83,7 @@ def df_row_to_dict_old(df, row_id):
     if "lr_schedule" in df.columns:
         step_decay_schedule = "na"
         # check in row_id of that column lr_schedule, the value = step
-        if df.iloc[row_id]["lr_schedule"] == "step":
+        if df.iloc[row_id]["lr_schedule"] in ["step","cosine"]:
             # load json formatted value string to dictionary
             step_decay_schedule = json.loads(df.iloc[row_id]["step_decay_schedule"])
             # check if step_decay_schedule decay_amt is all 1.0 
@@ -199,8 +214,10 @@ def create_lookup_entry_for_archive(mdict, hdict, archive_file):
     """
     # merge mdict and hdict
     mh_dict = {**mdict, **hdict}
-    if mh_dict["lr_schedule"] == "step":
+    if mh_dict["lr_schedule"] in ["step","cosine"] and not mh_dict["step_decay_schedule"] == "na":
         mh_dict["step_decay_schedule"] = json.dumps(mh_dict["step_decay_schedule"])
+    elif mh_dict["lr_schedule"] in ["step","cosine"] and mh_dict["step_decay_schedule"] == "na":
+        mh_dict["step_decay_schedule"] = "na"
     elif mh_dict["lr_schedule"] == "constant":
         mh_dict["step_decay_schedule"] = "na"
     lookup_entry = pd.DataFrame([mh_dict])
@@ -330,7 +347,7 @@ def get_run_id_and_path_archive(lookup_entry, archive_file):
 def save_entry_to_archive(archive_entry, archive_file):
     '''
     '''
-    # read the csv file
+
     df_archive = pd.read_csv(archive_file)
 
     # concatenate new_df to df_archive
@@ -371,6 +388,8 @@ def archive_wrapper(func, calc = True):
             if hdict["lr_schedule"] == "cosine":
                 hdict["lr_schedule"] = "constant"
                 #raise ValueError("updated hdict to: ", hdict["lr_schedule"])
+            #raise ValueError("hdict after nqs update: " + str(hdict))
+
             
         if "a" in mdict or "e_irr" in mdict: # nqs
             run_id = None

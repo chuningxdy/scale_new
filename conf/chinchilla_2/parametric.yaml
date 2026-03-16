@@ -1,6 +1,7 @@
 _target_: a_scale.baselines.baselines.chinchilla_parametric
 _partial_: true
 
+opt_method: ${chin_opt_method}  # BFGS or scipy
 use_last_x_ckpt: 1
 
 h_sampler_training: ${samplers.h_sampler_fit_chinchilla} # use a set of training hyperparameter cfgs

@@ -19,7 +19,9 @@ def chinchilla_parametric(
         neural_net,
         nn_archive_file,
         eval_metric,
-        use_last_x_ckpt = 1):
+        opt_method,
+        use_last_x_ckpt = 1
+        ):
     
     # create chinchilla_dir if it does not exist
     if not os.path.exists(chinchilla_dir):
@@ -83,8 +85,8 @@ def chinchilla_parametric(
     x_data = [series_to_jnp(series) for series in x_data]
     
 
-    use_chinchilla_paper_method = True
-    if use_chinchilla_paper_method: # use the chinchilla paper method
+    
+    if opt_method == "BFGS": # use the chinchilla paper method
 
         N = dat['actual_N']
         D = dat['D']
@@ -98,7 +100,7 @@ def chinchilla_parametric(
         with open(chinchilla_dir + "best_init_params.json", "w") as f:
             json.dump(best_init_params, f)
 
-    if not use_chinchilla_paper_method: # use the scipy curve_fit method
+    elif opt_method == "scipy": # use the scipy curve_fit method
 
         # save the x_data and y_data to a csv file
         # combine x_data and y_data
@@ -107,24 +109,53 @@ def chinchilla_parametric(
         xy_data.columns = ['actual_N', 'D', 'loss']
         xy_data.to_csv(chinchilla_dir + "xy_data.csv", index = False)
 
+        # use an initialisation grid
+        # Set up the grid for initial parameter values
+        alpha_vals = jnp.arange(0, 2.5, 0.5)
+        beta_vals = jnp.arange(0, 2.5, 0.5)
+        e_vals = jnp.arange(-1, 1.5, 0.5)
+        a_vals = jnp.arange(0, 30, 5)
+        b_vals = jnp.arange(0, 30, 5)
 
+        # Perform the optimization using curvefit over the grid of initial values
+        best_loss = jnp.inf
+        best_params = None
+        
         # create boundaries for the parameters
         bounds = (jnp.zeros(5), [jnp.inf, jnp.inf, jnp.inf, jnp.inf, jnp.inf])
-        initial_guess = [0.1, 1, 0.5, 1, 0.5]
-        # set maxfev to 10000
-        popt, _ = curve_fit(chinchilla_loss_func,
-                            x_data,
-                            y_data, 
-                            bounds = bounds,
-                            p0 = initial_guess,
-                            maxfev = 10000)
 
-        # create a dictionary for fitted_cp
-        fitted_cp = {'E': popt[0], 
-                    'A': popt[1], 
-                    'N_power': popt[2], 
-                    'B': popt[3], 
-                    'D_power': popt[4]}
+        from itertools import product
+        results_dict = {}
+        for alpha, beta, e, a, b in product(alpha_vals, beta_vals, e_vals, a_vals, b_vals):
+             
+
+            initial_guess = [jnp.exp(e),jnp.exp(a), alpha, jnp.exp(b), beta]
+            # set maxfev to 10000
+            popt, _ = curve_fit(chinchilla_loss_func,
+                                x_data,
+                                y_data, 
+                                bounds = bounds,
+                                p0 = initial_guess,
+                                maxfev = 10000)
+
+            # create a dictionary for fitted_cp
+            fitted_cp = {'E': popt[0], 
+                        'A': popt[1], 
+                        'N_power': popt[2], 
+                        'B': popt[3], 
+                        'D_power': popt[4]}
+            # calculate the loss
+            fitted_losses = chinchilla_loss_func(x_data, *popt)
+            loss = jnp.mean((y_data - fitted_losses)**2)
+            init_params_str = f"E:{e}_A:{a}_alpha:{alpha}_B:{b}_beta:{beta}"
+            results_dict[init_params_str] = {'fitted_cp': fitted_cp, 'loss': float(loss)}
+            if loss < best_loss:
+                best_loss = loss
+                best_params = fitted_cp
+        fitted_cp = best_params
+    else:
+        raise ValueError("opt_method must be either 'BFGS' or 'scipy'")
+
     # convert all entries to float
     
     fitted_cp = {key: float(value) for key, value in fitted_cp.items()}
