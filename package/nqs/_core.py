@@ -359,7 +359,7 @@ def _grad_risk_no_sch(nqs, cfg_array):
 
 
 # -------------------------------------------------------- #
-#       Spectral-Norm Regularized Bias/Variance             #
+#       Weight-Norm Regularized Bias/Variance             #
 # -------------------------------------------------------- #
 
 def _e_dim_bv_one_step(nqs, n, bv_factor, step, b_decay_factor=1.0):

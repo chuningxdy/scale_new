@@ -1,6 +1,6 @@
 Train: 64 runs (after filtering)
 Test:  64 runs
-fit_nqs completed in 73.88s | best_loss=0.022122
+fit_nqs completed in 75.28s | best_loss=0.022122
 
 Fitted NQS parameters (fitted vs expected):
   p    : fitted=1.116992  expected=1.116992  rel_err=0.0000  [OK]

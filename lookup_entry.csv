@@ -1,2 +1,2 @@
 data,model,loss,N,B,K,lr,end_lr,momentum,lr_schedule,optimizer,step_decay_schedule
-lm1b,llama,condcrossent,10000000,6144,80000,0.001,0.1,0.0,cosine,adamw,na
+openwebtext2,pythia,condcrossent,100000000,12,160000,1.999,0.1,0.0,constant,sgd,na

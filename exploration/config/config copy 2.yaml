@@ -26,14 +26,8 @@ eval_samples: 1000
 
 # Hessian analysis settings
 hessian_eval_interval: 20
-hessian_spacing: "linear"  # "linear" or "log" (log: 0, interval, base*interval, base^2*interval, ...)
-hessian_log_base: 2  # multiplier for log spacing (2 = doubling, 4 = quadrupling)
-hessian_linear_interval: 0  # also add hessian evals at this linear interval (0 = disabled)
-hessian_explicit_steps: []  # explicit list of steps (overrides log/linear spacing if non-empty)
-save_steps: 1000  # checkpoint saving interval
 hessian_batch_size: 64  # Reduced for Pythia-70M memory; can use 64 for tinystories
 top_k: 5 #20 # Lanczos 50
-bottom_k: 5  # Number of most-negative eigenvalues to compute via power iteration on -H
 max_iter_multiplier: 4  # MAX_ITER = top_k * this
 slq_iter: 3 #200  #200
 min_fit_index: 20
